@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 class APIProvider extends GetxService{
- ///
+ ////
   late dio.Dio _dio;
 
   APIProvider(){
