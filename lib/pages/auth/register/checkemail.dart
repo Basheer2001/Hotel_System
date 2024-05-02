@@ -6,7 +6,7 @@ import '../../../constant/auth/customtextformauth.dart';
 import '../../../constant/auth/customtexttitleauth.dart';
 import '../../../constant/color.dart';
 import '../../../controllers/checkemail_controlller.dart';
-
+//basheeralkhiat86
 class Checkemail extends GetView<CheckemailController>  {
   const Checkemail ({Key? key}) : super(key: key);
 
