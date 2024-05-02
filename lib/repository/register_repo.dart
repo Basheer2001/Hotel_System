@@ -13,7 +13,7 @@ class RegisterRepo extends GetxService {
   Future<AppResponse<Map<String, dynamic>>> Register(
       String firstname,
       String lastname,
-      String email,
+      //String email,
       String password,
       String confirmation,
       String address,
@@ -26,7 +26,6 @@ class RegisterRepo extends GetxService {
       var formData = dio.FormData.fromMap({
         "first_name": firstname,
         "last_name": lastname,
-        "email":email,
         "password": password,
         "password_confirmation": confirmation,
         "address": address,

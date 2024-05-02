@@ -22,7 +22,7 @@ class Register1Controller extends GetxController{
   GlobalKey<FormState> formkey=GlobalKey<FormState>();
   TextEditingController firstnameTextController=TextEditingController(text: "marla");
   TextEditingController lastnameTextController=TextEditingController(text:"beyrouthy");
-  TextEditingController emailTextController=TextEditingController(text:"beyrouthymarla@gmail.com");
+  //TextEditingController emailTextController=TextEditingController(text:"beyrouthymarla@gmail.com");
   TextEditingController passwordTextController=TextEditingController    (text:"12345678");
   TextEditingController confirmationTextController=TextEditingController(text:"12345678");
   //TextEditingController photoTextController=TextEditingController(text:"pistol");
@@ -57,7 +57,7 @@ class Register1Controller extends GetxController{
         phoneTextController.text,
         addressTextController.text,
         personalidTextController.text,
-        emailTextController.text,
+        //emailTextController.text,
         imageFile,
       );
       registerLoadingState.value=false;

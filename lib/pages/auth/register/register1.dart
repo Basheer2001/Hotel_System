@@ -77,6 +77,7 @@ class Register1 extends GetView<Register1Controller> {
                             backgroundImage:controller.avatarImagePath.value.isNotEmpty
                                 ? AssetImage(controller.avatarImagePath.value)
                                 : null,
+
                           child: controller.avatarImagePath.value.isEmpty
                               ? Icon(Icons.add_a_photo) // Display an icon if no image is selected
                               : null,
@@ -104,6 +105,7 @@ class Register1 extends GetView<Register1Controller> {
             autovalidateMode:  !controller.firstSubmit.value?
             AutovalidateMode.disabled:
             AutovalidateMode.always,
+            controller: controller.firstnameTextController,
             validator: (String ? value){
               if(value!.isEmpty){
                 return "Required Field";
@@ -144,7 +146,9 @@ class Register1 extends GetView<Register1Controller> {
                         autovalidateMode:  !controller.firstSubmit.value?
                         AutovalidateMode.disabled:
                         AutovalidateMode.always,
-                        validator: (String ? value){
+                            controller: controller.lastnameTextController,
+
+                            validator: (String ? value){
                           if(value!.isEmpty){
                             return "Required Field";
                           }
@@ -184,7 +188,9 @@ class Register1 extends GetView<Register1Controller> {
                         autovalidateMode:  !controller.firstSubmit.value?
                         AutovalidateMode.disabled:
                         AutovalidateMode.always,
-                        validator: (String ? value){
+                            controller: controller.passwordTextController,
+
+                            validator: (String ? value){
                           if(value!.isEmpty){
                             return "Required Field";
                           }
@@ -230,7 +236,9 @@ class Register1 extends GetView<Register1Controller> {
                         autovalidateMode:  !controller.firstSubmit.value?
                         AutovalidateMode.disabled:
                         AutovalidateMode.always,
-                        validator: (String ? value){
+                            controller: controller.confirmationTextController,
+
+                            validator: (String ? value){
                           if(value!.isEmpty){
                             return "Required Field";
                           }
@@ -272,7 +280,9 @@ class Register1 extends GetView<Register1Controller> {
                         autovalidateMode:  !controller.firstSubmit.value?
                         AutovalidateMode.disabled:
                         AutovalidateMode.always,
-                        validator: (String ? value){
+                            controller: controller.addressTextController,
+
+                            validator: (String ? value){
                           if(value!.isEmpty){
                             return "Required Field";
                           }
@@ -312,7 +322,9 @@ class Register1 extends GetView<Register1Controller> {
                         autovalidateMode:  !controller.firstSubmit.value?
                         AutovalidateMode.disabled:
                         AutovalidateMode.always,
-                        validator: (String ? value){
+                            controller: controller.personalidTextController,
+
+                            validator: (String ? value){
                           if(value!.isEmpty){
                             return "Required Field";
                           }
@@ -352,7 +364,9 @@ class Register1 extends GetView<Register1Controller> {
                         autovalidateMode:  !controller.firstSubmit.value?
                         AutovalidateMode.disabled:
                         AutovalidateMode.always,
-                        validator: (String ? value){
+                            controller: controller.phoneTextController,
+
+                            validator: (String ? value){
                           if(value!.isEmpty){
                             return "Required Field";
                           }
