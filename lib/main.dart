@@ -9,6 +9,7 @@ import 'package:untitled1/repository/resetpassword_repo.dart';
 import 'package:untitled1/repository/verfiycode_repo.dart';
 
 //controller
+/////
 
 ///////////////////////////////////////////
 class AppBinding extends Bindings{
