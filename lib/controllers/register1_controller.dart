@@ -23,7 +23,7 @@ class Register1Controller extends GetxController{
   TextEditingController firstnameTextController=TextEditingController(text: "marla");
   TextEditingController lastnameTextController=TextEditingController(text:"beyrouthy");
   TextEditingController emailTextController=TextEditingController(text:"beyrouthymarla@gmail.com");
-  TextEditingController passwordTextController=TextEditingController(text:"12345678");
+  TextEditingController passwordTextController=TextEditingController    (text:"12345678");
   TextEditingController confirmationTextController=TextEditingController(text:"12345678");
   //TextEditingController photoTextController=TextEditingController(text:"pistol");
   TextEditingController phoneTextController=TextEditingController(text:"111");

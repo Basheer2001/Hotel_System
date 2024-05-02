@@ -30,6 +30,7 @@ class AppBinding extends Bindings{
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   AppBinding().dependencies();
+
   runApp(const MyApp());
 }
 

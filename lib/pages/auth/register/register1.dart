@@ -10,6 +10,7 @@ class Register1 extends GetView<Register1Controller> {
   @override
 
   Widget build(BuildContext context) {
+    Get.put(Register1Controller());
 
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
     return Scaffold(
@@ -194,7 +195,6 @@ class Register1 extends GetView<Register1Controller> {
                           if (value != controller.confirmationTextController.text) {
                             return "Passwords do not match";
                           }
-                          return null;
                         },
                         obscureText: true,
                         style: TextStyle(color: Colors.black),
@@ -237,7 +237,6 @@ class Register1 extends GetView<Register1Controller> {
                           if (value != controller.passwordTextController.text) {
                             return "Passwords do not match";
                           }
-                          return null;
                         },
                         obscureText: true,
                         style: TextStyle(color: Colors.black),
