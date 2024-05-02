@@ -28,7 +28,7 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
           key:controller.formKey,
           child: ListView(children: [
             const SizedBox(height: 20),
-            const CustomTextTitleAuth(text: "Check Email"),
+            const CustomTextTitleAuth(text: "Check code"),
             const SizedBox(height: 10),
             const CustomTextBodyAuth(
                 text:
@@ -62,7 +62,7 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
 
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    hintText: 'Enter Email',
+                    hintText: 'Enter code',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),

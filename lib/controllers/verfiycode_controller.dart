@@ -19,11 +19,16 @@ class VerfiyCodeController extends GetxController{
   var loginLoadingState=false.obs;
 
   void verfiycode() async{
+    print("\nverfiycode\n");
     firstSubmit.value=true;
     if(formKey.currentState!.validate()) {
       loginLoadingState.value = true;
+      print("\nAppResponse response = await verfyCodeRepo.verfiycode(\n");
+
       AppResponse response = await verfyCodeRepo.verfiycode(
           numberTextController.text);
+      print("\nloginLoadingState.value = false;\n");
+
       loginLoadingState.value = false;
       if (response.success) {
         print("Verification Code Response: ${response.data}");

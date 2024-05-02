@@ -11,6 +11,8 @@ class CheckEmailRepo extends GetxService{
   APIProvider apiProvider=Get.find<APIProvider>();
 
   Future<AppResponse<String>> Checkemail(String username) async {
+    print("\n1");
+
     try {
       dio.Response response = await apiProvider.postRequest(
         "http://127.0.0.1:8000/api/register/email",
@@ -19,6 +21,8 @@ class CheckEmailRepo extends GetxService{
           "email": username,
         }),
       );
+      print("\n2");
+
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
       print("Response token: ${response.data["token"]}");

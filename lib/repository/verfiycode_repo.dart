@@ -10,7 +10,9 @@ class VerfiyCodeRepo extends GetxService {
 
   Future<AppResponse<String>> verfiycode(String number) async {
     try {
-      print("\n1");
+      print("\n1\n");
+      print(number);
+
       dio.Response response = await apiProvider.postRequest(
         "http://127.0.0.1:8000/api/register/code",
         {},
