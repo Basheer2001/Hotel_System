@@ -21,6 +21,7 @@ class CheckEmailRepo extends GetxService{
       );
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
+      print("Response token: ${response.data["token"]}");
 
       if (response.statusCode == 200) {
         return AppResponse<String>(

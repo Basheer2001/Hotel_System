@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/pages/auth/Register/register1.dart';
+
 import '../../../constant/auth/customtextbodyauth.dart';
 import '../../../constant/auth/customtexttitleauth.dart';
 import '../../../constant/color.dart';
@@ -29,8 +30,7 @@ class VerfiyCode extends StatelessWidget {
           const CustomTextTitleAuth(text: "Check Code"),
           const SizedBox(height: 10),
           const CustomTextBodyAuth(
-              text:
-              "Please Enter The Digit Code Sent To "),
+              text: "Please Enter The Digit Code Sent To "),
           const SizedBox(height: 15),
           OtpTextField(
             fieldWidth: 50,
@@ -43,8 +43,9 @@ class VerfiyCode extends StatelessWidget {
             onCodeChanged: (String code) {
               //handle validation or checks here
             },
-            onSubmit: (String verificationCode){
-              Get.off(() => Register1());
+            onSubmit: (String verificationCode) {
+
+             // Get.off(() => Register1());
             },
           ),
 

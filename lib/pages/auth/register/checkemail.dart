@@ -76,9 +76,12 @@ class Checkemail extends GetView<CheckemailController>  {
               ),
             ),
             SizedBox(height: 20,),
+
             ElevatedButton(onPressed: (){
               controller.Checkemail();
-    }, child:Text("checkemail")),
+
+              },
+                child:Text("checkemail")),
            // CustomButtomAuth(text: "Check", onPressed: () {
              // controller.goToVerfiyCode();
             //}),
