@@ -11,6 +11,8 @@ import 'package:untitled1/repository/verfiycode_repo.dart';
 
 import 'controllers/register1_controller.dart';
 
+
+///////////////////////////////////////////
 class AppBinding extends Bindings{
   @override
   void dependencies() {
