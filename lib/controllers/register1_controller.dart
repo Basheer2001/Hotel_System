@@ -58,7 +58,7 @@ class Register1Controller extends GetxController{
         addressTextController.text,
         personalidTextController.text,
         //emailTextController.text,
-        imageFile,
+        photo: imageFile,
       );
       registerLoadingState.value=false;
       if(response.success){

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
+import 'checkemail_repo.dart';
 
 class RegisterRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
@@ -19,7 +20,7 @@ class RegisterRepo extends GetxService {
       String address,
       String personalid,
       String phone,
-      File? photo,
+      {File? photo}
       ) async {
     try {
       // Create FormData for the request
@@ -32,14 +33,16 @@ class RegisterRepo extends GetxService {
         "personal_id": personalid,
         "phone": phone,
         // Append the image file if available
-        if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
+       // if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
       });
 
       dio.Response response = await apiProvider.postRequest(
-        "http://127.0.0.1:8000/api/register/user",
+        "http://192.168.1.110:8000/api/register/user",
         {},
-        formData, // Pass formData instead of jsonEncode
+        formData,// Pass formData instead of jsonEncode
+          head: CheckEmailRepo.cookies!.first
       );
+      CheckEmailRepo.cookies =response.headers['set-cookie'];
 
       if (response.statusCode == 200) {
         // Check if the response contains an "id" field

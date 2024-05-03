@@ -8,6 +8,7 @@ import 'package:untitled1/repository/register_repo.dart';
 import 'package:untitled1/repository/resetpassword_repo.dart';
 import 'package:untitled1/repository/verfiycode_repo.dart';
 
+import 'controllers/register1_controller.dart';
 import 'controllers/verfiycode_controller.dart';
 
 //controller
@@ -24,9 +25,10 @@ class AppBinding extends Bindings{
     Get.lazyPut(() => CheckEmailRepo());
     Get.lazyPut(() => VerfiyCodeRepo());
     Get.lazyPut(() => ResetPasswordRepo());
-  //  Get.lazyPut(()=>VerfiyCodeController());
+    // Get.lazyPut(()=>VerfiyCodeController());
+    // Get.lazyPut(()=>Register1Controller());
     Get.put(VerfiyCodeController());
-
+    Get.put(Register1Controller());
   }
 
 }

@@ -6,7 +6,9 @@ import '../models/app_response.dart';
 import '../providers/api_provider.dart';
 
 
+
 class CheckEmailRepo extends GetxService{
+  static List<String>? cookies;
 
   APIProvider apiProvider=Get.find<APIProvider>();
 
@@ -14,18 +16,24 @@ class CheckEmailRepo extends GetxService{
     print("\n1");
 
     try {
+
       dio.Response response = await apiProvider.postRequest(
-        "http://127.0.0.1:8000/api/register/email",
+          "http://192.168.1.110:8000/api/register/email",
         {},
         jsonEncode({
           "email": username,
         }),
       );
       print("\n2");
+      cookies =response.headers['set-cookie'];
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
       print("Response token: ${response.data["token"]}");
+      print("Response cookies: ${response.data["Cookies"]}");
+
+      print("Response cookies: ${cookies}");
+     // cookie = response.headers['set-cookie'];
 
       if (response.statusCode == 200) {
         return AppResponse<String>(

@@ -31,7 +31,10 @@ class APIProvider extends GetxService{
   }
 
   Future<dio.Response> postRequest(
-      String method, Map<String,dynamic> queryParams,dynamic body)async{
+      String method, Map<String,dynamic> queryParams,dynamic body,{String? head})async{
+    if (head!=null){
+      _dio.options = dio.BaseOptions(headers: {'Cookie': head});}
+
     dio.Response response=await _dio.post(method,queryParameters: queryParams,data: body);
     if(response.statusCode==200){
       return response;

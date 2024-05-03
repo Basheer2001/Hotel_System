@@ -10,7 +10,7 @@ class CheckemailController extends GetxController{
 
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
-  TextEditingController usernameTextController=TextEditingController(text:"beyrouthymarla@gmail.com");
+  TextEditingController usernameTextController=TextEditingController(text:"basheeralkhiat86@gmail.com");
 
   var firstSubmit =false.obs;
 

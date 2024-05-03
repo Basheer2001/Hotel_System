@@ -26,7 +26,7 @@ class VerfiyCodeController extends GetxController{
       print("\nAppResponse response = await verfyCodeRepo.verfiycode(\n");
 
       AppResponse response = await verfyCodeRepo.verfiycode(
-          numberTextController.text);
+          numberTextController.text,head:CheckEmailRepo.cookies!.first);
       print("\nloginLoadingState.value = false;\n");
 
       loginLoadingState.value = false;
