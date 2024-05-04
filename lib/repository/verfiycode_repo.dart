@@ -44,7 +44,8 @@ class VerfiyCodeRepo extends GetxService {
           return AppResponse<String>(
 
               success: true,
-            data: response.data["token"]);
+            //data: response.data["token"]
+               );
 
       } else {
         print("\n17");

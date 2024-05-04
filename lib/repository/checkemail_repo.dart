@@ -38,7 +38,7 @@ class CheckEmailRepo extends GetxService{
       if (response.statusCode == 200) {
         return AppResponse<String>(
           success: true,
-          data: response.data["token"],
+          //data: response.data["token"],
         );
       } else {
         throw Exception("Server responded with status code ${response.statusCode}");

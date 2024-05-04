@@ -69,7 +69,10 @@ class Register1 extends GetView<Register1Controller> {
                     Row(
                     children: [
                       GestureDetector(
-                        onTap: () => controller.pickImage(context),
+                        onTap: () =>
+
+                            controller.pickImage(context),
+
                         child: Obx(
                         ()=> CircleAvatar(
                             minRadius: 35,

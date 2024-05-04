@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../models/app_response.dart';
 import '../pages/auth/Register/verfiycode.dart';
+import '../pages/homePage.dart';
 import '../repository/register_repo.dart';
 
 
@@ -28,7 +29,7 @@ class Register1Controller extends GetxController{
   //TextEditingController photoTextController=TextEditingController(text:"pistol");
   TextEditingController phoneTextController=TextEditingController(text:"111");
   TextEditingController addressTextController=TextEditingController(text:"liban");
-  TextEditingController personalidTextController=TextEditingController(text:"1111111gh");
+  TextEditingController personalidTextController=TextEditingController(text:"1111111");
 
 
   var firstSubmit=false.obs;
@@ -62,7 +63,7 @@ class Register1Controller extends GetxController{
       );
       registerLoadingState.value=false;
       if(response.success){
-        Get.to(() =>VerfiyCode ());
+        Get.to(() =>HomePage ());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

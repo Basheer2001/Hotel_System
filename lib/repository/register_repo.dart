@@ -33,7 +33,7 @@ class RegisterRepo extends GetxService {
         "personal_id": personalid,
         "phone": phone,
         // Append the image file if available
-       // if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
+        if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
       });
 
       dio.Response response = await apiProvider.postRequest(
@@ -43,27 +43,24 @@ class RegisterRepo extends GetxService {
           head: CheckEmailRepo.cookies!.first
       );
       CheckEmailRepo.cookies =response.headers['set-cookie'];
+      print("Response body: ${response.data}");
+     // print("Response token: ${response.data["token"]}");
+    //  print("Response cookies: ${response.data["Cookies"]}");
 
+      print("Response cookies: ${CheckEmailRepo.cookies}");
       if (response.statusCode == 200) {
         // Check if the response contains an "id" field
-        if (response.data.containsKey("id") && response.data["id"] is int) {
-          int id = response.data["id"];
-          String token = response.data["token"];
+
+
 
           return AppResponse<Map<String, dynamic>>(
             success: true,
-            data: {
-              "id": id,
-              "token": token,
-            },
-          );
-        } else {
-          return AppResponse<Map<String, dynamic>>(
-            success: false,
-            errorMessage: "Response does not contain a valid 'id' field.",
+            //data: {
+              //"id": id,
+             // "token": token,},
           );
         }
-      } else {
+       else {
         // Handle non-200 status codes as needed
         return AppResponse<Map<String, dynamic>>(
           success: false,
