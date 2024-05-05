@@ -17,7 +17,7 @@ class CheckEmailRepo extends GetxService{
     try {
 
       dio.Response response = await apiProvider.postRequest(
-          "http://192.168.1.110:8000/api/register/email",
+        "${APIProvider.url}register/email",
         {},
         jsonEncode({
           "email": username,

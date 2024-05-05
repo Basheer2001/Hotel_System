@@ -13,7 +13,7 @@ class AccountRepo extends GetxService{
   Future<AppResponse<String>> login(String username, String password) async {
     try {
       dio.Response response = await apiProvider.postRequest(
-        "http://127.0.0.1:8000/api/login",
+        "${APIProvider.url}login",
         {},
         jsonEncode({
           "email": username,

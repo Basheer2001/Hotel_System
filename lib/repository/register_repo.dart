@@ -36,7 +36,7 @@ class RegisterRepo extends GetxService {
       });
 
       dio.Response response = await apiProvider.postRequest(
-        "http://127.0.0.1:8000/api/register/user",
+          "${APIProvider.url}register/user",
         {},
         formData,// Pass formData instead of jsonEncode
           head: CheckEmailRepo.cookies!.first

@@ -15,7 +15,7 @@ class VerfiyCodeRepo extends GetxService {
       print(number);
 
       dio.Response response = await apiProvider.postRequest(
-        "http://192.168.1.110:8000/api/register/code",
+        "${APIProvider.url}register/code",
         {},
         jsonEncode({
           "verification_code": number,

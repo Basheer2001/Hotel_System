@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:untitled1/pages/onboarding.dart';
 
 import '../models/app_response.dart';
 import '../pages/auth/Register/verfiycode.dart';
@@ -63,7 +64,7 @@ class Register1Controller extends GetxController{
       );
       registerLoadingState.value=false;
       if(response.success){
-        Get.to(() =>HomePage ());
+        Get.to(() =>OnBoarding ());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

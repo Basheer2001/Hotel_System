@@ -391,7 +391,9 @@ class Register1 extends GetView<Register1Controller> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),/*
+                    SizedBox(height: 20,),
+
+                    /*
                     Obx(()=>controller.registerLoadingState.value?
                     ElevatedButton(
                         onPressed: null,
@@ -420,7 +422,7 @@ class Register1 extends GetView<Register1Controller> {
                     ),*/
 
                    CustomButtomAuth(text: "Sign Up", onPressed: () {
-      Get.to(Checkemail());
+                           controller.Register();
 
     }),
 

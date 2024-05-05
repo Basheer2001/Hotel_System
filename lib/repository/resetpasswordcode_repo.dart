@@ -13,7 +13,7 @@ class ResetPasswordCodeRepo extends GetxService{
   Future<AppResponse<String>> resetpasswordcode(String email, String password ,String confirmation,String code) async {
     try {
       dio.Response response = await apiProvider.postRequest(
-        "http://127.0.0.1:8000/api/password/reset",
+        "${APIProvider.url}password/reset",
         {},
         jsonEncode({
           "email":email,
