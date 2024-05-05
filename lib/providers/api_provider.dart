@@ -9,6 +9,9 @@ class APIProvider extends GetxService{
       dio.BaseOptions(
         //  baseUrl: "https://reqres.in/api/",
         //  connectTimeout: Duration(seconds: 30),
+          connectTimeout: Duration(seconds:10 * 6000 ),
+     receiveTimeout: Duration(seconds: 10*6000),
+     // 10 minutes in milliseconds
           validateStatus: (status){
             return true;
           }

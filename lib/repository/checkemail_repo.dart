@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
-
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
 
@@ -18,7 +17,7 @@ class CheckEmailRepo extends GetxService{
     try {
 
       dio.Response response = await apiProvider.postRequest(
-          "http://192.168.1.110:8000/api/register/email",
+          "http://192.168.1.5:8000/api/register/email",
         {},
         jsonEncode({
           "email": username,

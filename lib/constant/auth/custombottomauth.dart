@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 class CustomButtomAuth extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
+  final bool isLoading;
 
   static const Color customColor=Color.fromRGBO(255, 160, 42, 1.0);
 
 
-  const CustomButtomAuth({Key? key, required this.text, this.onPressed})
+  const CustomButtomAuth({Key? key, required this.text,
+    this.onPressed,
+    this.isLoading = false,
+  })
       : super(key: key);
 
   @override
@@ -26,7 +30,7 @@ class CustomButtomAuth extends StatelessWidget {
         child: Text(text , style:const TextStyle(fontWeight: FontWeight.bold , fontSize: 16)),
       ),*/
         ElevatedButton(
-          onPressed: onPressed,
+          onPressed: isLoading ? null : onPressed,
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(customColor), // Set button color
             // Set button color
@@ -39,7 +43,19 @@ class CustomButtomAuth extends StatelessWidget {
               ),
             ),
           ),
-          child: Text(text , style:const TextStyle(fontWeight: FontWeight.bold , fontSize: 16)),
+          child:
+          isLoading
+              ? SizedBox(
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          )
+              :
+
+
+          Text(text , style:const TextStyle(fontWeight: FontWeight.bold , fontSize: 16)),
         )
 
     );

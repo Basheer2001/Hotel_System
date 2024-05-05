@@ -18,7 +18,7 @@ class VerfiyCodeController extends GetxController{
 
   var loginLoadingState=false.obs;
 
-  void verfiycode() async{
+  void verfiycode(String text) async{
     print("\nverfiycode\n");
     firstSubmit.value=true;
     if(formKey.currentState!.validate()) {
@@ -26,7 +26,7 @@ class VerfiyCodeController extends GetxController{
       print("\nAppResponse response = await verfyCodeRepo.verfiycode(\n");
 
       AppResponse response = await verfyCodeRepo.verfiycode(
-          numberTextController.text,head:CheckEmailRepo.cookies!.first);
+          numberTextController.text);
       print("\nloginLoadingState.value = false;\n");
 
       loginLoadingState.value = false;

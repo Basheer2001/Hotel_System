@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../models/app_response.dart';
 import '../pages/auth/login.dart';
-import '../repository/resetpassword_repo.dart';
+import '../repository/sendresetpassword_repo.dart';
 
-class ResetPasswordController extends GetxController{
+class SendResetPasswordController extends GetxController{
 
 
-  //LoginRepo accountRepo= Get.find<LoginRepo>();
-  ResetPasswordRepo resetpasswordRepo=Get.find<ResetPasswordRepo>();
+
+  SendResetPasswordRepo resetpasswordRepo=Get.find<SendResetPasswordRepo>();
 
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
-  TextEditingController usernameTextController=TextEditingController(text:"rrr@gmail.com");
+  TextEditingController usernameTextController=TextEditingController(text:"ramibeyrouthy7@gmail.com");
+
 
   var firstSubmit =false.obs;
 
@@ -26,7 +26,9 @@ class ResetPasswordController extends GetxController{
     if (formKey.currentState!.validate()) {
       loginLoadingState.value = true;
       AppResponse response = await resetpasswordRepo.resetpassword(
-          usernameTextController.text);
+          usernameTextController.text,
+
+      );
       loginLoadingState.value = false;
       if (response.success) {
         Get.to(() => Login());

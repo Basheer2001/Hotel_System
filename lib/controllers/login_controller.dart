@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../repository/account_repo.dart';
 import '../models/app_response.dart';
@@ -22,19 +21,7 @@ class loginController extends GetxController{
 
 
 
-  final _storage = FlutterSecureStorage();
 
-  Future<void> storeToken(String token) async {
-    await _storage.write(key: 'token', value: token);
-  }
-
-  Future<String?> getToken() async {
-    return await _storage.read(key: 'token');
-  }
-
-  Future<void> clearToken() async {
-    await _storage.delete(key: 'token');
-  }
 
 
 
@@ -73,9 +60,5 @@ class loginController extends GetxController{
   }
 
 
-  void logout() async {
-    await clearToken();
-    // Additional logout logic...
-  }
 
 }

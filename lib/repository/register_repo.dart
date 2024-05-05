@@ -14,7 +14,6 @@ class RegisterRepo extends GetxService {
   Future<AppResponse<Map<String, dynamic>>> Register(
       String firstname,
       String lastname,
-      //String email,
       String password,
       String confirmation,
       String address,
@@ -37,7 +36,7 @@ class RegisterRepo extends GetxService {
       });
 
       dio.Response response = await apiProvider.postRequest(
-        "http://192.168.1.110:8000/api/register/user",
+        "http://127.0.0.1:8000/api/register/user",
         {},
         formData,// Pass formData instead of jsonEncode
           head: CheckEmailRepo.cookies!.first
