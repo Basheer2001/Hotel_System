@@ -199,23 +199,23 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
             SizedBox(height: 20,),
 
             ElevatedButton(onPressed: () async {
-              // var response = await http.post(
-              //   Uri.parse("http://192.168.1.110:8000/api/register/code"),
-              //   headers: {
-              //     // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjg4MTU4MDY4LCJleHAiOjE2ODgxNjE2NjgsIm5iZiI6MTY4ODE1ODA2OCwianRpIjoiNWV1bGxwUE5KOVJqaGpRaCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PVSbBmnk68xPDpHBbzunLICybCDK-RGQqvRdb_adJO8',
-              //     'Content-Type': 'application/json',
-              //     'Cookie': CheckEmailRepo.cookies!.first,
-              //   },
-              //   body: jsonEncode(
-              //       {
-              //         "verification_code": controller.numberTextController.text,
-              //   }
-              //   ),
-              //
-              // );
-              // var js = jsonDecode(response.body);
-              //
-              // print(js);
+              var response = await http.post(
+                Uri.parse("http://192.168.1.110:8000/api/register/code"),
+                headers: {
+                  // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjg4MTU4MDY4LCJleHAiOjE2ODgxNjE2NjgsIm5iZiI6MTY4ODE1ODA2OCwianRpIjoiNWV1bGxwUE5KOVJqaGpRaCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PVSbBmnk68xPDpHBbzunLICybCDK-RGQqvRdb_adJO8',
+                  'Content-Type': 'application/json',
+                  'Cookie': CheckEmailRepo.cookies!.first,
+                },
+                body: jsonEncode(
+                    {
+                      "verification_code": controller.numberTextController.text,
+                }
+                ),
+
+              );
+              var js = jsonDecode(response.body);
+
+              print(js);
               print(controller.numberTextController.text);
               controller.verfiycode(controller.numberTextController.text);
 

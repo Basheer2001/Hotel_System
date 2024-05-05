@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
@@ -71,11 +73,14 @@ class Register1 extends GetView<Register1Controller> {
                                   ()=> CircleAvatar(
                                 minRadius: 35,
                                 maxRadius: 35,
-                                backgroundImage:controller.avatarImagePath.value.isNotEmpty
-                                    ? AssetImage(controller.avatarImagePath.value)
+                                backgroundImage:
+                                controller.avatarImagePath.value.isNotEmpty
+                                    ? FileImage(File(controller.avatarImagePath.value))
                                     : null,
 
-                                child: controller.avatarImagePath.value.isEmpty
+                                 child:
+
+                                    controller.avatarImagePath.value.isEmpty
                                     ? Icon(Icons.add_a_photo) // Display an icon if no image is selected
                                     : null,
                               ),)

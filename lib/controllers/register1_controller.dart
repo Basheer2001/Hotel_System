@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,6 @@ class Register1Controller extends GetxController{
   var registerLoadingState=false.obs;
 
   var avatarImagePath = ''.obs;
-
 
 
   void Register()async {
@@ -93,6 +93,7 @@ class Register1Controller extends GetxController{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       avatarImagePath.value = pickedFile.path;
+
     }
   }
 

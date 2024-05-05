@@ -125,8 +125,8 @@ class Checkemail extends GetView<CheckemailController>  {
                           );
                           var js = jsonDecode(response.body);
 
-                          print(js);
-                          controller.Checkemail();*/
+                          print(js);*/
+                          controller.Checkemail();
                         }),
                         SizedBox(width: 20,),
 

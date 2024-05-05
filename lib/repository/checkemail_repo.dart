@@ -17,7 +17,7 @@ class CheckEmailRepo extends GetxService{
     try {
 
       dio.Response response = await apiProvider.postRequest(
-          "http://192.168.1.5:8000/api/register/email",
+          "http://192.168.1.110:8000/api/register/email",
         {},
         jsonEncode({
           "email": username,
@@ -32,6 +32,8 @@ class CheckEmailRepo extends GetxService{
       print("Response cookies: ${response.data["Cookies"]}");
 
       print("Response cookies: ${cookies}");
+      print("Response header: ${response.headers}");
+      print("Response header: ${response}");
      // cookie = response.headers['set-cookie'];
 
       if (response.statusCode == 200) {

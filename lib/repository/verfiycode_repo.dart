@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
+import 'checkemail_repo.dart';
 
 class VerfiyCodeRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
@@ -14,22 +15,21 @@ class VerfiyCodeRepo extends GetxService {
       print(number);
 
       dio.Response response = await apiProvider.postRequest(
-        "http://127.0.0.1:8000/api/register/code",
+        "http://192.168.1.110:8000/api/register/code",
         {},
         jsonEncode({
           "verification_code": number,
         }),
+          head: CheckEmailRepo.cookies!.first
       );
-      print("\n2");
-//cc6987784
+      CheckEmailRepo.cookies =response.headers['set-cookie'];
+
       print("Response status code: ${response.statusCode}");
-      print("\n13");
-
       print("Response body: ${response.data}");
-      print("\n14");
-
       print("Response token: ${response.data["token"]}");
-      print("\n15");
+      print("Response cookies: ${response.data["Cookies"]}");
+
+      print("Response cookies: ${CheckEmailRepo.cookies}");
 
       if (response.statusCode == 200) {
         print("\n16");

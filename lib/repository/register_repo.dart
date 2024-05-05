@@ -42,9 +42,11 @@ class RegisterRepo extends GetxService {
           head: CheckEmailRepo.cookies!.first
       );
       CheckEmailRepo.cookies =response.headers['set-cookie'];
+
+      print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
-     // print("Response token: ${response.data["token"]}");
-    //  print("Response cookies: ${response.data["Cookies"]}");
+      print("Response token: ${response.data["token"]}");
+      print("Response cookies: ${response.data["Cookies"]}");
 
       print("Response cookies: ${CheckEmailRepo.cookies}");
       if (response.statusCode == 200) {

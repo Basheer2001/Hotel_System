@@ -18,7 +18,8 @@ List<GetPage<dynamic>>? routes =[
  // GetPage(name:"/", page: ()=>const OnBoarding()),
 //  GetPage(name:AppRoute.language, page: ()=>const Language()),
 
-  GetPage(name:"/", page: ()=> const Login()),
+ // GetPage(name:"/", page: ()=> const Login()),
+  GetPage(name:"/", page: ()=> const Checkemail()),
 //  GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
   GetPage(name:AppRoute.verifycode, page: () => VerfiyCode()),
