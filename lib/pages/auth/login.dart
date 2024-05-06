@@ -60,11 +60,11 @@ class Login extends GetView<loginController> {
                           child: ListView(children: [
                             //   const LogoAuth(),
                             const SizedBox(height: 20) ,
-                            const CustomTextTitleAuth(text: "Welcome Back"),
+                            const CustomTextTitleAuth(text: "2"),
                             const SizedBox(height: 10),
                             const CustomTextBodyAuth(
                                 text:
-                                "Sign In With Your Email And Password OR Continue With Social Media"),
+                                "3"),
                             const SizedBox(height: 15),
                             Container(
                               decoration: BoxDecoration(

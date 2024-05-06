@@ -26,7 +26,7 @@ class Language extends GetView<LocaleController> {
             //  fit: BoxFit.cover, // Adjust the fit of the image as needed
             ),
             SizedBox(height: 20), // Add some spacing between the image and the buttons
-            Text("Choose the Language familiar to you", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black)),
+            Text("1".tr, style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black)),
             SizedBox(height: 20),
             CustomButtonLang(
               flagIcon: Icons.flag,
