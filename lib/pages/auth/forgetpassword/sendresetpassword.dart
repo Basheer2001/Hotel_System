@@ -171,9 +171,9 @@ class SendResetPassword extends GetView<SendResetPasswordController>  {
                     key: controller.formKey,
                     child: ListView(children: [
                       const SizedBox(height: 100),
-                      CustomTextTitleAuth(text: "Forget Passowrd"),
+                      CustomTextTitleAuth(text: "7"),
                       const SizedBox(height: 17),
-                      CustomTextBodyAuth(text: "Reset Password"),
+                      CustomTextBodyAuth(text: "12"),
                       const SizedBox(height: 30),
                       Container(
                         decoration: BoxDecoration(
@@ -205,7 +205,7 @@ class SendResetPassword extends GetView<SendResetPasswordController>  {
 
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: 'Enter Email',
+                              hintText: '8'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               suffixIcon: Icon(Icons.email_outlined),
 
@@ -221,7 +221,7 @@ class SendResetPassword extends GetView<SendResetPasswordController>  {
                       SizedBox(height: 30,),
                       Row(
                         children: [
-                          CustomButtomAuth(text: "Reset Password", onPressed: () {
+                          CustomButtomAuth(text:"12", onPressed: () {
                             controller.resetpassword();
                           }),
                           SizedBox(width: 20,),

@@ -8,10 +8,6 @@ import '../../constant/auth/customtexttitleauth.dart';
 import '../../controllers/login_controller.dart';
 import '../../core/function/alertexitapp.dart';
 import 'forgetpassword/sendresetpassword.dart';
-
-
-
-
 class Login extends GetView<loginController> {
   const Login({Key? key}) : super(key: key);
 
@@ -96,7 +92,7 @@ class Login extends GetView<loginController> {
 
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
-                                    hintText: 'Enter Email',
+                                    hintText: '8'.tr,
                                     hintStyle: TextStyle(color: Colors.grey),
                                     suffixIcon: Icon(Icons.email_outlined),
                                     border: OutlineInputBorder(
@@ -137,7 +133,7 @@ class Login extends GetView<loginController> {
                                   obscureText: true,
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
-                                    hintText: 'Enter Password',
+                                    hintText: '',
                                     hintStyle: TextStyle(color: Colors.grey),
                                     suffixIcon: Icon(Icons.lock_outline),
                                     border: OutlineInputBorder(
@@ -155,26 +151,26 @@ class Login extends GetView<loginController> {
                               Get.to(SendResetPassword());
 
                             },
-                              child: const Text(
-                                "Forget Password",
+                              child: Text(
+                                "7".tr,
                                 textAlign: TextAlign.end,
                               ),
                             ),
 
 
-                            CustomButtomAuth(text: "Sign In", onPressed: () {
+                            CustomButtomAuth(text: "4".tr, onPressed: () {
                               controller.login();
                             }),
                             SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Don't have an account ? "),
+                                Text("6".tr),
                                 InkWell(
                                   onTap: (){
                                     Get.to(Checkemail());
                                   },
-                                  child: Text("Sign Up",
+                                  child: Text("5".tr,
                                                               style: TextStyle(
                                                                color: Colors.black87,
                                                                fontWeight: FontWeight.bold)),

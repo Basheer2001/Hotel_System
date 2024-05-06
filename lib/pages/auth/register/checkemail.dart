@@ -57,9 +57,9 @@ class Checkemail extends GetView<CheckemailController>  {
                   key: controller.formKey,
                   child: ListView(children: [
                     const SizedBox(height: 100),
-                    CustomTextTitleAuth(text: "Sign Up"),
+                    CustomTextTitleAuth(text: "5"),
                     const SizedBox(height: 17),
-                    CustomTextBodyAuth(text: "Enter Your Perosnal Informations"),
+                    CustomTextBodyAuth(text: "10"),
                     const SizedBox(height: 30),
                     Container(
                       decoration: BoxDecoration(
@@ -91,7 +91,7 @@ class Checkemail extends GetView<CheckemailController>  {
 
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Enter Email',
+                            hintText: '8'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             suffixIcon: Icon(Icons.email_outlined),
 
@@ -107,7 +107,7 @@ class Checkemail extends GetView<CheckemailController>  {
                       SizedBox(height: 30,),
                     Row(
                       children: [
-                        CustomButtomAuth(text: "Check Email", onPressed: () {
+                        CustomButtomAuth(text: "11", onPressed: () {
                           print("1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                           /*var response = await http.post(
                             Uri.parse("http://192.168.1.5:8000/api/register/email"),

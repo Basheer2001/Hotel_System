@@ -33,7 +33,7 @@ class Language extends GetView<LocaleController> {
               textbutton: "En",
               onPressed: () {
                 controller.changeLang("en");
-                Get.toNamed(AppRoute.login);
+                Get.toNamed(AppRoute.onBoarding);
               },
             ),
             SizedBox(height: 20),
@@ -42,7 +42,7 @@ class Language extends GetView<LocaleController> {
               textbutton: "Ar",
               onPressed: () {
                 controller.changeLang("ar");
-                Get.toNamed(AppRoute.login);
+                Get.toNamed(AppRoute.onBoarding);
               },
             ),
           ],

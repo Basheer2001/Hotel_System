@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomTextBodyAuth extends StatelessWidget {
   final String text;
@@ -9,7 +10,7 @@ class CustomTextBodyAuth extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 25),
       child: Text(
-        text,
+        text.tr,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyText1,
       ),

@@ -1,25 +1,25 @@
-
+import 'package:get/get.dart';
 import 'imageassets.dart';
 import 'onBoardingModel.dart';
 
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(
-      title: "Choose Your Room",
+      title: "28".tr,
       body:
       " ",
       image: AppImageAsset.onBoardingImageOne),
   OnBoardingModel(
-      title: "Easy And Safe Paymnet",
+      title: "29".tr,
       body:
       " ",
       image: AppImageAsset.onBoardingImageTwo),
   OnBoardingModel(
-      title: "Track Your Order",
+      title: "",
       body:
       " ",
       image: AppImageAsset.onBoardingImageThree),
   OnBoardingModel(
-      title: "Fast Delivery",
+      title: "30".tr,
       body:
       " ",
       image: AppImageAsset.onBoardingImageFour),

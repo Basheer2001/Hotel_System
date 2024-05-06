@@ -57,9 +57,9 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
                     key: controller.formKey,
                     child: ListView(children: [
                       const SizedBox(height: 100),
-                      CustomTextTitleAuth(text: "Verification Code"),
+                      CustomTextTitleAuth(text: "24"),
                       const SizedBox(height: 17),
-                      CustomTextBodyAuth(text: "Enter Your Perosnal Informations"),
+                      CustomTextBodyAuth(text: "25"),
                       const SizedBox(height: 30),
                       Container(
                         decoration: BoxDecoration(
@@ -89,7 +89,7 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
 
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: 'Enter code',
+                              hintText: '14'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -124,7 +124,7 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
                         controller.verfiycode(controller.numberTextController.text);
 
                       },
-                          child:Text("checkecode")),
+                          child:Text("26".tr)),
 
 
 

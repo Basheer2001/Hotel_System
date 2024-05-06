@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../pages/homepage/homepage.dart';
 import '../repository/account_repo.dart';
 import '../models/app_response.dart';
 
@@ -32,7 +33,7 @@ class loginController extends GetxController{
       AppResponse response=await  accountRepo.login(usernameTextController.text, PasswordTextController.text);
       loginLoadingState.value=false;
       if(response.success){
-        Get.to(() => ());
+        Get.to(() => HotelHomeView());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

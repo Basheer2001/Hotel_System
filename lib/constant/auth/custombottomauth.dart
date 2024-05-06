@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class CustomButtomAuth extends StatelessWidget {
@@ -55,7 +56,7 @@ class CustomButtomAuth extends StatelessWidget {
               :
 
 
-          Text(text , style:const TextStyle(fontWeight: FontWeight.bold , fontSize: 16)),
+          Text(text.tr , style:const TextStyle(fontWeight: FontWeight.bold , fontSize: 16)),
         )
 
     );

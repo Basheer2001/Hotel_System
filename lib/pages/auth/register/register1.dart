@@ -57,9 +57,9 @@ class Register1 extends GetView<Register1Controller> {
                 child: Form(
                   key: controller.formkey,
                   child: ListView(children: [
-                    CustomTextTitleAuth(text: "Sign Up"),
+                    CustomTextTitleAuth(text: "5"),
                     const SizedBox(height: 10),
-                    CustomTextBodyAuth(text: "Enter Your Personal Infromations"),
+                    CustomTextBodyAuth(text: "10"),
                     const SizedBox(height: 15),
 
                     Row(
@@ -117,7 +117,7 @@ class Register1 extends GetView<Register1Controller> {
 
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Enter firstname',
+                            hintText: '23'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -158,7 +158,7 @@ class Register1 extends GetView<Register1Controller> {
 
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Enter lastname',
+                            hintText: '22'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -254,7 +254,7 @@ class Register1 extends GetView<Register1Controller> {
                           obscureText: true,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Confrim Passowrd',
+                            hintText: '21'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -296,7 +296,7 @@ class Register1 extends GetView<Register1Controller> {
 
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Enter address',
+                            hintText: '20'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -338,7 +338,7 @@ class Register1 extends GetView<Register1Controller> {
 
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Enter id',
+                            hintText: '19'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -380,7 +380,7 @@ class Register1 extends GetView<Register1Controller> {
 
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            hintText: 'Enter phone',
+                            hintText: '18'.tr,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -421,7 +421,7 @@ class Register1 extends GetView<Register1Controller> {
                           : Text('Sign Up'),
                     ),*/
 
-                   CustomButtomAuth(text: "Sign Up", onPressed: () {
+                   CustomButtomAuth(text: "5", onPressed: () {
                            controller.Register();
 
     }),

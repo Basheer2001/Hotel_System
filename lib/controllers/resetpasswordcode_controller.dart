@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../models/app_response.dart';
 import '../pages/auth/Register/register1.dart';
 import '../pages/auth/login.dart';
+import '../pages/homepage/homepage.dart';
 import '../repository/resetpasswordcode_repo.dart';
 
 class ResetPasswordCodeController extends GetxController{
@@ -33,7 +34,7 @@ class ResetPasswordCodeController extends GetxController{
       loginLoadingState.value = false;
       if (response.success) {
         print("Verification Code Response: ${response.data}");
-        Get.to(() => Login());
+        Get.to(() => HotelHomeView());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

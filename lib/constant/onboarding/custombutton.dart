@@ -4,6 +4,7 @@ import 'package:untitled1/constant/onboarding/static_onboarding.dart';
 
 import '../../controllers/onboarding_controller.dart';
 import '../../pages/Language.dart';
+import '../../pages/auth/login.dart';
 
 
 class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {
@@ -22,7 +23,7 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {
           onPressed: () {
     if (controller.currentPage.value == onBoardingList.length - 1) {
     // Navigate to the language page
-    Get.to(Language());
+    Get.to(Login());
     } else {
     // Move to the next onboarding screen
     controller.next();
@@ -30,7 +31,7 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {
     },
           color:customColor,
          // color: AppColor.primaryColor,
-          child: const Text("Continue")),
+          child:  Text("27".tr)),
     );
   }
 }

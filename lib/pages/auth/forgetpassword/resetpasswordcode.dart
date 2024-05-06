@@ -266,9 +266,9 @@ class ResetPasswordCode extends GetView<ResetPasswordCodeController>  {
                     key: controller.formKey,
                     child: ListView(children: [
                       const SizedBox(height: 50),
-                      CustomTextTitleAuth(text: "Forget Passowrd"),
+                      CustomTextTitleAuth(text: "7"),
                       const SizedBox(height: 17),
-                      CustomTextBodyAuth(text: "Reset Password Code"),
+                      CustomTextBodyAuth(text: "13"),
                       const SizedBox(height: 30),
                       Container(
                         decoration: BoxDecoration(
@@ -300,7 +300,7 @@ class ResetPasswordCode extends GetView<ResetPasswordCodeController>  {
 
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: 'Enter Email',
+                              hintText: '8'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               suffixIcon: Icon(Icons.email_outlined),
 
@@ -342,7 +342,7 @@ class ResetPasswordCode extends GetView<ResetPasswordCodeController>  {
 
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: 'Enter Code',
+                              hintText: '14'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               suffixIcon: Icon(Icons.code),
 
@@ -384,7 +384,7 @@ class ResetPasswordCode extends GetView<ResetPasswordCodeController>  {
                             obscureText: true,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: 'Enter newPassword',
+                              hintText: '15'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               suffixIcon: Icon(Icons.lock_outline),
                               border: OutlineInputBorder(
@@ -426,7 +426,7 @@ class ResetPasswordCode extends GetView<ResetPasswordCodeController>  {
                             obscureText: true,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: 'confrim newPassword',
+                              hintText: '16'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               suffixIcon: Icon(Icons.lock_outline),
                               border: OutlineInputBorder(
@@ -440,7 +440,7 @@ class ResetPasswordCode extends GetView<ResetPasswordCodeController>  {
 
                       ),
                       SizedBox(height: 20,),
-                      CustomButtomAuth(text: "Confrim", onPressed: () {
+                      CustomButtomAuth(text: "17", onPressed: () {
                         controller.resetpasswordcode();
                       }),
 

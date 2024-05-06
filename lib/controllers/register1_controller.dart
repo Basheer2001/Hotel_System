@@ -10,7 +10,7 @@ import 'package:untitled1/pages/onboarding.dart';
 
 import '../models/app_response.dart';
 import '../pages/auth/Register/verfiycode.dart';
-import '../pages/homePage.dart';
+import '../pages/homepage/homepage.dart';
 import '../repository/register_repo.dart';
 
 
@@ -64,7 +64,7 @@ class Register1Controller extends GetxController{
       );
       registerLoadingState.value=false;
       if(response.success){
-        Get.to(() =>OnBoarding ());
+        Get.to(() =>HotelHomeView ());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),
