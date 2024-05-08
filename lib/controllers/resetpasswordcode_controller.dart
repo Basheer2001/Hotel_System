@@ -34,7 +34,7 @@ class ResetPasswordCodeController extends GetxController{
       loginLoadingState.value = false;
       if (response.success) {
         print("Verification Code Response: ${response.data}");
-        Get.to(() => HotelHomeView());
+        Get.to(() => Login());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

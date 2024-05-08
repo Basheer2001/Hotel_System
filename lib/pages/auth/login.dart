@@ -171,9 +171,9 @@ class Login extends GetView<loginController> {
                                     Get.to(Checkemail());
                                   },
                                   child: Text("5".tr,
-                                                              style: TextStyle(
-                                                               color: Colors.black87,
-                                                               fontWeight: FontWeight.bold)),
+                                      style: TextStyle(
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.bold)),
                                 ),
 
                                 ])

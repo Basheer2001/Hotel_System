@@ -20,14 +20,17 @@ class AccountRepo extends GetxService{
           "password": password,
         }),
       );
+      APIProvider.token = response.data["data"];
+
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
+      print("Response token: ${APIProvider.token}");
 
       if (response.statusCode == 200) {
-        if (response.data != null && response.data["token"] != null) {
+        if (response.data != null && response.data["data"] != null) {
           return AppResponse<String>(
             success: true,
-            data: response.data["token"],
+            data: response.data["data"],
           );
         } else {
           throw Exception("Token not found in response data");
@@ -35,7 +38,7 @@ class AccountRepo extends GetxService{
       } else {
         throw Exception("Server responded with status code ${response.statusCode}");
       }
-    } on dio.DioError catch (e) {
+    } on dio.DioException catch (e) {
       print("Dio error during login: $e");
       String errorMessage = "Network error occurred";
       if (e.response != null) {
