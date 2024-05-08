@@ -20,16 +20,15 @@ class VerfiyCodeRepo extends GetxService {
         jsonEncode({
           "verification_code": number,
         }),
-          head: CheckEmailRepo.cookies!.first
+          head:  APIProvider.cookies!.first
       );
-      CheckEmailRepo.cookies =response.headers['set-cookie'];
+      APIProvider.cookies =response.headers['set-cookie'];
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
-      print("Response token: ${response.data["token"]}");
-      print("Response cookies: ${response.data["Cookies"]}");
 
-      print("Response cookies: ${CheckEmailRepo.cookies}");
+
+      print("Response cookies: ${ APIProvider.cookies}");
 
       if (response.statusCode == 200) {
         print("\n16");

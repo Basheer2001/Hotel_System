@@ -39,16 +39,16 @@ class RegisterRepo extends GetxService {
           "${APIProvider.url}register/user",
         {},
         formData,// Pass formData instead of jsonEncode
-          head: CheckEmailRepo.cookies!.first
+          head:  APIProvider.cookies!.first
       );
-      CheckEmailRepo.cookies =response.headers['set-cookie'];
+      APIProvider.cookies =response.headers['set-cookie'];
+      APIProvider.token = response.data["data"];
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
-      print("Response token: ${response.data["token"]}");
-      print("Response cookies: ${response.data["Cookies"]}");
+      print("Response token: ${APIProvider.token}");
 
-      print("Response cookies: ${CheckEmailRepo.cookies}");
+      print("Response cookies: ${ APIProvider.cookies}");
       if (response.statusCode == 200) {
         // Check if the response contains an "id" field
 

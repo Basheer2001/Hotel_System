@@ -39,6 +39,7 @@ class Register1Controller extends GetxController{
   var registerLoadingState=false.obs;
 
   var avatarImagePath = ''.obs;
+  //File? image;
 
 
   void Register()async {
@@ -94,7 +95,7 @@ class Register1Controller extends GetxController{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       avatarImagePath.value = pickedFile.path;
-
+       // image = File(pickedFile.path);
     }
   }
 

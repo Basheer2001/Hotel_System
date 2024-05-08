@@ -74,13 +74,13 @@ class Register1 extends GetView<Register1Controller> {
                                 minRadius: 35,
                                 maxRadius: 35,
                                 backgroundImage:
-                                controller.avatarImagePath.value.isNotEmpty
-                                    ? FileImage(File(controller.avatarImagePath.value))
-                                    : null,
+                                controller.avatarImagePath.value.isEmpty
+                                    ?null
+                                    :FileImage(File(controller.avatarImagePath.value)) ,
 
                                  child:
 
-                                    controller.avatarImagePath.value.isEmpty
+                                 controller.avatarImagePath.isEmpty
                                     ? Icon(Icons.add_a_photo) // Display an icon if no image is selected
                                     : null,
                               ),)

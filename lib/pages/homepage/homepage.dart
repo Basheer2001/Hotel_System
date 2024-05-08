@@ -18,11 +18,11 @@ class HotelHomeView extends StatelessWidget {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
     // Sample list of hotels
     final List<Hotel> hotels = [
-      Hotel(name: 'Hotel A', location: 'City A', imageUrl: 'assets/images/download.jpg',des:"Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.", price: 100.0,),
-      Hotel(name: 'Hotel B', location: 'City B', imageUrl: 'assets/images/downloadd.jpg',des:"With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.", price: 1000.0,),
-      Hotel(name: 'Hotel C', location: 'City C', imageUrl: 'assets/images/download.jpg',des:"Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.", price: 250.0,),
-      Hotel(name: 'Hotel D', location: 'City E', imageUrl: 'assets/images/hotel1.jpg',des:"Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",price: 500.0,),
-      Hotel(name: 'Hotel E', location: 'City C', imageUrl: 'assets/images/hotel1.jpg',des:"Whether you're here for business or leisure, our centrally located hotel provides the perfect base for exploring the vibrant city and its myriad attractions.",price: 250.0,),
+      Hotel(name: 'Hotel A', location: 'City A', imageUrl: 'assets/images/images.jpg',des:"Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.", price: 100.0,),
+      Hotel(name: 'Hotel B', location: 'City B', imageUrl:'assets/images/images.jpg',des:"With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.", price: 1000.0,),
+      Hotel(name: 'Hotel C', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.", price: 250.0,),
+      Hotel(name: 'Hotel D', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",price: 500.0,),
+      Hotel(name: 'Hotel E', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Whether you're here for business or leisure, our centrally located hotel provides the perfect base for exploring the vibrant city and its myriad attractions.",price: 250.0,),
       Hotel(name: 'Hotel F', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Indulge in culinary delights and cultural experiences at our historic hotel, where each room is a reflection of the city's rich heritage.",price: 400.0,),
     ];
 
