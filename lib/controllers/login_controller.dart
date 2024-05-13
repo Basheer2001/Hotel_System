@@ -21,11 +21,6 @@ class loginController extends GetxController{
   var loginLoadingState=false.obs;
 
 
-
-
-
-
-
   void login() async{
     firstSubmit.value=true;
     if(formKey.currentState!.validate()){
@@ -33,7 +28,7 @@ class loginController extends GetxController{
       AppResponse response=await  accountRepo.login(usernameTextController.text, PasswordTextController.text);
       loginLoadingState.value=false;
       if(response.success){
-        Get.to(() => HotelHomeView());
+        Get.to(() => HotelHome());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

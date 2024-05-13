@@ -6,12 +6,13 @@ import 'package:untitled1/pages/auth/Register/verfiycode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/resetpasswordcode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/sendresetpassword.dart';
 import 'package:untitled1/pages/auth/login.dart';
+import 'package:untitled1/pages/auth/profile/profile.dart';
+import 'package:untitled1/pages/homepage/homepage.dart';
 import 'package:untitled1/pages/onboarding.dart';
-
 import 'constant/routes.dart';
 
 List<GetPage<dynamic>>? routes =[
-  GetPage(name: "/", page: ()=> const Language()),
+ /* GetPage(name: "/", page: ()=> const Language()),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
@@ -19,6 +20,11 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name: AppRoute.verifycode, page: () => VerfiyCode()),
   GetPage(name:AppRoute.register1 , page:()=>Register1()),
   GetPage(name:AppRoute.sendresetpassword , page:()=>SendResetPassword()),
-  GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),
+  GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),*/
+  //GetPage(name:"/", page:()=>HotelHome()),
+  GetPage(name: "/", page:()=>Profile()),
+  GetPage(name: AppRoute.profile, page:()=>Profile()),
+  //GetPage(name: AppRoute.hotelhome, page:()=>HotelHome()),
+
 
 ];

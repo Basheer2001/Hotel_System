@@ -11,6 +11,8 @@ import 'package:untitled1/pages/auth/register/checkemail.dart';
 import 'package:untitled1/providers/api_provider.dart';
 import 'package:untitled1/repository/account_repo.dart';
 import 'package:untitled1/repository/checkemail_repo.dart';
+import 'package:untitled1/repository/homepage_repo.dart';
+import 'package:untitled1/repository/profile_repo.dart';
 import 'package:untitled1/repository/register_repo.dart';
 import 'package:untitled1/repository/resetpasswordcode_repo.dart';
 import 'package:untitled1/repository/sendresetpassword_repo.dart';
@@ -36,9 +38,12 @@ class AppBinding extends Bindings{
     Get.lazyPut(() => VerfiyCodeRepo());
     Get.lazyPut(() => SendResetPasswordRepo());
     Get.lazyPut(() => ResetPasswordCodeRepo());
+    Get.lazyPut(()=> HomePageRepo());
+    Get.lazyPut(()=> ProfileRepo());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());
+
   }
 
 }

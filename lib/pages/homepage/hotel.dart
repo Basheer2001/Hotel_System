@@ -4,6 +4,7 @@ class Hotel {
   final String imageUrl;
   final String des;
   final double price;
+  final int id;
   bool isLiked;
   int? reviews;
   double? rating; // Define rating property
@@ -17,6 +18,7 @@ class Hotel {
     required this.price,
     this.rating,
     this.isLiked=false,
+    required this.id,
 
   });
 

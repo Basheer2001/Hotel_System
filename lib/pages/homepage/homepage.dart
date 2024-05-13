@@ -1,33 +1,42 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji_feedback/flutter_emoji_feedback.dart';
 import 'package:get/get.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
 
+import '../../controllers/homepage/homepage_controller.dart';
+import '../auth/profile/profile.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelp.dart';
 
 
-class HotelHomeView extends StatelessWidget {
-  const HotelHomeView({Key? key}) : super(key: key);
+class HotelHome extends StatelessWidget {
+  const HotelHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
     // Sample list of hotels
     final List<Hotel> hotels = [
-      Hotel(name: 'Hotel A', location: 'City A', imageUrl: 'assets/images/images.jpg',des:"Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.", price: 100.0,),
-      Hotel(name: 'Hotel B', location: 'City B', imageUrl:'assets/images/images.jpg',des:"With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.", price: 1000.0,),
-      Hotel(name: 'Hotel C', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.", price: 250.0,),
-      Hotel(name: 'Hotel D', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",price: 500.0,),
-      Hotel(name: 'Hotel E', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Whether you're here for business or leisure, our centrally located hotel provides the perfect base for exploring the vibrant city and its myriad attractions.",price: 250.0,),
-      Hotel(name: 'Hotel F', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Indulge in culinary delights and cultural experiences at our historic hotel, where each room is a reflection of the city's rich heritage.",price: 400.0,),
+      Hotel(name: 'Hotel A', location: 'City A', imageUrl: 'assets/images/images.jpg',des:"Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.", price: 100.0,id:1),
+      Hotel(name: 'Hotel B', location: 'City B', imageUrl:'assets/images/images.jpg',des:"With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.", price: 1000.0,id:2,),
+      Hotel(name: 'Hotel C', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.", price: 250.0,id:3),
+      Hotel(name: 'Hotel D', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",price: 500.0,id:4),
+      Hotel(name: 'Hotel E', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Whether you're here for business or leisure, our centrally located hotel provides the perfect base for exploring the vibrant city and its myriad attractions.",price: 250.0,id:5),
+      Hotel(name: 'Hotel F', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Indulge in culinary delights and cultural experiences at our historic hotel, where each room is a reflection of the city's rich heritage.",price: 400.0,id:6),
     ];
+
+    Get.put(HotelHomeController());
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
+
+
+
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -35,68 +44,74 @@ class HotelHomeView extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Browse existing offers",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Browse existing offers",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SingleChildScrollView(
-                            child: Container(
-                              padding: EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Activities',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                    SizedBox(width: 16,),
+                    ElevatedButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SingleChildScrollView(
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Activities',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  // Display pictures of activities here
-                                  // You can use GridView, ListView, or any other widget to display images
-                                  // Example:
-                                  GridView.count(
-                                    shrinkWrap: true,
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                    children: [
-                                      // Replace with your activity images
-                                      Image.asset('assets/images/activity.jpg'),
-                                      Image.asset('assets/images/activity.jpg'),
-                                      Image.asset('assets/images/c.jpg'),
-                                      // Add more images as needed
-                                    ],
-                                  ),
-                                ],
+                                    SizedBox(height: 10),
+                                    // Display pictures of activities here
+                                    // You can use GridView, ListView, or any other widget to display images
+                                    // Example:
+                                    GridView.count(
+                                      shrinkWrap: true,
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 10,
+                                      children: [
+                                        // Replace with your activity images
+                                        Image.asset('assets/images/activity.jpg'),
+                                        Image.asset('assets/images/activity.jpg'),
+                                        Image.asset('assets/images/c.jpg'),
+                                        // Add more images as needed
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Text("Browse"),
-                    style: ElevatedButton.styleFrom(
-                      //primary: Colors.blue, // Change to your preferred color
+                            );
+                          },
+                        );
+                      },
+                      child: Text("Browse"),
+                      style: ElevatedButton.styleFrom(
+                        //primary: Colors.blue, // Change to your preferred color
+                      ),
                     ),
-                  ),
-
-
-                ],
+                SizedBox(width: 30,),
+                ElevatedButton(onPressed: (){
+                  Get.to(() => Profile());
+                }, child: Text("profile"))
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -123,42 +138,46 @@ class HotelHomeView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 13),
-            Row(
-              children: [
-                SizedBox(width: 10),
-                Text(
-                  "Categories",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.black,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  SizedBox(width: 10),
+                  Text(
+                    "Categories",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                SizedBox(width: 20),
-                _buildCategoryButton(Icons.beach_access, "Sea"),
-                SizedBox(width: 10),
-                _buildCategoryButton(Icons.terrain, "Mountain"),
-                SizedBox(width: 10),
-                _buildCategoryButton(Icons.pool, "Pool"),
-              ],
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                ),
-                itemCount: hotels.length,
-                itemBuilder: (context, index) {
-                  return HotelCard(hotel: hotels[index]);
-                },
+                  SizedBox(width: 20),
+                  _buildCategoryButton(Icons.beach_access, "Sea"),
+                  SizedBox(width: 10),
+                  _buildCategoryButton(Icons.terrain, "Mountain"),
+                  SizedBox(width: 10),
+                  _buildCategoryButton(Icons.pool, "Pool"),
+                ],
               ),
             ),
-          ],
+            SizedBox(height: 10),
+      GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                  ),
+                  itemCount: hotels.length,
+                  itemBuilder: (context, index) {
+                    return HotelCard(hotel: hotels[index]);
+                  },
+                ),
+              ]
+            ),
         ),
-      ),
+
     );
   }
 
@@ -241,12 +260,13 @@ class HotelCard extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            // Handle favorite icon press
+                            Get.find<HotelHomeController>().toggleLike(hotel.id);
+                            Get.find<HotelHomeController>().addToWishlist(hotel.id);
                           },
                           icon: Icon(
                             Icons.favorite,
                             size: 15,
-                            color: hotel.isLiked ? Colors.red : null,
+                            color: hotel.isLiked ? Colors.red : Colors.grey,
                           ),
                         ),
                       ],
@@ -273,6 +293,7 @@ class HotelCard extends StatelessWidget {
                         hotel.rating = rating;
                       },
                     ),
+
                   ],
                 ),
               ),

@@ -65,7 +65,7 @@ class Register1Controller extends GetxController{
       );
       registerLoadingState.value=false;
       if(response.success){
-        Get.to(() =>HotelHomeView ());
+        Get.to(() =>HotelHome ());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),
