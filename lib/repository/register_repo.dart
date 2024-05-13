@@ -39,7 +39,7 @@ class RegisterRepo extends GetxService {
           "${APIProvider.url}register/user",
         {},
         formData,// Pass formData instead of jsonEncode
-          head:  APIProvider.cookies!.first
+          cookies:  APIProvider.cookies!.first
       );
       APIProvider.cookies =response.headers['set-cookie'];
       //APIProvider.token = response.data["data"];

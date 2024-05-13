@@ -20,7 +20,7 @@ class VerfiyCodeRepo extends GetxService {
         jsonEncode({
           "verification_code": number,
         }),
-          head:  APIProvider.cookies!.first
+          cookies:  APIProvider.cookies!.first
       );
       APIProvider.cookies =response.headers['set-cookie'];
 

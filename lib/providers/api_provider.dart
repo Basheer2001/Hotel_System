@@ -68,7 +68,7 @@ static String? token;
 
   Future<dio.Response> postRequest(
 
-      String method, Map<String,dynamic> queryParams,dynamic body,{String? head})async{
+      String method, Map<String,dynamic> queryParams,dynamic body,{String? cookies,String?token})async{
     // print(1);
     // DioForBrowser dioForBrowser = DioForBrowser(_dio.options);
     // print(2);
@@ -79,8 +79,14 @@ static String? token;
     // _dio.httpClientAdapter=adapter;
 
     print(5);
-    if (head!=null){
-      _dio.options = dio.BaseOptions(headers: {'Cookie': head});}
+    if (cookies!=null|| token!=null ){
+      _dio.options = dio.BaseOptions(
+          headers: {
+            'Cookie': cookies??cookies,
+            'Authorization' : token?? 'Bearer ${token}'
+      }
+      );
+    }
     print(6);
     dio.Response response=await _dio.post(method,queryParameters: queryParams,data: body);
     print(7);
