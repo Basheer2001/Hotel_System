@@ -9,6 +9,7 @@ class AppRoute {
   static const String checkemail="/checkemail";
   static const String hotelhome="/hotelhome";
   static const String profile="/profile";
+  static const String uodateprofile="/profile";
 
 
 }
