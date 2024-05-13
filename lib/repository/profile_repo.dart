@@ -28,6 +28,7 @@ class ProfileRepo extends GetxService{
           "current_password":currentpassword,
           "email ":eemail
         }),
+        token: APIProvider.token
       );
 
       print("\n2");
