@@ -305,7 +305,7 @@ class HotelCard extends StatelessWidget {
   }
 }
 
-
+//
 class HotelDetailsView extends StatelessWidget {
   final Hotel hotel;
 

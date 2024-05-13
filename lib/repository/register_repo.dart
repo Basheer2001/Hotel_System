@@ -44,7 +44,7 @@ class RegisterRepo extends GetxService {
       APIProvider.cookies =response.headers['set-cookie'];
       //APIProvider.token = response.data["data"];
       String token = response.data["data"];
-
+        APIProvider.token = token;
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
      // print("Response token: ${APIProvider.token}");
