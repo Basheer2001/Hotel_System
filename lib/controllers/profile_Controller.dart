@@ -19,6 +19,7 @@ class ProfileController extends GetxController{
   TextEditingController eemailTextController=TextEditingController(text:"ramibeyrouthy7@gmail.com");
 
 
+  var token = "".obs;
 
   var firstSubmit =false.obs;
 
@@ -63,8 +64,30 @@ class ProfileController extends GetxController{
   }
 
 
+  void getProfile() async {
+    AppResponse<Map<String, dynamic>> response =
+    await profileRepo.getProfile(token.value);
+    if (response.success) {
+      emailTextController.text = response.data!['email'];
+      nameTextController.text = response.data!['name'];
+      phoneTextController.text = response.data!['phone'];    } else {
+      Get.defaultDialog(
+          title: "Error",
+          content: Text(response.errorMessage!),
+          actions: [
+            TextButton(onPressed: (){
+              Get.back();
+            },
+                child: Text("ok")),
+          ]
+      );
 
 
-
+      Get.snackbar(
+          'Error',
+          response.errorMessage!,
+          snackPosition: SnackPosition.BOTTOM,);
+    }
+  }
 
 }

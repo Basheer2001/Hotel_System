@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_emoji_feedback/flutter_emoji_feedback.dart';
 import 'package:get/get.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
-
 import '../../controllers/homepage/homepage_controller.dart';
-import '../auth/profile/profile.dart';
+import '../profile/profile.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelp.dart';
@@ -262,6 +260,7 @@ class HotelCard extends StatelessWidget {
                           onPressed: () {
                             Get.find<HotelHomeController>().toggleLike(hotel.id);
                             Get.find<HotelHomeController>().addToWishlist(hotel.id);
+                            Get.find<HotelHomeController>().getWishlist();
                           },
                           icon: Icon(
                             Icons.favorite,

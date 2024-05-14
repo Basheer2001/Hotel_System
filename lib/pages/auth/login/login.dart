@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:untitled1/pages/auth/register/checkemail.dart';
-import '../../constant/auth/custombottomauth.dart';
-import '../../constant/auth/customtextbodyauth.dart';
-import '../../constant/auth/customtexttitleauth.dart';
-import '../../controllers/login_controller.dart';
-import '../../core/function/alertexitapp.dart';
-import 'forgetpassword/sendresetpassword.dart';
+import '../../../constant/auth/custombottomauth.dart';
+import '../../../constant/auth/customtextbodyauth.dart';
+import '../../../constant/auth/customtexttitleauth.dart';
+import '../../../controllers/login_controller.dart';
+import '../../../core/function/alertexitapp.dart';
+import '../forgetpassword/sendresetpassword.dart';
 class Login extends GetView<loginController> {
   const Login({Key? key}) : super(key: key);
 
@@ -146,6 +146,54 @@ class Login extends GetView<loginController> {
                               ),
 
                             ),
+                            SizedBox(height: 20,),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 2), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Obx(
+                                    ()=> TextFormField(
+                                  controller: controller.checkPasswordTextController,
+                                  autovalidateMode: !controller.firstSubmit.value?
+                                  AutovalidateMode.disabled
+                                      :AutovalidateMode.always,
+                                  validator: (String ? value){
+                                    if(value!.isEmpty){
+                                      return "Required Field";
+                                    }
+                                    return null;
+                                  },
+                                  obscureText: true,
+                                  style: TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    hintText: 'checkpassword',
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    suffixIcon: InkWell(onTap: (){
+                                      controller.checkpassword();
+                                    },
+                                        child: Icon(Icons.check)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    contentPadding: EdgeInsets.all(20),
+                                  ),
+                                ),
+                              ),
+
+                            ),
+                            SizedBox(height: 20,),
+
+
                            SizedBox(height: 15,),
                             InkWell(onTap: (){
                               Get.to(SendResetPassword());

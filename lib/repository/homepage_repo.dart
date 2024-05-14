@@ -3,12 +3,13 @@ import 'dart:io'; // Import the 'dart:io' library
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 import '../models/app_response.dart';
+import '../pages/homepage/hotel.dart';
 import '../providers/api_provider.dart';
 
 class HomePageRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
 
-  Future<void> addToWishlist(int roomid,String cookie) async {
+  Future<void> addToWishlist(int roomid, String cookie) async {
     try {
       // Call getRequest method from APIProvider
       final response = await apiProvider.getRequest(
@@ -19,57 +20,40 @@ class HomePageRepo extends GetxService {
 
       // Handle response here
       print(response.data);
-    }catch (e) {
+    } catch (e) {
       // Handle error
       print("Error: $e");
     }
   }
 
-  Future<AppResponse<String>> getWishlist(String rating, String comment) async {
+  Future<List<Hotel>> getwishlist(String cookie) async {
     try {
-      final response = await apiProvider.postRequest(
-        "${APIProvider.url}wishlist",
+      // Call getRequest method from APIProvider to fetch wishlist items
+      final response = await apiProvider.getRequest(
+        "wishlist", // Adjust the endpoint URL if necessary
         {},
-        jsonEncode({
-          "rating": rating,
-          "comment": comment,
-        }),
+        cookie: cookie,
       );
 
-      APIProvider.cookies = response.headers['set-cookie'];
-      String token = response.data["data"];
-
-      print("Response status code: ${response.statusCode}");
-      print("Response cookies: ${APIProvider.cookies}");
-      print("Response header: ${response.headers}");
-      print("Response body: ${response.data}");
-      print("Response token: $token");
-
+      // Handle response here
       if (response.statusCode == 200) {
-        if (response.data != null && response.data["data"] != null) {
-          return AppResponse<String>(
-            success: true,
-            data: response.data["data"],
-          );
-        } else {
-          throw Exception("Token not found in response data");
-        }
+        // Assuming response.data is a list of wishlist items in JSON format
+        List<dynamic> data = response.data;
+        List<Hotel> wishlist = data.map((item) => Hotel.fromJson(item)).toList();
+        return wishlist;
       } else {
-        throw Exception("Server responded with status code ${response.statusCode}");
+        throw Exception('Failed to fetch wishlist');
       }
-    } on dio.DioException catch (e) {
-      print("Dio error during wishlist retrieval: $e");
-      String errorMessage = "Network error occurred";
-      if (e.response != null) {
-        errorMessage = "Server error: ${e.response!.statusCode}";
-        // Optionally, handle different types of Dio errors (e.g., timeouts, connectivity issues)
-      }
-      return AppResponse(success: false, errorMessage: errorMessage);
     } catch (e) {
-      print("Error during wishlist retrieval: $e");
-      return AppResponse(success: false, errorMessage: e.toString());
+      // Handle error
+      print("Error fetching wishlist: $e");
+      throw e; // Rethrow the error so it can be handled elsewhere in your application
     }
   }
+
+
+}
+
 
 /*
   Future<AppResponse<String>> deleteFromWishlist(String rating, String comment) async {
@@ -117,7 +101,7 @@ class HomePageRepo extends GetxService {
     }
   }
 */
-}
+
 
 
 

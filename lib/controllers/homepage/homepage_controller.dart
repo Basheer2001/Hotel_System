@@ -9,8 +9,16 @@ class HotelHomeController extends GetxController {
   HomePageRepo homePageRepo = Get.find<HomePageRepo>();
   TextEditingController numberTextController = TextEditingController(text: "2");
 
+  List<int> wishlist = [];
 
   List<int> likedHotelIds = [];
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Fetch wishlist items when the homepage is initialized
+    getWishlist();
+  }
 
   void toggleLike(int hotelId) {
     if (likedHotelIds.contains(hotelId)) {
@@ -60,26 +68,17 @@ class HotelHomeController extends GetxController {
     }
   }
 
-  void getWishlist(String rating, String comment) async {
+  void getWishlist() async {
     try {
-      final response = await homePageRepo.getWishlist(rating, comment);
-      if (response.success) {
-        // Wishlist retrieval successful
-        final wishlistData = response.data;
-        // Process the wishlistData as needed
-      } else {
-        // Wishlist retrieval failed
-        final errorMessage = response.errorMessage;
-        // Handle the error message
-      }
+      // Fetch wishlist items
+
+       await homePageRepo.getwishlist("your_cookie_here");
+      // Update UI if needed
+      update();
     } catch (e) {
-      // Handle any exceptions thrown during wishlist retrieval
-      print("Error during wishlist retrieval: $e");
+      // Handle error
+      print("Error fetching wishlist: $e");
     }
   }
-
-
-
-
 }
 
