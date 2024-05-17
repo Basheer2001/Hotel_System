@@ -5,12 +5,15 @@ import 'package:untitled1/pages/auth/Register/register1.dart';
 import 'package:untitled1/pages/auth/Register/verfiycode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/resetpasswordcode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/sendresetpassword.dart';
-import 'package:untitled1/pages/auth/login.dart';
-import 'package:untitled1/pages/auth/profile/profile.dart';
-import 'package:untitled1/pages/auth/profile/updateprofile.dart';
+// import 'package:untitled1/pages/auth/login.dart';
+// import 'package:untitled1/pages/auth/profile/profile.dart';
+// import 'package:untitled1/pages/auth/profile/updateprofile.dart';
 import 'package:untitled1/pages/homepage/homepage.dart';
 import 'package:untitled1/pages/onboarding.dart';
+import 'package:untitled1/pages/profile/profile.dart';
+import 'package:untitled1/pages/profile/updateprofile.dart';
 import 'constant/routes.dart';
+import 'package:untitled1/pages/auth/login/login.dart';
 
 List<GetPage<dynamic>>? routes =[
   GetPage(name: "/", page: ()=> const Language()),

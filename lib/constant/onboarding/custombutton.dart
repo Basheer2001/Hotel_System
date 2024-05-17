@@ -4,7 +4,7 @@ import 'package:untitled1/constant/onboarding/static_onboarding.dart';
 
 import '../../controllers/onboarding_controller.dart';
 import '../../pages/Language.dart';
-import '../../pages/auth/login.dart';
+import '../../pages/auth/login/login.dart';
 
 
 class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {

@@ -30,9 +30,9 @@ class ProfileController extends GetxController{
     firstSubmit.value=true;
     if(formKey.currentState!.validate()){
       loginLoadingState.value=true;
-      AppResponse response=await profileRepo.updateprofile(emailTextController.text, nameTextController.text,
+      AppResponse response=await profileRepo.updateprofile( nameTextController.text,
           phoneTextController.text,newpasswordTextController.text,newpasswordconfirmation.text,currentpassword.text,
-          eemailTextController.text
+
       );
       loginLoadingState.value=false;
       if(response.success){

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/app_response.dart';
 import '../pages/auth/Register/register1.dart';
-import '../pages/auth/login.dart';
+import '../pages/auth/login/login.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/resetpasswordcode_repo.dart';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/app_response.dart';
 import '../pages/auth/forgetpassword/resetpasswordcode.dart';
-import '../pages/auth/login.dart';
 import '../repository/sendresetpassword_repo.dart';
 
 class SendResetPasswordController extends GetxController{

@@ -26,7 +26,7 @@ class HomePageRepo extends GetxService {
     }
   }
 
-  Future<List<Hotel>> getwishlist(String cookie) async {
+  Future<List> getwishlist(String cookie) async {
     try {
       // Call getRequest method from APIProvider to fetch wishlist items
       final response = await apiProvider.getRequest(
@@ -39,8 +39,9 @@ class HomePageRepo extends GetxService {
       if (response.statusCode == 200) {
         // Assuming response.data is a list of wishlist items in JSON format
         List<dynamic> data = response.data;
-        List<Hotel> wishlist = data.map((item) => Hotel.fromJson(item)).toList();
-        return wishlist;
+        // List<Hotel> wishlist = data.map((item) => Hotel.fromJson(item)).toList();
+        // return wishlist;
+        return data;
       } else {
         throw Exception('Failed to fetch wishlist');
       }

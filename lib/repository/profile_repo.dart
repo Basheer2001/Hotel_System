@@ -10,20 +10,20 @@ class ProfileRepo extends GetxService{
 
   APIProvider apiProvider=Get.find<APIProvider>();
 
-  Future<AppResponse<String>> updateprofile(String email,String username,String number ,String newpassword ,String newpasswordconfirmation,String currentpassword,String eemail)async {
+  Future<AppResponse<String>> updateprofile(String username,String number ,String newpassword ,String newpasswordconfirmation,String currentpassword,)async {
     print("\n1");
     try {
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}user/profile",
         {},
         jsonEncode({
-          "email":email,
+
           "name":  username,
           "phone":number,
           "new_password":newpassword,
           "new_password_confirmation":newpasswordconfirmation,
           "current_password":currentpassword,
-          "email ":eemail
+
         }),
         token: APIProvider.token
       );

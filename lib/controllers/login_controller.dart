@@ -48,7 +48,7 @@ class loginController extends GetxController{
       AppResponse response=await  accountRepo.login(usernameTextController.text, PasswordTextController.text);
       loginLoadingState.value=false;
       if(response.success){
-      //  Get.to(() => HotelHome());
+        Get.to(() => HotelHome());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

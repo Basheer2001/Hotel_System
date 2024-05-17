@@ -6,7 +6,7 @@ import 'package:untitled1/pages/auth/Register/register1.dart';
 import 'package:untitled1/pages/auth/Register/verfiycode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/resetpasswordcode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/sendresetpassword.dart';
-import 'package:untitled1/pages/auth/login.dart';
+import 'package:untitled1/pages/auth/login/login.dart';
 import 'package:untitled1/pages/auth/register/checkemail.dart';
 import 'package:untitled1/providers/api_provider.dart';
 import 'package:untitled1/repository/account_repo.dart';
@@ -18,6 +18,7 @@ import 'package:untitled1/repository/resetpasswordcode_repo.dart';
 import 'package:untitled1/repository/sendresetpassword_repo.dart';
 import 'package:untitled1/repository/verfiycode_repo.dart';
 import 'package:untitled1/routes.dart';
+import 'controllers/homepage/homepage_controller.dart';
 import 'controllers/register1_controller.dart';
 import 'controllers/resetpasswordcode_controller.dart';
 import 'controllers/verfiycode_controller.dart';
@@ -43,7 +44,7 @@ class AppBinding extends Bindings{
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());
-
+    Get.put(HotelHomeController());
   }
 
 }
