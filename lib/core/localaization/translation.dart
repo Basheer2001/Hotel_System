@@ -36,6 +36,8 @@ class MyTranslation extends Translations{
       "29":"عملية دغع سهلة وآمنة",
       "30":"خدمة سريعة",
       "31":"نشاطات مميزة و ممتعة",
+      "32": "دخل كلمة المرور الحالية",
+
 
     },
     "en": {
@@ -69,7 +71,8 @@ class MyTranslation extends Translations{
       "28":"Choose Your Room",
       "29":"Easy And Safe Paymnet",
       "30":"Fast Delivery",
-      "31":"Unique and fun activities"
+      "31":"Unique and fun activities",
+      "32": "Enter current password",
 },
   };
 

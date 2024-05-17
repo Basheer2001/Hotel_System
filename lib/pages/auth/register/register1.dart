@@ -78,9 +78,7 @@ class Register1 extends GetView<Register1Controller> {
                                     ?null
                                     :FileImage(File(controller.avatarImagePath.value)) ,
 
-                                 child:
-
-                                 controller.avatarImagePath.isEmpty
+                                 child: controller.avatarImagePath.isEmpty
                                     ? Icon(Icons.add_a_photo) // Display an icon if no image is selected
                                     : null,
                               ),)

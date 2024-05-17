@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -57,6 +59,25 @@ class UpdateProfile extends GetView<ProfileController>{
                       const SizedBox(height: 10),
                       CustomTextBodyAuth(text: "10"),
                       const SizedBox(height: 15),
+                      GestureDetector(
+                          onTap: () =>
+
+                              controller.pickImage(context),
+
+                          child: Obx(
+                                ()=> CircleAvatar(
+                              minRadius: 35,
+                              maxRadius: 35,
+                              backgroundImage:
+                              controller.avatarImagePath.value.isEmpty
+                                  ?null
+                                  :FileImage(File(controller.avatarImagePath.value)) ,
+
+                              child: controller.avatarImagePath.isEmpty
+                                  ? Icon(Icons.add_a_photo) // Display an icon if no image is selected
+                                  : null,
+                            ),)
+                      ),
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -76,7 +97,7 @@ class UpdateProfile extends GetView<ProfileController>{
                             autovalidateMode:  !controller.firstSubmit.value?
                             AutovalidateMode.disabled:
                             AutovalidateMode.always,
-                            controller: controller.emailTextController,
+                            controller: controller.firstnameTextController,
                             validator: (String ? value){
                               if(value!.isEmpty){
                                 return "Required Field";
@@ -111,13 +132,13 @@ class UpdateProfile extends GetView<ProfileController>{
                             ),
                           ],
                         ),
-                        child: Obx(
+                        child:Obx(
                               ()=> TextFormField(
                             //  controller: controller.firstnameTextController,
                             autovalidateMode:  !controller.firstSubmit.value?
                             AutovalidateMode.disabled:
                             AutovalidateMode.always,
-                            controller: controller.nameTextController,
+                            controller: controller.lastnameTextController,
                             validator: (String ? value){
                               if(value!.isEmpty){
                                 return "Required Field";
@@ -251,7 +272,7 @@ class UpdateProfile extends GetView<ProfileController>{
 
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              hintText: '20'.tr,
+                              hintText: '32'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -263,48 +284,7 @@ class UpdateProfile extends GetView<ProfileController>{
                         ),
                       ),
                       const SizedBox(height: 15),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 5,
-                              offset: Offset(0, 2), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Obx(
-                              ()=> TextFormField(
-                            // controller: controller.addressTextController,
-                            autovalidateMode:  !controller.firstSubmit.value?
-                            AutovalidateMode.disabled:
-                            AutovalidateMode.always,
-                            controller: controller.eemailTextController,
 
-                            validator: (String ? value){
-                              if(value!.isEmpty){
-                                return "Required Field";
-                              }
-                              return null;
-                            },
-
-                            style: TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                              hintText: '19'.tr,
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: EdgeInsets.all(20),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 15),
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -336,6 +316,48 @@ class UpdateProfile extends GetView<ProfileController>{
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               hintText: '18'.tr,
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                              contentPadding: EdgeInsets.all(20),
+                            ),
+                          ),
+                        ),
+                      ),  const SizedBox(height: 15),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              offset: Offset(0, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Obx(
+                              ()=> TextFormField(
+                            // controller: controller.addressTextController,
+                            autovalidateMode:  !controller.firstSubmit.value?
+                            AutovalidateMode.disabled:
+                            AutovalidateMode.always,
+                            controller: controller.address,
+
+                            validator: (String ? value){
+                              if(value!.isEmpty){
+                                return "Required Field";
+                              }
+                              return null;
+                            },
+
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              hintText: '20'.tr,
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),

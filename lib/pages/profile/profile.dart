@@ -21,9 +21,11 @@ class Profile extends GetView<ProfileController> {
           children: [
             Row(
               children: [
+                Obx(() =>
                 CircleAvatar(
                   radius: 45,
-                 // backgroundImage: AssetImage('assets/images/hotel1.jpg'),
+                  backgroundImage: controller.avatarImagePath.value.isEmpty?null:FileImage(File(controller.avatarImagePath.value)),
+                ),
                 ),
 
                 SizedBox(width: 60,),

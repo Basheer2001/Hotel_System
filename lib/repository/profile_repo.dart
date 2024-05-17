@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 
@@ -10,7 +11,7 @@ class ProfileRepo extends GetxService{
 
   APIProvider apiProvider=Get.find<APIProvider>();
 
-  Future<AppResponse<String>> updateprofile(String username,String number ,String newpassword ,String newpasswordconfirmation,String currentpassword,)async {
+  Future<AppResponse<String>> updateprofile(String firstname,lastname,String number ,String newpassword ,String newpasswordconfirmation,String currentpassword,String address,{File?photo})async {
     print("\n1");
     try {
       dio.Response response = await apiProvider.postRequest(
@@ -18,11 +19,16 @@ class ProfileRepo extends GetxService{
         {},
         jsonEncode({
 
-          "name":  username,
+
+          "first_name":  firstname,
+          "last_name": lastname,
+
           "phone":number,
           "new_password":newpassword,
           "new_password_confirmation":newpasswordconfirmation,
           "current_password":currentpassword,
+          "address" : address,
+          "photo" : photo,
 
         }),
         token: APIProvider.token

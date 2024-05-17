@@ -16,7 +16,7 @@ import 'constant/routes.dart';
 import 'package:untitled1/pages/auth/login/login.dart';
 
 List<GetPage<dynamic>>? routes =[
-  GetPage(name: "/", page: ()=> const Language()),
+ // GetPage(name: "/", page: ()=> const Language()),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
@@ -26,7 +26,7 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name:AppRoute.sendresetpassword , page:()=>SendResetPassword()),
   GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),
   //GetPage(name:"/", page:()=>HotelHome()),
- // GetPage(name: "/", page:()=>Profile()),
+  GetPage(name: "/", page:()=>Profile()),
   GetPage(name: AppRoute.profile, page:()=>Profile()),
   GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
   GetPage(name: AppRoute.hotelhome, page:()=>HotelHome()),

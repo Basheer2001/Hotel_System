@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../models/app_response.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/profile_repo.dart';
@@ -10,13 +13,13 @@ class ProfileController extends GetxController{
 
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
-  TextEditingController emailTextController=TextEditingController(text:"ramibeyrouthy7@gmail.com");
-  TextEditingController nameTextController=TextEditingController(text:"marloo");
+  TextEditingController firstnameTextController=TextEditingController(text:"marloo");
+  TextEditingController lastnameTextController=TextEditingController(text:"bb");
   TextEditingController phoneTextController=TextEditingController(text:"111");
   TextEditingController newpasswordTextController=TextEditingController(text:"87654321");
   TextEditingController  newpasswordconfirmation=TextEditingController(text:"87654321");
   TextEditingController  currentpassword=TextEditingController(text:"87654321");
-  TextEditingController eemailTextController=TextEditingController(text:"ramibeyrouthy7@gmail.com");
+  TextEditingController  address=TextEditingController(text:"321");
 
 
   var token = "".obs;
@@ -24,14 +27,18 @@ class ProfileController extends GetxController{
   var firstSubmit =false.obs;
 
   var loginLoadingState=false.obs;
-
+  var avatarImagePath = ''.obs;
 
   void updateprofile() async{
     firstSubmit.value=true;
     if(formKey.currentState!.validate()){
       loginLoadingState.value=true;
-      AppResponse response=await profileRepo.updateprofile( nameTextController.text,
-          phoneTextController.text,newpasswordTextController.text,newpasswordconfirmation.text,currentpassword.text,
+      File? imageFile;
+      if (avatarImagePath.value.isNotEmpty) {
+        imageFile = File(avatarImagePath.value);
+      }
+      AppResponse response=await profileRepo.updateprofile(photo:  imageFile, firstnameTextController.text,lastnameTextController,
+          phoneTextController.text,newpasswordTextController.text,newpasswordconfirmation.text,currentpassword.text,address.text
 
       );
       loginLoadingState.value=false;
@@ -68,8 +75,7 @@ class ProfileController extends GetxController{
     AppResponse<Map<String, dynamic>> response =
     await profileRepo.getProfile(token.value);
     if (response.success) {
-      emailTextController.text = response.data!['email'];
-      nameTextController.text = response.data!['name'];
+      firstnameTextController.text = response.data!['name'];
       phoneTextController.text = response.data!['phone'];    } else {
       Get.defaultDialog(
           title: "Error",
@@ -87,6 +93,14 @@ class ProfileController extends GetxController{
           'Error',
           response.errorMessage!,
           snackPosition: SnackPosition.BOTTOM,);
+    }
+  }
+  void pickImage(BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      avatarImagePath.value = pickedFile.path;
+      // image = File(pickedFile.path);
     }
   }
 
