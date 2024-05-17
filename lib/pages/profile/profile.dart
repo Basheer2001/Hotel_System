@@ -34,7 +34,7 @@ class Profile extends GetView<ProfileController> {
                 }, child: Text("Update Profile"))
               ],
             ),
-
+//
             SizedBox(height: 20.0),
 
             // Personal Information Section
