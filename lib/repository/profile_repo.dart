@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 
+import '../Services.dart';
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
 
+MyServices myServices=Get.find();
 
 class ProfileRepo extends GetxService{
 
@@ -13,25 +15,27 @@ class ProfileRepo extends GetxService{
 
   Future<AppResponse<String>> updateprofile(String firstname,lastname,String number ,String newpassword ,String newpasswordconfirmation,String currentpassword,String address,{File?photo})async {
     print("\n1");
+
     try {
+      var formData = dio.FormData.fromMap({
+        "first_name":  firstname,
+        "last_name": lastname,
+
+        "phone":number,
+        "new_password":newpassword,
+        "new_password_confirmation":newpasswordconfirmation,
+        "current_password":currentpassword,
+        "address" : address,
+        // Append the image file if available
+        if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
+      });
+
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}user/profile",
         {},
-        jsonEncode({
+        formData,
 
-
-          "first_name":  firstname,
-          "last_name": lastname,
-
-          "phone":number,
-          "new_password":newpassword,
-          "new_password_confirmation":newpasswordconfirmation,
-          "current_password":currentpassword,
-          "address" : address,
-          "photo" : photo,
-
-        }),
-        token: APIProvider.token
+        token:  myServices.sharedPreferences.getString("token")
       );
 
       print("\n2");
@@ -90,7 +94,7 @@ class ProfileRepo extends GetxService{
         if (response.data != null) {
           return AppResponse<Map<String, dynamic>>(
             success: true,
-            data: Map<String, dynamic>.from(response.data),
+          //  data: Map<String, dynamic>.from(response.data),
           );
         } else {
           throw Exception("No data found in response");

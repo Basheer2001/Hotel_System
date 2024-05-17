@@ -37,7 +37,7 @@ class ProfileController extends GetxController{
       if (avatarImagePath.value.isNotEmpty) {
         imageFile = File(avatarImagePath.value);
       }
-      AppResponse response=await profileRepo.updateprofile(photo:  imageFile, firstnameTextController.text,lastnameTextController,
+      AppResponse response=await profileRepo.updateprofile(photo:  imageFile, firstnameTextController.text,lastnameTextController.text,
           phoneTextController.text,newpasswordTextController.text,newpasswordconfirmation.text,currentpassword.text,address.text
 
       );
