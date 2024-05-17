@@ -38,7 +38,7 @@ class Profile extends GetView<ProfileController> {
             SizedBox(height: 20.0),
 
             // Personal Information Section
-            Text(
+            const Text(
               'Personal Information',
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),

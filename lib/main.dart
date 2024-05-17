@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled1/Services.dart';
 import 'package:untitled1/pages/auth/Register/register1.dart';
 import 'package:untitled1/pages/auth/Register/verfiycode.dart';
@@ -45,6 +44,7 @@ class AppBinding extends Bindings{
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());
     Get.put(HotelHomeController());
+
   }
 
 }

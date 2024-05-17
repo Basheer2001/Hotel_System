@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../Services.dart';
 import '../../../constant/auth/custombottomauth.dart';
 import '../../../constant/auth/customtextbodyauth.dart';
 import '../../../constant/auth/customtexttitleauth.dart';

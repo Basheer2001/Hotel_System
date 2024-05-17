@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 
+import '../Services.dart';
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
 
 
 class AccountRepo extends GetxService{
+  MyServices myServices=Get.find();
 
   APIProvider apiProvider=Get.find<APIProvider>();
 
@@ -22,6 +24,7 @@ class AccountRepo extends GetxService{
       );
 
       String token = response.data["data"];
+      myServices.sharedPreferences.setString("token", token);
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");

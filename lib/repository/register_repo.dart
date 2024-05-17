@@ -4,11 +4,14 @@ import 'dart:io'; // Import the 'dart:io' library
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 
+import '../Services.dart';
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
 import 'checkemail_repo.dart';
+MyServices myServices=Get.find();
 
 class RegisterRepo extends GetxService {
+
   APIProvider apiProvider = Get.find<APIProvider>();
 
   Future<AppResponse<Map<String, dynamic>>> Register(
@@ -44,6 +47,7 @@ class RegisterRepo extends GetxService {
       APIProvider.cookies =response.headers['set-cookie'];
       //APIProvider.token = response.data["data"];
       String token = response.data["data"];
+      myServices.sharedPreferences.setString("token", token);
         APIProvider.token = token;
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");

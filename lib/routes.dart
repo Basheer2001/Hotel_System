@@ -1,4 +1,8 @@
+
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled1/pages/Language.dart';
 import 'package:untitled1/pages/auth/Register/checkemail.dart';
 import 'package:untitled1/pages/auth/Register/register1.dart';
@@ -12,11 +16,13 @@ import 'package:untitled1/pages/homepage/homepage.dart';
 import 'package:untitled1/pages/onboarding.dart';
 import 'package:untitled1/pages/profile/profile.dart';
 import 'package:untitled1/pages/profile/updateprofile.dart';
+import 'Services.dart';
 import 'constant/routes.dart';
 import 'package:untitled1/pages/auth/login/login.dart';
-
+//SharedPreferences preferences = await   SharedPreferences.getInstance();
+MyServices myServices=Get.find();
 List<GetPage<dynamic>>? routes =[
- // GetPage(name: "/", page: ()=> const Language()),
+  GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language(): const HotelHome()),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
@@ -26,7 +32,7 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name:AppRoute.sendresetpassword , page:()=>SendResetPassword()),
   GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),
   //GetPage(name:"/", page:()=>HotelHome()),
-  GetPage(name: "/", page:()=>Profile()),
+ // GetPage(name: "/", page:()=>Profile()),
   GetPage(name: AppRoute.profile, page:()=>Profile()),
   GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
   GetPage(name: AppRoute.hotelhome, page:()=>HotelHome()),
