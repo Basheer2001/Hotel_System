@@ -19,13 +19,13 @@ class RooHillView extends GetView<RoomHillController> {
       price: 1000.0,
     ),
     Room(
-      imageUrl: 'assets/images/p.jpg',
+      imageUrl: 'assets/images/hill1.jpg',
       des:
       "Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.",
       price: 250.0,
     ),
     Room(
-      imageUrl: 'assets/images/hotel5.jpg',
+      imageUrl: 'assets/images/hill2.jpg',
       des:
       "Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",
       price: 500.0,

@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
 import '../../controllers/homepage/homepage_controller.dart';
+import '../booking/bookingroom.dart';
 import '../profile/profile.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
@@ -13,38 +15,99 @@ import 'hotelp.dart';
 
 
 class HotelHome extends StatelessWidget {
-  const HotelHome({Key? key}) : super(key: key);
+ HotelHome({Key? key}) : super(key: key);
 
-  @override
+  // Define categories
+  final List<Map<String, dynamic>> categories = [
+    {'icon': Icons.beach_access, 'label': 'Sea'},
+    {'icon': Icons.pool, 'label': 'Pool'},
+    {'icon': Icons.terrain, 'label': 'Hill'},
+  ];
+
+ Widget _buildCategoryIcon(IconData icon, String label) {
+   Widget destinationScreen;
+   switch (label) {
+     case 'Sea':
+       destinationScreen = RoomSeaView();
+       break;
+     case 'Pool':
+       destinationScreen = RoomPoolView();
+       break;
+     case 'Hill':
+       destinationScreen = RooHillView();
+       break;
+     default:
+       destinationScreen = Container();       break;
+   }
+
+   return
+     GestureDetector(
+       onTap: (){
+         Get.to(() => destinationScreen);
+       },
+       child: Column(
+         children: [
+           Container(
+             width: 50, // Fixed width for the circular container
+             height: 50, // Fixed height for the circular container
+             margin: EdgeInsets.symmetric(horizontal: 35),
+             decoration: BoxDecoration(
+               shape: BoxShape.circle,
+               color: Colors.white, // Background color of the circular container
+               border: Border.all(
+                 color: Colors.grey, // Border color
+                 width: 2.0, // Border width (bold)
+               ),
+               boxShadow: [
+                 BoxShadow(
+                   color: Colors.grey.withOpacity(0.5), // Shadow color
+                   spreadRadius: 2,
+                   blurRadius: 5,
+                   offset: Offset(0, 3), // changes position of shadow
+                 ),
+               ],
+             ),
+             padding: EdgeInsets.all(10), // Adjust padding as needed
+             child: Icon(
+               icon,
+               color: Colors.grey,
+               size: 24, // Set the size of the icon
+             ),
+           ),
+           SizedBox(height: 4),
+           Text(
+             label,
+             style: TextStyle(
+               fontSize: 12,
+               color: Colors.grey,
+             ),
+           ),
+         ],
+
+          ),
+     );
+ }
+
+
+ @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
-    // Sample list of hotels
-    final List<Hotel> hotels = [
-      Hotel(name: 'Hotel A', location: 'City A', imageUrl: 'assets/images/images.jpg',des:"Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.", price: 100.0,id:1),
-      Hotel(name: 'Hotel B', location: 'City B', imageUrl:'assets/images/images.jpg',des:"With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.", price: 1000.0,id:2,),
-      Hotel(name: 'Hotel C', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.", price: 250.0,id:3),
-      Hotel(name: 'Hotel D', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",price: 500.0,id:4),
-      Hotel(name: 'Hotel E', location: 'City C', imageUrl: 'assets/images/images.jpg',des:"Whether you're here for business or leisure, our centrally located hotel provides the perfect base for exploring the vibrant city and its myriad attractions.",price: 250.0,id:5),
-      Hotel(name: 'Hotel F', location: 'City E', imageUrl: 'assets/images/images.jpg',des:"Indulge in culinary delights and cultural experiences at our historic hotel, where each room is a reflection of the city's rich heritage.",price: 400.0,id:6),
-    ];
 
-    Get.put(HotelHomeController());
+    final HotelHomeController controller = Get.put(HotelHomeController());
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
 
-
-
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+      body: Column(
+        children: [
+          // Categories section
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              SizedBox(height:40 ,),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -55,8 +118,7 @@ class HotelHome extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(width: 16,),
-                    ElevatedButton(
+                    OutlinedButton(
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
@@ -68,6 +130,36 @@ class HotelHome extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    TextField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: InkWell(
+                                          child: Icon(Icons.search),
+                                          onTap: () {
+                                            showSearch(
+                                              context: context,
+                                              delegate: CustomSearch(),
+                                            );
+                                          },
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                          borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                          borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                          borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                                        ),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                      ),
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    SizedBox(height: 16,),
                                     Text(
                                       'Activities',
                                       style: TextStyle(
@@ -76,20 +168,15 @@ class HotelHome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(height: 10),
-                                    // Display pictures of activities here
-                                    // You can use GridView, ListView, or any other widget to display images
-                                    // Example:
                                     GridView.count(
                                       shrinkWrap: true,
                                       crossAxisCount: 2,
                                       mainAxisSpacing: 10,
                                       crossAxisSpacing: 10,
                                       children: [
-                                        // Replace with your activity images
                                         Image.asset('assets/images/activity.jpg'),
                                         Image.asset('assets/images/activity.jpg'),
                                         Image.asset('assets/images/c.jpg'),
-                                        // Add more images as needed
                                       ],
                                     ),
                                   ],
@@ -100,29 +187,22 @@ class HotelHome extends StatelessWidget {
                         );
                       },
                       child: Text("Browse"),
-                      style: ElevatedButton.styleFrom(
-                        //primary: Colors.blue, // Change to your preferred color
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.black,                        side: BorderSide(color: Colors.grey, width: 2.0), // Border color and width
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                        ),
                       ),
                     ),
-                SizedBox(width: 30,),
-                ElevatedButton(onPressed: (){
-                  Get.to(() => Profile());
-                }, child: Text("profile"))
                   ],
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: TextField(
+                SizedBox(height: 20,),
+                TextField(
                   decoration: InputDecoration(
+                    hintText: 'Search...', // Add a hint text
+                    hintStyle: TextStyle(color: Colors.grey), // Style for the hint text
                     prefixIcon: InkWell(
-                      child: Icon(Icons.search),
+                      child: Icon(Icons.search, color: Colors.black), // Customize the icon color
                       onTap: () {
                         showSearch(
                           context: context,
@@ -130,185 +210,165 @@ class HotelHome extends StatelessWidget {
                         );
                       },
                     ),
-                    border: InputBorder.none,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                      borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                      borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0), // Bold border when focused
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // Padding inside the text field
+                    filled: true,
+                    fillColor: Colors.white, // Background color for the text field
+                  ),
+                  style: TextStyle(color: Colors.black), // Text style
+                ),
+                SizedBox(height: 15,),
+                Text(
+                  'Categories',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
-              ),
+                SizedBox(height: 8),
+                Container(
+                  height: 80, // Adjust the height as needed
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: categories.map((category) {
+                      return _buildCategoryIcon(category['icon'], category['label']);
+                    }).toList(),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 13),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  SizedBox(width: 10),
-                  Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  _buildCategoryButton(Icons.beach_access, "Sea"),
-                  SizedBox(width: 10),
-                  _buildCategoryButton(Icons.terrain, "Mountain"),
-                  SizedBox(width: 10),
-                  _buildCategoryButton(Icons.pool, "Pool"),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-      GridView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: hotels.length,
-                  itemBuilder: (context, index) {
-                    return HotelCard(hotel: hotels[index]);
-                  },
-                ),
-              ]
-            ),
-        ),
-
-    );
-  }
-
-  Widget _buildCategoryButton(IconData icon, String label) {
-    return ElevatedButton.icon(
-      onPressed: () {
-        if(label=="Sea"){
-          Get.to(() => RoomSeaView());
-        }else if(label=="Mountain"){
-          Get.to(() => RooHillView());
-        }else if(label=="Pool"){
-          Get.to(() => RoomPoolView());
-        }
-
-      },
-      icon: Icon(icon),
-      label: Text(label),
-      style: ElevatedButton.styleFrom(
-        //primary: Colors.grey[200],
-        //onPrimary: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-}
-
-class HotelCard extends StatelessWidget {
-  final Hotel hotel;
-
-  HotelCard({required this.hotel});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Card(
-        elevation: 4,
-        child: InkWell(
-          onTap: () {
-            Get.to(() => HotelDetailsView(hotel: hotel),
-              //transition: Transition.fadeIn, // Specify transition animation
-              // duration: Duration(milliseconds: 400), // Adjust duration as needed
-            );
-          },
-
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Hero(
-                tag:'hotel_image_${hotel.imageUrl}',
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(4),
-                    topRight: Radius.circular(4),
-                  ),
-                  child: Image.asset(
-                    hotel.imageUrl,
-                    fit: BoxFit.cover,
-                    height: 120,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            hotel.name,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Get.find<HotelHomeController>().toggleLike(hotel.id);
-                            Get.find<HotelHomeController>().addToWishlist(hotel.id);
-                            Get.find<HotelHomeController>().getWishlist();
-                          },
-                          icon: Icon(
-                            Icons.favorite,
-                            size: 15,
-                            color: hotel.isLiked ? Colors.red : Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      hotel.location,
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
-                    ),
-                    SizedBox(height: 4),
-                    RatingBar.builder(
-                      initialRating: hotel.rating ?? 0,
-                      minRating: 0,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 10,
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        // Update the rating of the hotel
-                        hotel.rating = rating;
-                      },
-                    ),
-
-                  ],
-                ),
-              ),
-            ],
           ),
-        ),
+          // Expanded to make sure the grid takes the remaining space
+          Expanded(
+            child: Obx(() {
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Number of columns
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.75, // Aspect ratio for each item
+                ),
+                itemCount: controller.hotels.length,
+                itemBuilder: (context, index) {
+                  final hotel = controller.hotels[index];
+                  return GestureDetector(
+                    onTap: () {
+                     // Get.to(() => HotelDetailsView(hotel: hotel));
+                         Get.to( () => HotelDetailsView(hotel: hotel, imageUrl: hotel.imageUrl));
+
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Stack(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                                      child: Container(
+                                        height: 250,
+                                        child: Image.asset(
+                                          hotel.imageUrl,
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 10,
+                                      right: 10,
+                                      child:
+                                      GestureDetector(
+                                        onTap: () {
+                                          controller.toggleFavorite(hotel.id); // Toggle favorite status
+                                          controller.addToWishlist(hotel.id); // Add to wishlist
+                                        },
+                                        child: Icon(
+                                          hotel.isLiked ? Icons.favorite : Icons.favorite_border,
+                                          color: hotel.isLiked ? Colors.red : Colors.grey, // Change color based on isLiked status
+                                        ),
+                                      ),
+
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      hotel.name,
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '\$${hotel.price}',
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                        ), RatingBar.builder(
+                                          initialRating: hotel.rating ?? 0,
+                                          minRating: 0,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemSize: 16,
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          onRatingUpdate: (rating) {
+                                            // Update the rating of the hotel
+                                            hotel.rating = rating;
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            }),
+          ),
+        ],
       ),
     );
   }
 }
 
-//
 class HotelDetailsView extends StatelessWidget {
   final Hotel hotel;
+  final String imageUrl;
 
-  HotelDetailsView({required this.hotel});
+  HotelDetailsView({required this.hotel, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -320,14 +380,15 @@ class HotelDetailsView extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(hotel.imageUrl), // Path to your image
+                image: AssetImage(imageUrl),
+               // image: AssetImage(hotel.imageUrl), // Path to your image
                 fit: BoxFit.cover,
               ),
             ),
             alignment: Alignment.bottomCenter, // Align the container to the bottom center
           ),
           Positioned(
-            top: 200,
+            top: 350,
             bottom: 0,
             left: 0,
             right: 0,
@@ -373,13 +434,7 @@ class HotelDetailsView extends StatelessWidget {
                     children: [
                       Icon(Icons.location_on_outlined,color: Colors.blue,),
                       SizedBox(width: 5,),
-                      Text(
-                        hotel.location,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey,
-                        ),
-                      ),
+
                     ],
                   ),
                   SizedBox(height: 10),
@@ -418,7 +473,6 @@ class HotelDetailsView extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   SizedBox(height: 20),
                   Row(
                     children: [
@@ -475,7 +529,7 @@ class HotelDetailsView extends StatelessWidget {
                   // Add more form fields as needed
                   ElevatedButton(
                     onPressed: () {
-                      Get.to(() => ());
+                      Get.to(() => RoomBooking());
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

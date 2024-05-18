@@ -19,17 +19,18 @@ class RoomSeaView extends GetView<RoomSeaController> {
       price: 1000.0,
     ),
     Room(
-      imageUrl: 'assets/images/sea.jpg',
+      imageUrl: 'assets/images/sea2.jpg',
       des:
       "Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.",
       price: 250.0,
     ),
     Room(
-      imageUrl: 'assets/images/hotel5.jpg',
+      imageUrl: 'assets/images/sea.jpg',
       des:
-      "Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",
-      price: 500.0,
+      "Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.",
+      price: 250.0,
     ),
+
   ];
 
   @override

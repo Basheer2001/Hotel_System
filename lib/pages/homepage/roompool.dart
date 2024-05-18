@@ -13,13 +13,13 @@ class RoomPoolView extends GetView<RoomPoolController> {
       price: 100.0,
     ),
     Room(
-      imageUrl: 'assets/images/p.jpg',
+      imageUrl: 'assets/images/p2.jpg',
       des:
       "With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.",
       price: 1000.0,
     ),
     Room(
-      imageUrl: 'assets/images/p2.jpg',
+      imageUrl: 'assets/images/p3.jpg',
       des:
       "Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.",
       price: 250.0,
