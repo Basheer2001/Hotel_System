@@ -1,21 +1,42 @@
 import 'package:flutter/material.dart';
 
-class HotelN extends StatelessWidget {
-  final List<Room> rooms = [
-    Room(
-      imageUrl: 'assets/images/m.jpg',
-      des: "Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.",
-      view: "Hill View",
-    ),
-    Room(
-      imageUrl: 'assets/images/m1.jpg',
-      des: "With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.",
-      view: "Ocean View",
-    ),
-  ];
+class HotelNP extends StatelessWidget {
+  const HotelNP({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Sample list of rooms
+    final List<Room> rooms = [
+      Room(
+        imageUrl: 'assets/images/p1.jpg',
+        des: "Cozy room suitable for a single person.",
+        price: 100.0,
+        capacity: 1,
+        offers: ["10% Off on Spa Services", "Free Breakfast Included"],
+      ),
+      Room(
+        imageUrl: 'assets/images/m.jpg',
+        des: "Spacious room ideal for two persons.",
+        price: 1000.0,
+        capacity: 2,
+        offers: ["20% Off on Room Service", "Complimentary Airport Transfer"],
+      ),
+      Room(
+        imageUrl: 'assets/images/p1.jpg',
+        des: "Comfortable room for up to three persons.",
+        price: 250.0,
+        capacity: 3,
+        offers: ["15% Off on Laundry Service", "Free Gym Access"],
+      ),
+      Room(
+        imageUrl: 'assets/images/sea.jpg',
+        des: "Large suite perfect for a family of four.",
+        price: 500.0,
+        capacity: 4,
+        offers: ["Special Discount on Extended Stays", "Free Wi-Fi"],
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: Padding(
@@ -23,7 +44,7 @@ class HotelN extends StatelessWidget {
         child: ListView.builder(
           itemCount: rooms.length,
           itemBuilder: (context, index) {
-            return RoomView(room: rooms[index]);
+            return RoomCard(room: rooms[index]);
           },
         ),
       ),
@@ -33,20 +54,24 @@ class HotelN extends StatelessWidget {
 
 class Room {
   final String imageUrl;
+  final double price;
   final String des;
-  final String view;
+  final int capacity;
+  final List<String> offers;
 
   Room({
     required this.imageUrl,
     required this.des,
-    required this.view,
+    required this.price,
+    required this.capacity,
+    required this.offers,
   });
 }
 
-class RoomView extends StatelessWidget {
+class RoomCard extends StatelessWidget {
   final Room room;
 
-  RoomView({required this.room});
+  RoomCard({required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -94,14 +119,30 @@ class RoomView extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      "View:",
+                      '\$${room.price?.toStringAsFixed(2)}',
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "Capacity:",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey),
                     ),
                     SizedBox(height: 4),
+                    Text("${room.capacity} persons"),
+                    SizedBox(height: 8),
                     Text(
-                      "${room.view}",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      "Offers:",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                    ),
+                    SizedBox(height: 4),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: room.offers
+                          .map((offer) => Text("- $offer"))
+                          .toList(),
                     ),
                   ],
                 ),

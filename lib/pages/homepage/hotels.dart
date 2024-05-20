@@ -1,29 +1,49 @@
 import 'package:flutter/material.dart';
 
-class HotelN extends StatelessWidget {
-  final List<Room> rooms = [
+class HotelS extends StatelessWidget {
+  final List<Room> room = [
     Room(
       imageUrl: 'assets/images/m.jpg',
-      des: "Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.",
-      view: "Hill View",
+      des:
+      "Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.",
+      price: 100.0,
+      services: ["Free Wi-Fi", "Breakfast Included"],
     ),
     Room(
       imageUrl: 'assets/images/m1.jpg',
-      des: "With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.",
-      view: "Ocean View",
+      des:
+      "With breathtaking views of the ocean, our beachfront hotel promises a rejuvenating stay filled with sun, sand, and sea.",
+      price: 1000.0,
+      services: ["Pool Access", "Spa Services"],
+    ),
+    Room(
+      imageUrl: 'assets/images/hill1.jpg',
+      des:
+      "Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.",
+      price: 250.0,
+      services: ["Gym Access", "Room Service"],
+    ),
+    Room(
+      imageUrl: 'assets/images/hill2.jpg',
+      des:
+      "Discover a fusion of modern elegance and traditional charm at our boutique hotel, where personalized experiences await around every corner.",
+      price: 500.0,
+      services: ["Free Wi-Fi", "Parking"],
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
-          itemCount: rooms.length,
+          itemCount: room.length,
           itemBuilder: (context, index) {
-            return RoomView(room: rooms[index]);
+            return RoomCard(room: room[index]);
           },
         ),
       ),
@@ -33,20 +53,22 @@ class HotelN extends StatelessWidget {
 
 class Room {
   final String imageUrl;
+  final double price;
   final String des;
-  final String view;
+  final List<String> services;
 
   Room({
     required this.imageUrl,
     required this.des,
-    required this.view,
+    required this.price,
+    required this.services,
   });
 }
 
-class RoomView extends StatelessWidget {
+class RoomCard extends StatelessWidget {
   final Room room;
 
-  RoomView({required this.room});
+  RoomCard({required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -94,14 +116,22 @@ class RoomView extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      "View:",
+                      '\$${room.price?.toStringAsFixed(2)}',
+                      style:
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "Services:",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey),
                     ),
                     SizedBox(height: 4),
-                    Text(
-                      "${room.view}",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: room.services
+                          .map((service) => Text("- $service"))
+                          .toList(),
                     ),
                   ],
                 ),

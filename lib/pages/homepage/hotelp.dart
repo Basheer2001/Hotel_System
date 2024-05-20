@@ -1,41 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../controllers/homepage/hotelp_controller.dart';
-
 
 class HotelP extends StatelessWidget {
   const HotelP({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final HotelPController controller = Get.put(HotelPController());
-
-    // Sample list of hotels
-    final List<Price> price = [
-      Price(name: 'sweet', price: 100.0, imageUrl: "assets/images/p1.jpg"),
-      Price(name: 'doublex', price: 1000.0, imageUrl: "assets/images/m.jpg"),
-      Price(name: '2 person', price: 250.0, imageUrl: "assets/images/p1.jpg"),
-      Price(name: '2 person', price: 500.0, imageUrl: "assets/images/sea.jpg"),
-      Price(name: 'doublex', price: 250.0, imageUrl: "assets/images/m1.jpg"),
-      Price(name: 'sweet', price: 400.0, imageUrl: "assets/images/sea1.jpg"),
+    // Sample list of rooms
+    final List<Room> rooms = [
+      Room(
+        imageUrl: 'assets/images/p1.jpg',
+        des: "A cozy room with a beautiful view, perfect for a romantic getaway.",
+        price: 100.0,
+        offers: ["10% Off on Spa Services", "Free Breakfast Included"],
+      ),
+      Room(
+        imageUrl: 'assets/images/m.jpg',
+        des: "Spacious room with modern amenities, ideal for a comfortable stay.",
+        price: 1000.0,
+        offers: ["20% Off on Room Service", "Complimentary Airport Transfer"],
+      ),
+      Room(
+        imageUrl: 'assets/images/p1.jpg',
+        des: "Comfortable room for two with access to the hotel's gym.",
+        price: 250.0,
+        offers: ["15% Off on Laundry Service", "Free Gym Access"],
+      ),
+      Room(
+        imageUrl: 'assets/images/sea.jpg',
+        des: "Room with a view of the sea, perfect for a relaxing vacation.",
+        price: 500.0,
+        offers: ["Special Discount on Extended Stays", "Free Wi-Fi"],
+      ),
     ];
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-          ),
-          itemCount: price.length,
+        child: ListView.builder(
+          itemCount: rooms.length,
           itemBuilder: (context, index) {
-            return PriceCard(
-              price: price[index],
-            );
+            return RoomCard(room: rooms[index]);
           },
         ),
       ),
@@ -43,33 +48,29 @@ class HotelP extends StatelessWidget {
   }
 }
 
-class Price {
-  final String name;
+class Room {
   final String imageUrl;
   final double price;
+  final String des;
+  final List<String> offers;
 
-  Price({
-    required this.name,
+  Room({
     required this.imageUrl,
+    required this.des,
     required this.price,
+    required this.offers,
   });
 }
 
-class PriceCard extends StatefulWidget {
-  final Price price;
+class RoomCard extends StatelessWidget {
+  final Room room;
 
-  const PriceCard({required this.price});
-
-  @override
-  _PriceCardState createState() => _PriceCardState();
-}
-
-class _PriceCardState extends State<PriceCard> {
-  bool isLiked = false;
+  RoomCard({required this.room});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -84,64 +85,58 @@ class _PriceCardState extends State<PriceCard> {
       ),
       child: Card(
         elevation: 0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                widget.price.imageUrl,
-                fit: BoxFit.cover,
-                height: 140,
-                width: double.infinity,
-              ),
-            ),
-            SizedBox(height: 8), // Add spacing between image and text
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8), // Add horizontal padding
-              child: Text(
-                widget.price.name,
-                style: TextStyle(
-                  fontSize: 16, // Increase font size for room name
-                  fontWeight: FontWeight.bold, // Apply bold font weight
-                  // Optionally, you can use a different font family:
-                  // fontFamily: 'YourCustomFont',
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Hero(
+                tag: 'room_image_${room.imageUrl}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    room.imageUrl,
+                    fit: BoxFit.cover,
+                    height: 140,
+                    width: 140,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 4), // Add spacing between room name and price
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8), // Add horizontal padding
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '\$${widget.price.price?.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontSize: 14, // Adjust font size for price
-                      fontWeight: FontWeight.bold, // Apply bold font weight
-                      color: Colors.blue, // Optionally, apply a different color to the price
+              SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${room.des}",
+                      style: TextStyle(fontSize: 14),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isLiked = !isLiked;
-                      });
-                    },
-                    child: Icon(
-                      isLiked ? Icons.favorite : Icons.favorite_border,
-                      color: isLiked ? Colors.red : null,
+                    SizedBox(height: 8),
+                    Text(
+                      '\$${room.price?.toStringAsFixed(2)}',
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 8),
+                    Text(
+                      "Offers:",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                    ),
+                    SizedBox(height: 4),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: room.offers
+                          .map((offer) => Text("- $offer"))
+                          .toList(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 8), // Add spacing below price
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
-

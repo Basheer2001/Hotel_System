@@ -11,7 +11,9 @@ import '../booking/bookingroom.dart';
 import '../profile/profile.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
+import 'hotelnp.dart';
 import 'hotelp.dart';
+import 'hotels.dart';
 
 
 class HotelHome extends StatelessWidget {
@@ -589,35 +591,36 @@ Widget _buildCategoryIcon(IconData icon, String label) {
 }
 
 class CustomSearch extends SearchDelegate {
-
   List username = [
-    "price",
-    "number of person",
-    "view",
-    "servies"
+    "Price",
+    "Number of Persons",
+    "View",
+    "Services"
   ];
 
-  List ? filterList;
-
+  List? filterList;
   bool isLoading = false;
-
 
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(onPressed: () {
-        query = "";
-      }, icon: Icon(Icons.close)),
+      IconButton(
+        onPressed: () {
+          query = "";
+        },
+        icon: Icon(Icons.close),
+      ),
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-        onPressed: () {
-          close(context, null);
-        },
-        icon: Icon(Icons.arrow_back));
+      onPressed: () {
+        close(context, null);
+      },
+      icon: Icon(Icons.arrow_back),
+    );
   }
 
   @override
@@ -626,92 +629,68 @@ class CustomSearch extends SearchDelegate {
   }
 
   @override
-  /*Widget buildSuggestions(BuildContext context) {
-
-
-
-    if(query==""){
-      return ListView.builder(
-          itemCount:username.length ,
-          itemBuilder:(context,i){
-            return InkWell(
-              onTap:(){
-                showResults(context);
-              } ,
-              child: Card(child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("${username[i]}",
-                  style: TextStyle(fontSize: 16),
-                ),
-              )),
-            );
-          });
-    }else
-      {
-        filterList=username.where((element) =>element.contains(query)).toList();
-        return ListView.builder(
-            itemCount:filterList!.length ,
-            itemBuilder:(context,i){
-              return InkWell(
-                onTap:(){
-                  showResults(context);
-                } ,
-                child: Card(child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("${filterList![i]}",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                )),
-              );
-            });
-      }
-
-  }*/
-
   Widget buildSuggestions(BuildContext context) {
-    List filteredList =
-    username.where((element) => element.contains(query)).toList();
-
+    List filteredList = username
+        .where((element) => element.toLowerCase().contains(query.toLowerCase()))
+        .toList();
 
     return ListView.builder(
-        itemCount: filteredList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(filteredList[index]),
-            onTap: () {
-              // Show loading indicator
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+      itemCount: filteredList.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: Material(
+            elevation: 4.0, // Set elevation
+            borderRadius: BorderRadius.circular(10.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(color: Colors.black),
+              ),
+              child: ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(filteredList[index]),
+                ),
+                onTap: () {
+                  // Show loading indicator
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                   );
-                },
-              );
 
-              Future.delayed(Duration(seconds: 2), () {
-                // Close loading dialog
-                Navigator.of(context).pop();
-                // Navigate to corresponding page based on query
-                if (filteredList[index] == "view") {
-                  Get.to(() => HotelN());
-                } else if (filteredList[index] == "price") {
-                  Get.to(() => HotelP());
-                } else if (filteredList[index] == "number of person") {
-                  Get.to(() => RooHillView());
-                } else if (filteredList[index] == "services") {
-                  Get.to(() => RooHillView());
-                }
-              });
-            },
-          );
-        }
+                  Future.delayed(Duration(seconds: 2), () {
+                    // Close loading dialog
+                    Navigator.of(context).pop();
+                    // Navigate to corresponding page based on query
+                    if (filteredList[index] == "View") {
+                      Get.to(HotelN());
+                    } else if (filteredList[index] == "Price") {
+                      Get.to(HotelP());
+                    } else if (filteredList[index] == "Number of Persons") {
+                      Get.to(HotelNP());
+                    } else if (filteredList[index] == "Services") {
+                      Get.to(HotelS());
+                    }
+                  });
+                },
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-}
 
+
+
+}
 
 
 
