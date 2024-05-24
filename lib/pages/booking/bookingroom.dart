@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_calendar/table_calendar.dart';
 import '../../controllers/booking/roombooking_controller.dart';
-
+import '../homepage/homepage.dart';
 
 class RoomBooking extends GetView<RoomBookingController> {
   const RoomBooking({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final RoomBookingController controller = Get.put(RoomBookingController());
-
-
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
+
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
         child: Stack(
           children: [
-            Positioned.fill(
+           /* Positioned.fill(
               child: Image.asset(
                 "assets/images/images.jpg",
                 fit: BoxFit.cover,
               ),
-            ),
+            ),*/
             SingleChildScrollView(
               padding: EdgeInsets.all(16.0),
               child: Form(
@@ -33,20 +32,25 @@ class RoomBooking extends GetView<RoomBookingController> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: 50,),
-                    Text("Book Room",style: TextStyle(fontSize: 20,fontStyle:FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    Text(
+                      "Book Room",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(height: 30,),
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey), // Add border
-                        borderRadius: BorderRadius.circular(8), // Add border radius
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5), // Set shadow color
-                            spreadRadius: 2, // Set spread radius
-                            blurRadius: 3, // Set blur radius
-                            offset: Offset(0, 2), // Set offset
+                            color: Colors.white38.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 3,
+                            offset: Offset(0, 2),
                           ),
                         ],
                       ),
@@ -54,13 +58,22 @@ class RoomBooking extends GetView<RoomBookingController> {
                         decoration: InputDecoration(
                           labelText: 'Name',
                           labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold, // Example: Setting the font weight to bold
+                            fontWeight: FontWeight.bold,
+
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: customColor), // Set the border color when focused
-                            borderRadius: BorderRadius.circular(8), // Set border radius
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                            borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
                           ),
-                        ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                            borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                          ),
+focusedBorder:  OutlineInputBorder(
+  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+  borderSide: BorderSide(color: Colors.grey, width: 2.0),
+
+)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your name';
@@ -79,7 +92,7 @@ class RoomBooking extends GetView<RoomBookingController> {
                         borderRadius: BorderRadius.circular(8), // Add border radius
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5), // Set shadow color
+                            color: Colors.white38.withOpacity(0.5), // Set shadow color
                             spreadRadius: 2, // Set spread radius
                             blurRadius: 3, // Set blur radius
                             offset: Offset(0, 2), // Set offset
@@ -92,10 +105,19 @@ class RoomBooking extends GetView<RoomBookingController> {
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold, // Example: Setting the font weight to bold
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: customColor), // Set the border color when focused
-                            borderRadius: BorderRadius.circular(8), // Set border radius
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                            borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
                           ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                            borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                          ),
+                            focusedBorder:  OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                              borderSide: BorderSide(color: Colors.grey, width: 2.0),
+
+                            )
                         ),
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
@@ -117,7 +139,7 @@ class RoomBooking extends GetView<RoomBookingController> {
                         borderRadius: BorderRadius.circular(8), // Add border radius
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5), // Set shadow color
+                            color: Colors.white38.withOpacity(0.5), // Set shadow color
                             spreadRadius: 2, // Set spread radius
                             blurRadius: 3, // Set blur radius
                             offset: Offset(0, 2), // Set offset
@@ -130,10 +152,19 @@ class RoomBooking extends GetView<RoomBookingController> {
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold, // Example: Setting the font weight to bold
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: customColor), // Set the border color when focused
-                            borderRadius: BorderRadius.circular(8), // Set border radius
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                            borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
                           ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                            borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                          ),
+                            focusedBorder:  OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                              borderSide: BorderSide(color: Colors.grey, width: 2.0),
+
+                            )
                         ),
                         keyboardType: TextInputType.phone,
                         validator: (value) {
@@ -158,7 +189,7 @@ class RoomBooking extends GetView<RoomBookingController> {
                               borderRadius: BorderRadius.circular(8), // Add border radius
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5), // Set shadow color
+                                  color: Colors.white38.withOpacity(0.5), // Set shadow color
                                   spreadRadius: 2, // Set spread radius
                                   blurRadius: 3, // Set blur radius
                                   offset: Offset(0, 2), // Set offset
@@ -171,10 +202,19 @@ class RoomBooking extends GetView<RoomBookingController> {
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold, // Example: Setting the font weight to bold
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: customColor), // Set the border color when focused
-                                  borderRadius: BorderRadius.circular(8), // Set border radius
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                                  borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
                                 ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                                  borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                                ),
+                                  focusedBorder:  OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                                    borderSide: BorderSide(color: Colors.grey, width: 2.0),
+
+                                  )
                               ),
                               keyboardType: TextInputType.number,
                               initialValue: '1',
@@ -193,55 +233,54 @@ class RoomBooking extends GetView<RoomBookingController> {
                         ),
                       ],
                     ),
+
                     SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Check-in Date: ${controller.checkInDate.toString().substring(0, 10)}',
-                            style: TextStyle(fontWeight: FontWeight.bold)
-                        ),
-                        ElevatedButton(
-                          onPressed: () => controller.selectCheckInDate(context),
-                          child: Text('Select Date'),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(customColor),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0), // Set the border radius
+                    // Other form fields...
+                    ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: Container(
+                                height: MediaQuery.of(context).size.height * 0.5,
+                                child: TableCalendar(
+                                  firstDay: DateTime.utc(2020, 1, 1),
+                                  lastDay: DateTime.utc(2100, 12, 31),
+                                  focusedDay: controller.selectedDate.value,
+                                  selectedDayPredicate: (day) {
+                                    return isSameDay(controller.selectedDate.value, day);
+                                  },
+                                  onDaySelected: (selectedDay, focusedDay) {
+                                    controller.selectedDate.value = selectedDay;
+                                    Get.back(); // Close the dialog when a date is selected
+                                  },
+                                  calendarBuilders: CalendarBuilders(
+                                    defaultBuilder: (context, day, focusedDay) {
+                                      // Customize the day cells as needed
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
+                            );
+                          },
+                        );
+                      },
+                      child: Text('Select Date',style: TextStyle(color: Colors.black),),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(customColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                    SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Check-out Date: ${controller.checkOutDate.toString().substring(0, 10)}',
-                            style: TextStyle(fontWeight: FontWeight.bold)
-                        ),
-                        ElevatedButton(
-                          onPressed: () => controller.selectCheckOutDate(context),
-                          child: Text('Select Date'),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(customColor),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0), // Set the border radius
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16.0),
+                    SizedBox(height: 10.0),
                     ElevatedButton(
                       onPressed: () {
                         if (controller.formKey.currentState!.validate()) {
                           controller.formKey.currentState!.save();
-                          // Here, you can handle submitting the reservation data, such as sending it to a backend server
-                          // You can also navigate to a confirmation page or show a dialog confirming the reservation
                           controller.submitReservation();
                         }
                       },
@@ -249,11 +288,11 @@ class RoomBooking extends GetView<RoomBookingController> {
                         backgroundColor: MaterialStateProperty.all<Color>(customColor),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0), // Set the border radius
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
                       ),
-                      child: Text('Submit Reservation',),
+                      child: Text('Submit Reservation',style: TextStyle(color: Colors.black),),
                     ),
                   ],
                 ),

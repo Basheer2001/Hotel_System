@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../controllers/dashboard/managing_reports_controller/uncheckedreports_controller.dart';
+import '../../controllers/dashboard/managing_reports_controller/uncheckedreports_controller.dart';
 import 'managing_reports/displayreports.dart';
 import 'managing_reports/uncheckedreports.dart';
+import 'managing_rooms/createroom.dart';
+import 'managing_rooms/deleteroom.dart';
 import 'managing_users/banunbanuser.dart';
 import 'managing_users/edituser.dart';
 import 'managing_users/getprofile.dart';
@@ -344,6 +346,7 @@ class NavigationDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
+
             accountName: Text('Admin Name'),
             accountEmail: Text('admin@example.com'),
             currentAccountPicture: CircleAvatar(
@@ -432,6 +435,26 @@ class NavigationDrawer extends StatelessWidget {
                 title: Text('MultipleReportsCheck'),
                 onTap: () {
                   Get.to(() => MultipleReportsCheck(reportsArray: []));
+                },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            leading: Icon(Icons.room),
+            title: Text('Managing Rooms'),
+            children: [
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text('Create Room'),
+                onTap: () {
+                  Get.to(() => CreateRoom());
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.delete),
+                title: Text('Delete Room'),
+                onTap: () {
+                  Get.to(() => DeleteRoom());
                 },
               ),
             ],

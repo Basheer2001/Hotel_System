@@ -5,6 +5,13 @@ import 'package:untitled1/pages/auth/Register/register1.dart';
 import 'package:untitled1/pages/auth/Register/verfiycode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/resetpasswordcode.dart';
 import 'package:untitled1/pages/auth/forgetpassword/sendresetpassword.dart';
+import 'package:untitled1/pages/booking/reservation.dart';
+import 'package:untitled1/pages/dashboard/dashboardscreen.dart';
+import 'package:untitled1/pages/dashboard/managing_users/banunbanuser.dart';
+import 'package:untitled1/pages/dashboard/managing_users/deleteuser.dart';
+import 'package:untitled1/pages/dashboard/managing_users/getprofile.dart';
+import 'package:untitled1/pages/dashboard/managing_users/searchuser.dart';
+import 'package:untitled1/pages/dashboard/managing_users/viewallusers.dart';
 import 'package:untitled1/pages/homepage/homepage.dart';
 import 'package:untitled1/pages/onboarding.dart';
 import 'package:untitled1/pages/profile/profile.dart';
@@ -13,8 +20,10 @@ import 'pages/auth/login/login.dart';
 import 'pages/profile/updateprofile.dart';
 
 List<GetPage<dynamic>>? routes =[
+  //TODO AUTH
  // GetPage(name: "/", page: ()=> const Language()),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
+  GetPage(name:"/", page: ()=> const Login()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
   GetPage(name:AppRoute.verifycode, page: () => VerfiyCode()),
@@ -23,12 +32,21 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name:AppRoute.sendresetpassword , page:()=>SendResetPassword()),
   GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),
   //GetPage(name:"/", page:()=>HotelHome()),
- // GetPage(name: "/", page:()=>Profile()),
   GetPage(name: AppRoute.profile, page:()=>Profile()),
   GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
-  GetPage(name: "/", page:()=>HotelHome()),
   GetPage(name: AppRoute.hotelhome, page:()=>HotelHome()),
 
+  //TODO Dashboard
+  GetPage(name: AppRoute.dashboardscreen, page: () => DashboardScreen()),  // Add this route
+  GetPage(name: AppRoute.viewallusers, page: () => ViewAllUsers()),  // Add this route
+  //GetPage(name: AppRoute.edituser, page: () => EditUser()),
+  GetPage(name: AppRoute.getprofile, page: () => GetProfile(userId: '',)), // Define route with parameter userId
+  GetPage(name: AppRoute.banunbanuser, page: () => BanUnbanUser()),
+  GetPage(name: AppRoute.deleteuser, page: () => DeleteUser()),
+  GetPage(name: AppRoute.searchuser, page: () => SearchUser()),
+
+  //TODO RESERVATION
+  GetPage(name: AppRoute.reservation, page:()=>Reservation()),
 
 
 ];

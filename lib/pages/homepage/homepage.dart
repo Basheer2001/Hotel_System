@@ -8,7 +8,8 @@ import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
 import '../../controllers/homepage/homepage_controller.dart';
 import '../booking/bookingroom.dart';
-import '../profile/profile.dart';
+import 'package:untitled1/pages/settings/settings.dart';
+import '../dashboard/dashboardscreen.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
@@ -99,16 +100,71 @@ class HotelHome extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
+      appBar: AppBar(
+        backgroundColor:Colors.blueGrey[50],
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+      ),
+      drawer: Drawer(
+  child: ListView(
+    padding: EdgeInsets.zero,
+    children: [
 
+      UserAccountsDrawerHeader(
+        decoration: BoxDecoration(
+          color:Colors.black,
+        ),
+        accountName: Text('Lory Demerjian',style: TextStyle(color: Colors.white),),
+        accountEmail: Text('Lory@Gmail.com',style: TextStyle(color: Colors.white),),
+        currentAccountPicture: CircleAvatar(
+          backgroundColor: Colors.white,
+          child: Text(
+            'A',
+            style: TextStyle(fontSize: 40.0),
+          ),
+        ),
+      ),
+      ListTile(
+        leading: Icon(Icons.dashboard),
+        title: Text('Dashboard'),
+        onTap: () {
+          Get.to(DashboardScreen());
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.settings),
+        title: Text('Settings'),
+        onTap: () {
+          Get.to(Settings());
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.logout),
+        title: Text('Logout'),
+        onTap: () {
+          // Handle logout
+        },
+      ),
+    ],
+  ),
+),
       body: Column(
         children: [
-          // Categories section
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              SizedBox(height:40 ,),
+              SizedBox(height:10 ,),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -190,7 +246,8 @@ class HotelHome extends StatelessWidget {
                       },
                       child: Text("Browse"),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.black,                        side: BorderSide(color: Colors.grey, width: 2.0), // Border color and width
+                        foregroundColor: Colors.black,
+                        side: BorderSide(color: Colors.grey, width: 2.0), // Border color and width
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0), // Rounded corners
                         ),
@@ -390,7 +447,7 @@ class HotelDetailsView extends StatelessWidget {
             alignment: Alignment.bottomCenter, // Align the container to the bottom center
           ),
           Positioned(
-            top: 350,
+            top: 250,
             bottom: 0,
             left: 0,
             right: 0,

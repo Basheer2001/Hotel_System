@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-class RoomBookingController extends GetxController{
-
+class RoomBookingController extends GetxController {
   late final RxString name;
   late final RxString email;
   late final RxString phoneNumber;
   late final RxInt numberOfGuests;
   late final Rx<DateTime> checkInDate;
   late final Rx<DateTime> checkOutDate;
+  late final Rx<DateTime> selectedDate; // Define selectedDate
+  late final List<DateTime> reservedDates; // Define list of reservedDates
 
-  get formKey => null;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
@@ -22,6 +22,8 @@ class RoomBookingController extends GetxController{
     numberOfGuests = 1.obs;
     checkInDate = DateTime.now().obs;
     checkOutDate = DateTime.now().add(Duration(days: 1)).obs;
+    selectedDate = DateTime.now().obs; // Initialize selectedDate
+    reservedDates = []; // Initialize reservedDates list
   }
 
   Future<void> selectCheckInDate(BuildContext context) async {
@@ -57,7 +59,8 @@ class RoomBookingController extends GetxController{
     print('Number of Guests: ${numberOfGuests.value}');
     print('Check-in Date: ${checkInDate.value}');
     print('Check-out Date: ${checkOutDate.value}');
+    // Add the selected date to the list of reserved dates
+    reservedDates.add(selectedDate.value);
+    // Other reservation submission logic...
   }
-
-
 }

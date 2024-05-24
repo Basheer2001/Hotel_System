@@ -1,4 +1,5 @@
 class AppRoute {
+  //Auth
   static const String login = "/login" ;
   static const String onBoarding = "/onboarding" ;
   static const String language = "/language" ;
@@ -11,5 +12,16 @@ class AppRoute {
   static const String profile="/profile";
   static const String uodateprofile="/profile";
 
+  //Dashboard
+  static const String dashboardscreen="/dashboardscreen";
+  static const String viewallusers="/viewallusers";
+  static const String edituser="/edituser";
+  static const String getprofile="/getprofile";
+  static const String banunbanuser="/banunbanuser";
+  static const String deleteuser="/deleteuser";
+  static const String searchuser="/searchuser";
+
+ //Reservation
+  static const String reservation="/reservation";
 
 }

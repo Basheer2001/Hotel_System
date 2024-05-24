@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/dashboard/managing_users_controller/createuser_controller.dart';
+import 'package:untitled1/controllers/dashboard/managing_rooms_controller/createroom_controller.dart';
 
-class UserCreation extends StatelessWidget {
-  final UserCreationController controller = Get.put(UserCreationController());
+
+class CreateRoom extends StatelessWidget {
+  final CreateRoomController controller = Get.put(CreateRoomController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create User'),
+        title: Text('Create Room'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -17,22 +18,22 @@ class UserCreation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: 20),
-            _buildTextField('First Name', controller.firstName, (value) => controller.firstName = value),
+            _buildTextField('Status', controller.status, (value) => controller.status = value),
             SizedBox(height: 20),
-            _buildTextField('Last Name', controller.lastName, (value) => controller.lastName = value),
+            _buildTextField('Floor', controller.floor, (value) => controller.floor = value),
             SizedBox(height: 20),
-            _buildPasswordField('Password', controller.password, (value) => controller.password = value),
+            _buildTextField('Price', controller.price, (value) => controller.price= value),
             SizedBox(height: 20),
-            _buildPasswordField('Confirm Password', controller.confirmPassword, (value) => controller.confirmPassword = value),
+            _buildTextField('Type', controller.type, (value) => controller.type = value),
             SizedBox(height: 20),
             _buildPermissionDropdown(),
             SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
                 // Call a method to handle user creation
-                controller.createUser();
+                controller.createRoom();
               },
-              child: Text('Create User'),
+              child: Text('CreateRoom'),
             ),
           ],
         ),
@@ -50,16 +51,7 @@ class UserCreation extends StatelessWidget {
     );
   }
 
-  Widget _buildPasswordField(String labelText, String value, ValueChanged<String> onChanged) {
-    return TextField(
-      decoration: InputDecoration(
-        labelText: labelText,
-        border: OutlineInputBorder(),
-      ),
-      onChanged: onChanged,
-      obscureText: true,
-    );
-  }
+
 
   Widget _buildPermissionDropdown() {
     return DropdownButtonFormField<UserType>(
