@@ -10,6 +10,8 @@ import '../../controllers/homepage/homepage_controller.dart';
 import '../booking/bookingroom.dart';
 import 'package:untitled1/pages/settings/settings.dart';
 import '../dashboard/dashboardscreen.dart';
+import '../profile/profile.dart';
+import 'favorite.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
@@ -18,7 +20,10 @@ import 'hotels.dart';
 
 
 class HotelHome extends StatelessWidget {
- HotelHome({Key? key}) : super(key: key);
+  final String token;
+
+ HotelHome({required this.token,Key? key}) : super(key: key);
+
 
   // Define categories
   final List<Map<String, dynamic>> categories = [
@@ -26,6 +31,8 @@ class HotelHome extends StatelessWidget {
     {'icon': Icons.pool, 'label': 'Pool'},
     {'icon': Icons.terrain, 'label': 'Hill'},
   ];
+
+
 
  Widget _buildCategoryIcon(IconData icon, String label) {
    Widget destinationScreen;
@@ -95,7 +102,6 @@ class HotelHome extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
-
     final HotelHomeController controller = Get.put(HotelHomeController());
 
     return Scaffold(
@@ -110,9 +116,25 @@ class HotelHome extends StatelessWidget {
                 Scaffold.of(context).openDrawer();
               },
             );
-          },
+          },),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: ElevatedButton(
+                onPressed: ()  async{
+                  await controller.getWishlist();
+                  Get.to(() => Favorite(likedHotelIds: [],));
+                },
+                child: Text('Favorites',style: TextStyle(color: Colors.black),),
+                style: ElevatedButton.styleFrom(
+                 backgroundColor:customColor ,
+                  // Change button color if needed
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
+
       drawer: Drawer(
   child: ListView(
     padding: EdgeInsets.zero,
@@ -137,6 +159,13 @@ class HotelHome extends StatelessWidget {
         title: Text('Dashboard'),
         onTap: () {
           Get.to(DashboardScreen());
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.logout),
+        title: Text('Profile'),
+        onTap: () {
+          Get.to(Profile());
         },
       ),
       ListTile(
@@ -354,19 +383,17 @@ class HotelHome extends StatelessWidget {
                                     Positioned(
                                       top: 10,
                                       right: 10,
-                                      child:
-                                      GestureDetector(
-                                        onTap: () {
+                                      child: GestureDetector(
+                                        onTap: () async {
                                           controller.toggleFavorite(hotel.id); // Toggle favorite status
-                                          controller.addToWishlist(hotel.id); // Add to wishlist
                                         },
                                         child: Icon(
                                           hotel.isLiked ? Icons.favorite : Icons.favorite_border,
                                           color: hotel.isLiked ? Colors.red : Colors.grey, // Change color based on isLiked status
                                         ),
                                       ),
-
                                     ),
+
                                   ],
                                 ),
                               ),

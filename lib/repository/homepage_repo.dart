@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io'; // Import the 'dart:io' library
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import '../constant/sharedprefrence/shared.dart';
 import '../models/app_response.dart';
 import '../pages/homepage/hotel.dart';
 import '../providers/api_provider.dart';
@@ -9,13 +10,96 @@ import '../providers/api_provider.dart';
 class HomePageRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
 
-  Future<void> addToWishlist(int roomid, String cookie) async {
+
+  Future<void> addToWishlist(int roomId) async {
+    try {
+      // Retrieve token
+      String? token = await getToken();
+      print(6);
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+
+      // Call getRequest method from APIProvider
+      final response = await apiProvider.getRequest(
+        "${APIProvider.url}wishlists/add?roomId=$roomId",
+        {},
+        headers: {'Authorization': 'Bearer $token',
+
+        }, // Pass the token here
+      );
+      print("Response: $response");
+      print(token);
+      // Handle response here
+      print("Response status: ${response.statusCode}");
+      print("Response data: ${response.data}");
+    } catch (e) {
+      // Handle error
+      print("Error: $e");
+      rethrow;
+    }
+  }
+  Future<void> removeFromWishlist(int roomId) async {
+    try {
+      String? token = await getToken();
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+
+      final response = await apiProvider.deleteRequest(
+        "${APIProvider.url}wishlist/$roomId",
+        headers: {'Authorization': 'Bearer $token',
+
+        },
+      );
+
+      print("Response status: ${response.statusCode}");
+      print("Response data: ${response.data}");
+    } catch (e) {
+      print("Error: $e");
+      rethrow;
+    }
+  }
+
+
+  Future<List<dynamic>> getwishlist() async {
+    try {
+      // Retrieve token
+      String? token = await getToken();
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+
+      final response = await apiProvider.getRequest(
+        "${APIProvider.url}wishlist",
+        {},
+        headers: {'Authorization': 'Bearer $token'}, // Pass the token here
+      );
+
+      if (response.statusCode == 200) {
+        // Extract wishlist data from response
+        List<dynamic> wishlistData = response.data['msg']['wishlist'];
+        return wishlistData;
+      } else {
+        throw Exception('Failed to fetch wishlist');
+      }
+    } catch (e) {
+      print("Error fetching wishlist: $e");
+      throw e;
+    }
+  }
+
+
+
+}
+
+/*Future<void> addToWishlist(int roomid) async {
     try {
       // Call getRequest method from APIProvider
       final response = await apiProvider.getRequest(
-        "wishlist",
+        "${APIProvider.url}wishlists/add?roomId=2",
         {},
-        cookie: cookie,
+
       );
 
       // Handle response here
@@ -24,36 +108,16 @@ class HomePageRepo extends GetxService {
       // Handle error
       print("Error: $e");
     }
-  }
-
-  Future<List> getwishlist(String cookie) async {
-    try {
-      // Call getRequest method from APIProvider to fetch wishlist items
-      final response = await apiProvider.getRequest(
-        "wishlist", // Adjust the endpoint URL if necessary
-        {},
-        cookie: cookie,
-      );
-
-      // Handle response here
-      if (response.statusCode == 200) {
-        // Assuming response.data is a list of wishlist items in JSON format
-        List<dynamic> data = response.data;
-        // List<Hotel> wishlist = data.map((item) => Hotel.fromJson(item)).toList();
-        // return wishlist;
-        return data;
-      } else {
-        throw Exception('Failed to fetch wishlist');
-      }
-    } catch (e) {
-      // Handle error
-      print("Error fetching wishlist: $e");
-      throw e; // Rethrow the error so it can be handled elsewhere in your application
-    }
-  }
+  }*/
 
 
-}
+
+
+
+
+
+
+
 
 
 /*
