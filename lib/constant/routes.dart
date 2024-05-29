@@ -11,6 +11,7 @@ class AppRoute {
   static const String hotelhome="/hotelhome";
   static const String profile="/profile";
   static const String uodateprofile="/profile";
+  static const String favorite="/favorite";
 
   //Dashboard
   static const String dashboardscreen="/dashboardscreen";

@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../models/app_response.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/profile_repo.dart';
+import 'homepage/homepage_controller.dart';
 
 class ProfileController extends GetxController{
 
@@ -21,7 +22,7 @@ class ProfileController extends GetxController{
   TextEditingController  currentpassword=TextEditingController(text:"87654321");
   TextEditingController  address=TextEditingController(text:"321");
 
-
+  final HotelHomeController controller = Get.find<HotelHomeController>();
   var token = "".obs;
 
   var firstSubmit =false.obs;
@@ -43,7 +44,7 @@ class ProfileController extends GetxController{
       );
       loginLoadingState.value=false;
       if(response.success){
-        Get.to(() => HotelHome());
+        Get.to(() => HotelHome(token:''));
         Get.defaultDialog(
             title: "Success",
             content: Text(""),
@@ -70,31 +71,69 @@ class ProfileController extends GetxController{
     }
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    MyProfile();
+    getProfile();
+  }
 
-  void getProfile() async {
-    AppResponse<Map<String, dynamic>> response =
-    await profileRepo.getProfile(token.value);
+  var profileData = {}.obs;
+  var loading = false.obs;
+  var errorMessage = ''.obs;
+
+  void MyProfile() async {
+    loading.value = true;
+    AppResponse<Map<String, dynamic>> response = await profileRepo.MyProfile();
+    loading.value = false;
+
     if (response.success) {
-      firstnameTextController.text = response.data!['name'];
-      phoneTextController.text = response.data!['phone'];    } else {
+      profileData.value = response.data!;
+    } else {
+      errorMessage.value = response.errorMessage!;
       Get.defaultDialog(
-          title: "Error",
-          content: Text(response.errorMessage!),
-          actions: [
-            TextButton(onPressed: (){
+        title: "Error",
+        content: Text(response.errorMessage!),
+        actions: [
+          TextButton(
+            onPressed: () {
               Get.back();
             },
-                child: Text("ok")),
-          ]
+            child: Text("OK"),
+          ),
+        ],
       );
-
-
-      Get.snackbar(
-          'Error',
-          response.errorMessage!,
-          snackPosition: SnackPosition.BOTTOM,);
     }
   }
+
+  void getProfile() async {
+    loading.value = true;
+    AppResponse<Map<String, dynamic>> response = await profileRepo.getProfile();
+    loading.value = false;
+
+    if (response.success) {
+      profileData.value = response.data!;
+    } else {
+      errorMessage.value = response.errorMessage!;
+      Get.defaultDialog(
+        title: "Error",
+        content: Text(response.errorMessage!),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    }
+  }
+
+
+
+
+
   void pickImage(BuildContext context) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

@@ -6,12 +6,12 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
+import '../../controllers/dashboard/managing_reports_controller/displayreports_controller.dart';
 import '../../controllers/homepage/homepage_controller.dart';
 import '../booking/bookingroom.dart';
 import 'package:untitled1/pages/settings/settings.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../profile/profile.dart';
-import 'favorite.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
@@ -34,69 +34,69 @@ class HotelHome extends StatelessWidget {
 
 
 
- Widget _buildCategoryIcon(IconData icon, String label) {
-   Widget destinationScreen;
-   switch (label) {
-     case 'Sea':
-       destinationScreen = RoomSeaView();
-       break;
-     case 'Pool':
-       destinationScreen = RoomPoolView();
-       break;
-     case 'Hill':
-       destinationScreen = RooHillView();
-       break;
-     default:
-       destinationScreen = Container();       break;
-   }
+  Widget _buildCategoryIcon(IconData icon, String label) {
+    Widget destinationScreen;
+    switch (label) {
+      case 'Sea':
+        destinationScreen = RoomSeaView();
+        break;
+      case 'Pool':
+        destinationScreen = RoomPoolView();
+        break;
+      case 'Hill':
+        destinationScreen = RooHillView();
+        break;
+      default:
+        destinationScreen = Container();
+        break;
+    }
 
-   return
-     GestureDetector(
-       onTap: (){
-         Get.to(() => destinationScreen);
-       },
-       child: Column(
-         children: [
-           Container(
-             width: 50, // Fixed width for the circular container
-             height: 50, // Fixed height for the circular container
-             margin: EdgeInsets.symmetric(horizontal: 35),
-             decoration: BoxDecoration(
-               shape: BoxShape.circle,
-               color: Colors.white, // Background color of the circular container
-               border: Border.all(
-                 color: Colors.grey, // Border color
-                 width: 2.0, // Border width (bold)
-               ),
-               boxShadow: [
-                 BoxShadow(
-                   color: Colors.grey.withOpacity(0.5), // Shadow color
-                   spreadRadius: 2,
-                   blurRadius: 5,
-                   offset: Offset(0, 3), // changes position of shadow
-                 ),
-               ],
-             ),
-             padding: EdgeInsets.all(10), // Adjust padding as needed
-             child: Icon(
-               icon,
-               color: Colors.grey,
-               size: 24, // Set the size of the icon
-             ),
-           ),
-           SizedBox(height: 4),
-           Text(
-             label,
-             style: TextStyle(
-               fontSize: 12,
-               color: Colors.grey,
-             ),
-           ),
-         ],
-
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => destinationScreen);
+      },
+      child: Column(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            margin: EdgeInsets.symmetric(horizontal: 35),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.grey,
+                width: 2.0,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            padding: EdgeInsets.all(10),
+            child: Icon(
+              icon,
+              color: Colors.grey,
+              size: 24,
+            ),
           ),
-     );
- }
+          SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
 
  @override
@@ -120,17 +120,17 @@ class HotelHome extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                onPressed: ()  async{
-                  await controller.getWishlist();
-                  Get.to(() => Favorite(likedHotelIds: [],));
+              child:
+              ElevatedButton(
+                onPressed: () async {
+                 controller.navigateToFavorites();
                 },
-                child: Text('Favorites',style: TextStyle(color: Colors.black),),
+                child: Text('Favorites', style: TextStyle(color: Colors.black)),
                 style: ElevatedButton.styleFrom(
-                 backgroundColor:customColor ,
-                  // Change button color if needed
+                  backgroundColor: customColor,
                 ),
               ),
+
             ),
           ],
         ),
@@ -168,6 +168,7 @@ class HotelHome extends StatelessWidget {
           Get.to(Profile());
         },
       ),
+
       ListTile(
         leading: Icon(Icons.settings),
         title: Text('Settings'),

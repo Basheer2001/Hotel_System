@@ -20,11 +20,8 @@ class HotelHomeController extends GetxController {
 
   var hotels = <Hotel>[].obs;
 
- // HotelHomeController(String token);
+  var reports = <dynamic>[].obs;
 
-
-
-  // Constructor to receive the token
 
 
   @override
@@ -41,21 +38,41 @@ class HotelHomeController extends GetxController {
       Hotel(name: 'Doublex',  imageUrl: 'assets/images/sea1.jpg', des: "Indulge in culinary delights and cultural experiences at our historic hotel, where each room is a reflection of the city's rich heritage.", price: 400.0, id: 6),
     ]);
     getWishlist();
-
+    fetchReports();
   }
-
-
-  Future<void> getWishlist() async {
+//reports
+  Future<void> fetchReports() async {
     try {
-      // Fetch wishlist items
-      List data = await homePageRepo.getwishlist();
-      wishlist = data.map<int>((item) => item['id']).toList();
-      update(); // Update UI
+      List<dynamic> fetchedReports = await homePageRepo.fetchReports();
+      reports.assignAll(fetchedReports);
     } catch (e) {
-      // Handle error
-      print("Error fetching wishlist: $e");
+      print("Error fetching reports: $e");
     }
   }
+  Future<void> navigateToFavorites() async {
+    try {
+      // Fetch the wishlist data before navigating
+      List<dynamic> wishlistData = await homePageRepo.getwishlist();
+      print("Navigating to Favorites with data: $wishlistData"); // Log data for debugging
+      // Navigate to Favorites page and pass the list of liked room IDs
+      Get.to(() => Favorite(wishlistData: wishlistData,reportsData:  this.reports));
+    } catch (e) {
+      print("Error navigating to Favorites page: $e");
+    }
+  }
+
+ Future<List<dynamic>> getWishlist() async {
+    try {
+      List data = await homePageRepo.getwishlist();
+      wishlist = data.map<int>((item) => item['id']).toList();
+      return data; // Return wishlist data
+    } catch (e) {
+      print("Error fetching wishlist: $e");
+      // Handle the error gracefully, for example, return an empty list
+      return [];
+    }
+  }
+
 
 
   void toggleFavorite(int id) async {
@@ -75,8 +92,6 @@ class HotelHomeController extends GetxController {
       }
     }
   }
-
-
 
   Future<void> removeFromWishlist(int roomId) async {
     try {
@@ -154,14 +169,7 @@ class HotelHomeController extends GetxController {
     }
   }
 
-  Future<void> navigateToFavorites() async {
-    try {
-      // Navigate to Favorites page and pass the list of liked room IDs
-      Get.to(() => Favorite(likedHotelIds: likedHotelIds));
-    } catch (e) {
-      print("Error navigating to Favorites page: $e");
-    }
-  }
+
 
   bool isHotelLiked(int hotelId) {
     return wishlist.contains(hotelId);
@@ -194,6 +202,8 @@ class HotelHomeController extends GetxController {
       ],
     );
   }
+
+
 
 }
 

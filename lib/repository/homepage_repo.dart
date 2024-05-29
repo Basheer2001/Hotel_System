@@ -10,7 +10,34 @@ import '../providers/api_provider.dart';
 class HomePageRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
 
+//reports
 
+  Future<List<dynamic>> fetchReports() async {
+    try {
+      String? token = await getToken();
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+
+      final response = await apiProvider.getRequest(
+        "${APIProvider.url}reports",
+        {},
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        // Extract reports data from response
+        List<dynamic> reportsData = response.data['msg']['reports'];
+        return reportsData;
+      } else {
+        throw Exception('Failed to fetch reports');
+      }
+    } catch (e) {
+      print("Error fetching reports: $e");
+      throw e;
+    }
+  }
+  //wishlist
   Future<void> addToWishlist(int roomId) async {
     try {
       // Retrieve token
@@ -60,8 +87,6 @@ class HomePageRepo extends GetxService {
       rethrow;
     }
   }
-
-
   Future<List<dynamic>> getwishlist() async {
     try {
       // Retrieve token
@@ -88,6 +113,7 @@ class HomePageRepo extends GetxService {
       throw e;
     }
   }
+
 
 
 

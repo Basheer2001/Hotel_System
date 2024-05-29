@@ -4,89 +4,83 @@ import 'package:get/get.dart';
 import '../../../controllers/profile_Controller.dart';
 import 'updateprofile.dart';
 
-
-
 class Profile extends GetView<ProfileController> {
-
   const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Get.put(ProfileController());
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                Obx(() =>
-                CircleAvatar(
-                  radius: 45,
-                  backgroundImage: controller.avatarImagePath.value.isEmpty?null:FileImage(File(controller.avatarImagePath.value)),
-                ),
-                ),
+      body: Obx(() {
+        if (controller.loading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
 
-                SizedBox(width: 60,),
-                ElevatedButton(onPressed: (){
-                  Get.to(() => UpdateProfile());
-                }, child: Text("Update Profile"))
-              ],
-            ),
-//
-            SizedBox(height: 20.0),
+        if (controller.errorMessage.isNotEmpty) {
+          return Center(child: Text(controller.errorMessage.value));
+        }
 
-            // Personal Information Section
-            const Text(
-              'Personal Information',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10.0),
-            // ListTiles for personal information
-            // Example:
-            buildInfoTile('Name', 'John Doe'),
-            buildInfoTile('Email', 'john.doe@example.com'),
+        var profile = controller.profileData.value;
 
-            SizedBox(height: 20.0),
-
-            // Booking History Section
-            Text(
-              'Booking History',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10.0),
-            // ListTiles for booking history
-            // Example:
-            buildBookingTile('Hotel ABC', 'Check-in: Jan 1, 2024 | Check-out: Jan 3, 2024'),
-
-            SizedBox(height: 20.0),
-
-            // Notification Settings Section
-            Text(
-              'Notification Settings',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10.0),
-            // SwitchListTile for notification settings
-            // Example:
-            SwitchListTile(
-              title: Text(
-                'Receive Push Notifications',
-                style: TextStyle(fontSize: 16.0),
+        return SingleChildScrollView(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Obx(() => CircleAvatar(
+                    radius: 45,
+                    backgroundImage: controller.avatarImagePath.value.isEmpty
+                        ? null
+                        : FileImage(File(controller.avatarImagePath.value)),
+                  )),
+                  SizedBox(width: 60),
+                  ElevatedButton(
+                    onPressed: () {
+                     // Get.to(() => UpdateProfile());
+                    },
+                    child: Text("Update Profile"),
+                  ),
+                ],
               ),
-              value: true, // Example value, replace with actual notification setting
-              onChanged: (newValue) {
-                // Update notification setting
-              },
-            ),
-            // Add more notification settings options as needed
-
-
-
-          ],
-        ),
-      ),
+              SizedBox(height: 20.0),
+              const Text(
+                'Personal Information',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10.0),
+              buildInfoTile('First Name', profile['first_name'] ?? ''),
+              buildInfoTile('Last Name', profile['last_name'] ?? ''),
+              buildInfoTile('Phone', profile['phone'] ?? ''),
+              buildInfoTile('Address', profile['address'] ?? ''),
+              SizedBox(height: 20.0),
+              Text(
+                'Booking History',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10.0),
+              buildBookingTile('Hotel ABC', 'Check-in: Jan 1, 2024 | Check-out: Jan 3, 2024'),
+              SizedBox(height: 20.0),
+              Text(
+                'Notification Settings',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10.0),
+              SwitchListTile(
+                title: Text(
+                  'Receive Push Notifications',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                value: true, // Example value, replace with actual notification setting
+                onChanged: (newValue) {
+                  // Update notification setting
+                },
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 
