@@ -52,6 +52,12 @@ static String? token;
         throw Exception('unknown error');
       }
     } catch (e) {
+      print('Error: $e');
+      if (e is dio.DioError) {
+        print('Response data: ${e.response?.data}');
+        print('Response headers: ${e.response?.headers}');
+        print('Response request: ${e.requestOptions}');
+      }
       throw Exception('Error: $e');
     }
   }
@@ -97,6 +103,7 @@ static String? token;
     }
 
   }
+
 
   Future<dio.Response> putRequest(
       String method, Map<String,dynamic> queryParams)async{

@@ -121,9 +121,9 @@ class HotelHome extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child:
-              ElevatedButton(
+              ElevatedButton (
                 onPressed: () async {
-                 controller.navigateToFavorites();
+                await controller.navigateToFavorites();
                 },
                 child: Text('Favorites', style: TextStyle(color: Colors.black)),
                 style: ElevatedButton.styleFrom(

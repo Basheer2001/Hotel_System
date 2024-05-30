@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Favorite extends StatelessWidget {
   final List<dynamic> wishlistData;
-  final List<dynamic> reportsData; // Added reports data
 
-  Favorite({required this.wishlistData, required this.reportsData}); // Updated constructor
+
+  Favorite({required this.wishlistData}); // Updated constructor
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +14,7 @@ class Favorite extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Display reports here
-          if (reportsData.isNotEmpty)
-            Expanded(
-              child: ListView.builder(
-                itemCount: reportsData.length,
-                itemBuilder: (context, index) {
-                  final report = reportsData[index];
-                  // Build the report item UI here
-                  return ListTile(
-                    title: Text('Report ${index + 1}'),
-                    // Customize the subtitle as needed based on the report data
-                    subtitle: Text('Details: ${report['details']}'),
-                  );
-                },
-              ),
-            ),
-          // Display wishlist items here
+
           Expanded(
             child: ListView.builder(
               itemCount: wishlistData.length,

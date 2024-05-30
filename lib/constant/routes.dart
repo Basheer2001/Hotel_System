@@ -24,5 +24,6 @@ class AppRoute {
 
  //Reservation
   static const String reservation="/reservation";
+  static const String report="/report";
 
 }

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:untitled1/pages/Language.dart';
 import 'package:untitled1/pages/auth/Register/checkemail.dart';
@@ -15,15 +16,19 @@ import 'package:untitled1/pages/dashboard/managing_users/viewallusers.dart';
 import 'package:untitled1/pages/homepage/homepage.dart';
 import 'package:untitled1/pages/onboarding.dart';
 import 'package:untitled1/pages/profile/profile.dart';
+import 'package:untitled1/pages/report/report.dart';
+import 'package:untitled1/repository/account_repo.dart';
 import 'constant/routes.dart';
 import 'pages/auth/login/login.dart';
 import 'pages/profile/updateprofile.dart';
+import 'package:untitled1/pages/homepage/favorite.dart';
+
 
 List<GetPage<dynamic>>? routes =[
   //TODO AUTH
  // GetPage(name: "/", page: ()=> const Language()),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
-  GetPage(name:"/", page: ()=> const Login()),
+ // GetPage(name:"/", page: ()=> const Login()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
   GetPage(name:AppRoute.verifycode, page: () => VerfiyCode()),
@@ -31,10 +36,9 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name:AppRoute.register1 , page:()=>Register1()),
   GetPage(name:AppRoute.sendresetpassword , page:()=>SendResetPassword()),
   GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),
-  //GetPage(name:"/", page:()=>HotelHome()),
   GetPage(name: AppRoute.profile, page:()=>Profile()),
-  GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
-  GetPage(name: AppRoute.hotelhome, page:()=>HotelHome()),
+ // GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
+
 
   //TODO Dashboard
   GetPage(name: AppRoute.dashboardscreen, page: () => DashboardScreen()),  // Add this route
@@ -48,5 +52,12 @@ List<GetPage<dynamic>>? routes =[
   //TODO RESERVATION
   GetPage(name: AppRoute.reservation, page:()=>Reservation()),
 
+  //TODO Homepage
+  //GetPage(name: AppRoute.hotelhome, page:()=>HotelHome(token: '',)),
+  GetPage(name: "/", page:()=>HotelHome(token: '',)),
+  GetPage(name: AppRoute.favorite, page: () => Favorite(wishlistData: [])),
+  //GetPage(name: "/", page: () => Report()),
+
+  GetPage(name: AppRoute.report, page: () => Report()),
 
 ];

@@ -38,24 +38,16 @@ class HotelHomeController extends GetxController {
       Hotel(name: 'Doublex',  imageUrl: 'assets/images/sea1.jpg', des: "Indulge in culinary delights and cultural experiences at our historic hotel, where each room is a reflection of the city's rich heritage.", price: 400.0, id: 6),
     ]);
     getWishlist();
-    fetchReports();
+   // fetchReports();
   }
 //reports
-  Future<void> fetchReports() async {
-    try {
-      List<dynamic> fetchedReports = await homePageRepo.fetchReports();
-      reports.assignAll(fetchedReports);
-    } catch (e) {
-      print("Error fetching reports: $e");
-    }
-  }
   Future<void> navigateToFavorites() async {
     try {
       // Fetch the wishlist data before navigating
       List<dynamic> wishlistData = await homePageRepo.getwishlist();
       print("Navigating to Favorites with data: $wishlistData"); // Log data for debugging
       // Navigate to Favorites page and pass the list of liked room IDs
-      Get.to(() => Favorite(wishlistData: wishlistData,reportsData:  this.reports));
+      Get.to(() => Favorite(wishlistData: wishlistData));
     } catch (e) {
       print("Error navigating to Favorites page: $e");
     }
