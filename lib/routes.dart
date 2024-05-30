@@ -18,6 +18,7 @@ import 'package:untitled1/pages/onboarding.dart';
 import 'package:untitled1/pages/profile/profile.dart';
 import 'package:untitled1/pages/report/report.dart';
 import 'package:untitled1/repository/account_repo.dart';
+import 'package:untitled1/repository/profile_repo.dart';
 import 'constant/routes.dart';
 import 'pages/auth/login/login.dart';
 import 'pages/profile/updateprofile.dart';
@@ -26,9 +27,9 @@ import 'package:untitled1/pages/homepage/favorite.dart';
 
 List<GetPage<dynamic>>? routes =[
   //TODO AUTH
- // GetPage(name: "/", page: ()=> const Language()),
+ GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
- // GetPage(name:"/", page: ()=> const Login()),
+ //GetPage(name:"/", page: ()=> const Login()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
   GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
   GetPage(name:AppRoute.verifycode, page: () => VerfiyCode()),
@@ -39,7 +40,6 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name: AppRoute.profile, page:()=>Profile()),
  // GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
 
-
   //TODO Dashboard
   GetPage(name: AppRoute.dashboardscreen, page: () => DashboardScreen()),  // Add this route
   GetPage(name: AppRoute.viewallusers, page: () => ViewAllUsers()),  // Add this route
@@ -48,7 +48,6 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name: AppRoute.banunbanuser, page: () => BanUnbanUser()),
   GetPage(name: AppRoute.deleteuser, page: () => DeleteUser()),
   GetPage(name: AppRoute.searchuser, page: () => SearchUser()),
-
   //TODO RESERVATION
   GetPage(name: AppRoute.reservation, page:()=>Reservation()),
 
