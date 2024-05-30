@@ -8,7 +8,7 @@ import '../../../constant/auth/customtextbodyauth.dart';
 import '../../../constant/auth/customtexttitleauth.dart';
 import '../../../controllers/profile_Controller.dart';
 
-class UpdateProfile extends GetView<ProfileController>{
+/*class UpdateProfile extends GetView<ProfileController>{
   const UpdateProfile({super.key});
 
   @override
@@ -387,7 +387,7 @@ class UpdateProfile extends GetView<ProfileController>{
             ])
     );
 
-  }}
+  }}*/
 
 
 

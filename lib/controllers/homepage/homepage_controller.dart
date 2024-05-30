@@ -124,6 +124,7 @@ class HotelHomeController extends GetxController {
   }
   Future<void> addToWishlist(int roomId) async {
     try {
+      print(7);
       String? token = await getToken(); // Assume this function retrieves your token
       if (token == null) {
         throw Exception("User not logged in");
@@ -131,6 +132,7 @@ class HotelHomeController extends GetxController {
 
       await homePageRepo.addToWishlist(roomId);
       await updateWishlist();
+
       Get.defaultDialog(
         title: "Success",
         content: Text("Added to wishlist successfully"),

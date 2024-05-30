@@ -99,7 +99,7 @@ class AccountRepo extends GetxService{
     }
   }
 
-  Future<AppResponse<bool>> logout(String token) async {
+  /*Future<AppResponse<bool>> logout(String token) async {
     try {
       dio.Response response = await apiProvider.getRequest(
         "${APIProvider.url}logout",
@@ -130,7 +130,7 @@ class AccountRepo extends GetxService{
       print("Error during logout: $e");
       return AppResponse(success: false, errorMessage: e.toString());
     }
-  }
+  }*/
 
 
 }

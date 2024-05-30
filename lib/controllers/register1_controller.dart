@@ -12,15 +12,10 @@ import '../models/app_response.dart';
 import '../pages/auth/Register/verfiycode.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/register_repo.dart';
-
-
-
-
+import 'homepage/homepage_controller.dart';
 class Register1Controller extends GetxController{
 
   RegisterRepo registerRepo=Get.find<RegisterRepo>();
-
-
 
   GlobalKey<FormState> formkey=GlobalKey<FormState>();
   TextEditingController firstnameTextController=TextEditingController(text: "marla");
@@ -65,7 +60,7 @@ class Register1Controller extends GetxController{
       );
       registerLoadingState.value=false;
       if(response.success){
-        Get.to(() =>HotelHome ());
+        Get.to(() =>HotelHome (token: '',));
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

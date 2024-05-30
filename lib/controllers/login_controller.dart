@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/account_repo.dart';
 import '../models/app_response.dart';
+import 'homepage/homepage_controller.dart';
 
 class loginController extends GetxController{
 
@@ -27,6 +28,8 @@ class loginController extends GetxController{
 
   var logoutstatue = false.obs;
 
+  final HotelHomeController controller = Get.find<HotelHomeController>();
+
 
   @override
   void onInit() {
@@ -48,7 +51,9 @@ class loginController extends GetxController{
       AppResponse response=await  accountRepo.login(usernameTextController.text, PasswordTextController.text);
       loginLoadingState.value=false;
       if(response.success){
-        Get.to(() => HotelHome());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', response.data);
+        Get.to(() => HotelHome(token: response.data));
         Get.defaultDialog(
             title: "Success",
             content: Text(""),
@@ -74,6 +79,7 @@ class loginController extends GetxController{
       }
     }
   }
+
 
   void checkpassword() async{
     firstSubmit.value=true;
@@ -82,7 +88,7 @@ class loginController extends GetxController{
       AppResponse response=await  accountRepo.checkpassword(checkPasswordTextController.text);
       loginLoadingState.value=false;
       if(response.success){
-        Get.to(() => HotelHome());
+        Get.to(() => HotelHome(token: response.data));
         Get.defaultDialog(
             title: "Success",
             content: Text(""),
@@ -109,7 +115,7 @@ class loginController extends GetxController{
     }
   }
 
-  void logout() async {
+  /*void logout() async {
     if (token.value.isNotEmpty) {
       AppResponse response = await accountRepo.logout(token.value);
       if (response.success) {
@@ -145,5 +151,5 @@ class loginController extends GetxController{
         ],
       );
     }
-  }
+  }*/
 }

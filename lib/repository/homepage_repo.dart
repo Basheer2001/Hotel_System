@@ -18,7 +18,7 @@ class HomePageRepo extends GetxService {
       if (token == null) {
         throw Exception("User not logged in");
       }
-
+print(5);
       // Call getRequest method from APIProvider
       final response = await apiProvider.getRequest(
         "${APIProvider.url}wishlists/add?roomId=$roomId",
