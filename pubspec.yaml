@@ -44,6 +44,11 @@ dependencies:
   shared_preferences: ^2.2.3
   reactive_flutter_rating_bar: ^2.0.1
   flutter_emoji_feedback: ^0.3.0
+  flutter_easyloading: ^3.0.5
+  google_fonts: ^6.2.1
+  syncfusion_flutter_charts: ^25.2.4
+  table_calendar: ^3.1.1
+
 
 dev_dependencies:
   flutter_test:

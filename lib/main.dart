@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Services.dart';
-import 'package:untitled1/pages/auth/Register/register1.dart';
-import 'package:untitled1/pages/auth/Register/verfiycode.dart';
-import 'package:untitled1/pages/auth/forgetpassword/resetpasswordcode.dart';
-import 'package:untitled1/pages/auth/forgetpassword/sendresetpassword.dart';
-import 'package:untitled1/pages/auth/login/login.dart';
-import 'package:untitled1/pages/auth/register/checkemail.dart';
 import 'package:untitled1/providers/api_provider.dart';
 import 'package:untitled1/repository/account_repo.dart';
 import 'package:untitled1/repository/checkemail_repo.dart';
 import 'package:untitled1/repository/homepage_repo.dart';
 import 'package:untitled1/repository/profile_repo.dart';
 import 'package:untitled1/repository/register_repo.dart';
+import 'package:untitled1/repository/report_repo.dart';
 import 'package:untitled1/repository/resetpasswordcode_repo.dart';
 import 'package:untitled1/repository/sendresetpassword_repo.dart';
 import 'package:untitled1/repository/verfiycode_repo.dart';
@@ -40,10 +35,14 @@ class AppBinding extends Bindings{
     Get.lazyPut(() => ResetPasswordCodeRepo());
     Get.lazyPut(()=> HomePageRepo());
     Get.lazyPut(()=> ProfileRepo());
+    Get.lazyPut(()=>ReportRepo());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());
+
     Get.put(HotelHomeController());
+   // Get.put(HotelHomeController(Get.arguments));
+
 
   }
 
@@ -69,7 +68,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       translations:MyTranslation() ,
       locale: controller.language,
-      //initialRoute: "/", // Set your initial route
+      theme:ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      initialRoute: '/dashboard', // Set your initial route
       getPages: routes,
 
     );
