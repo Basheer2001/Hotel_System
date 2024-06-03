@@ -390,4 +390,91 @@ import '../../../controllers/profile_Controller.dart';
   }}*/
 
 
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../controllers/profile_Controller.dart';
+
+class UpdateProfile extends StatelessWidget {
+  UpdateProfile({Key? key}) : super(key: key);
+
+  final ProfileController controller = Get.find<ProfileController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Update Profile'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: controller.formKey,
+          child: ListView(
+            children: [
+              Obx(() => CircleAvatar(
+                radius: 60,
+                backgroundImage: controller.avatarImagePath.value.isEmpty
+                    ? null
+                    : FileImage(File(controller.avatarImagePath.value)),
+                child: IconButton(
+                  icon: Icon(Icons.camera_alt),
+                  onPressed: () => _pickImage(),
+                ),
+              )),
+              SizedBox(height: 20),
+              buildTextField(controller.firstnameTextController, 'First Name', 'Enter your first name'),
+              buildTextField(controller.lastnameTextController, 'Last Name', 'Enter your last name'),
+              buildTextField(controller.phoneTextController, 'Phone', 'Enter your phone number', keyboardType: TextInputType.phone),
+              buildTextField(controller.address, 'Address', 'Enter your address'),
+              buildTextField(controller.currentpassword, 'Current Password', 'Enter your current password', obscureText: true),
+              buildTextField(controller.newpasswordTextController, 'New Password', 'Enter your new password', obscureText: true),
+              buildTextField(controller.newpasswordconfirmation, 'Confirm New Password', 'Confirm your new password', obscureText: true),
+              SizedBox(height: 20),
+              Obx(() => ElevatedButton(
+                onPressed: controller.loginLoadingState.value ? null : () => controller.updateprofile(),
+                child: controller.loginLoadingState.value
+                    ? CircularProgressIndicator()
+                    : Text('Save'),
+              )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextField(TextEditingController controller, String label, String hint, {bool obscureText = false, TextInputType keyboardType = TextInputType.text}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter $label';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      controller.avatarImagePath.value = pickedFile.path;
+    }
+  }
+}
 

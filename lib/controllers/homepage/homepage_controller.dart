@@ -4,8 +4,10 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constant/sharedprefrence/shared.dart';
 import '../../models/app_response.dart';
+import '../../pages/auth/login/login.dart';
 import '../../pages/homepage/favorite.dart';
 import '../../pages/homepage/hotel.dart';
+import '../../providers/api_provider.dart';
 import '../../repository/homepage_repo.dart';
 
 class HotelHomeController extends GetxController {
@@ -40,7 +42,19 @@ class HotelHomeController extends GetxController {
     getWishlist();
    // fetchReports();
   }
-//reports
+
+  Future<List<dynamic>> getWishlist() async {
+    try {
+      List data = await homePageRepo.getwishlist();
+      wishlist = data.map<int>((item) => item['id']).toList();
+      return data; // Return wishlist data
+    } catch (e) {
+      print("Error fetching wishlist: $e");
+      // Handle the error gracefully, for example, return an empty list
+      return [];
+    }
+  }
+
   Future<void> navigateToFavorites() async {
     try {
       // Fetch the wishlist data before navigating
@@ -50,18 +64,6 @@ class HotelHomeController extends GetxController {
       Get.to(() => Favorite(wishlistData: wishlistData));
     } catch (e) {
       print("Error navigating to Favorites page: $e");
-    }
-  }
-
- Future<List<dynamic>> getWishlist() async {
-    try {
-      List data = await homePageRepo.getwishlist();
-      wishlist = data.map<int>((item) => item['id']).toList();
-      return data; // Return wishlist data
-    } catch (e) {
-      print("Error fetching wishlist: $e");
-      // Handle the error gracefully, for example, return an empty list
-      return [];
     }
   }
 
@@ -163,15 +165,10 @@ class HotelHomeController extends GetxController {
     }
   }
 
-
-
   bool isHotelLiked(int hotelId) {
     return wishlist.contains(hotelId);
   }
 
-
-
-  // Method to fetch wishlist data
   Future<void> updateWishlist() async {
     try {
       List data = await homePageRepo.getwishlist();
@@ -182,7 +179,6 @@ class HotelHomeController extends GetxController {
     }
   }
 
-  // Method to handle errors related to wishlist operations
   void handleWishlistError(dynamic error) {
     print("Error: $error");
     Get.defaultDialog(
@@ -198,8 +194,30 @@ class HotelHomeController extends GetxController {
   }
 
 
-
+  Future<void> logout() async {
+    try {
+      await homePageRepo.logout();
+      // Clear user data, navigate to login screen, etc.
+      Get.offAll(Login());
+    } catch (e) {
+      print("Error during logout: $e");
+      Get.defaultDialog(
+        title: "Error",
+        content: Text("Failed to logout"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("Ok"),
+          ),
+        ],
+      );
+    }
+  }
 }
+
+
 
 
 

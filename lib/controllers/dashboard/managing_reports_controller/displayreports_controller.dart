@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class DisplayReportsController extends GetxController {
+/*class DisplayReportsController extends GetxController {
   // Dummy data for demonstration purposes
   var reports = <Report>[
     Report(title: 'Daily Revenue', value: '\$500'),
@@ -37,4 +37,5 @@ class Report {
   final String value;
 
   Report({required this.title, required this.value});
-}
+
+}*/

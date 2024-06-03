@@ -12,6 +12,8 @@ import '../booking/bookingroom.dart';
 import 'package:untitled1/pages/settings/settings.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../profile/profile.dart';
+import '../report/report.dart';
+import '../report/reports.dart';
 import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
@@ -165,22 +167,23 @@ class HotelHome extends StatelessWidget {
         leading: Icon(Icons.logout),
         title: Text('Profile'),
         onTap: () {
-          Get.to(Profile());
+          Get.to(() => Profile());
+
         },
       ),
 
       ListTile(
-        leading: Icon(Icons.settings),
-        title: Text('Settings'),
+        leading: Icon(Icons.report),
+        title: Text('Reports'),
         onTap: () {
-          Get.to(Settings());
+          Get.to(() => Reports());
         },
       ),
       ListTile(
         leading: Icon(Icons.logout),
         title: Text('Logout'),
         onTap: () {
-          // Handle logout
+          Get.find<HotelHomeController>().logout();
         },
       ),
     ],

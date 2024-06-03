@@ -10,6 +10,34 @@ import '../providers/api_provider.dart';
 class HomePageRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
 
+  Future<List<dynamic>> getwishlist() async {
+    try {
+      // Retrieve token
+      String? token = await getToken();
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+
+      final response = await apiProvider.getRequest(
+        "${APIProvider.url}wishlist",
+        {},
+        headers: {'Authorization': 'Bearer $token'}, // Pass the token here
+      );
+
+      if (response.statusCode == 200) {
+        // Extract wishlist data from response
+        List<dynamic> wishlistData = response.data['msg']['wishlist'];
+        return wishlistData;
+      } else {
+        throw Exception('Failed to fetch wishlist');
+      }
+    } catch (e) {
+      print("Error fetching wishlist: $e");
+      throw e;
+    }
+  }
+
+
   Future<void> addToWishlist(int roomId) async {
     try {
       // Retrieve token
@@ -39,9 +67,6 @@ print(5);
     }
   }
 
-//reports
-
-  //wishlist
 
   Future<void> removeFromWishlist(int roomId) async {
     try {
@@ -64,37 +89,35 @@ print(5);
       rethrow;
     }
   }
-  Future<List<dynamic>> getwishlist() async {
+
+  Future<void> logout() async {
     try {
-      // Retrieve token
       String? token = await getToken();
       if (token == null) {
         throw Exception("User not logged in");
       }
 
       final response = await apiProvider.getRequest(
-        "${APIProvider.url}wishlist",
+        "${APIProvider.url}logout",
         {},
-        headers: {'Authorization': 'Bearer $token'}, // Pass the token here
+        headers: {'Authorization': 'Bearer $token'},
       );
 
       if (response.statusCode == 200) {
-        // Extract wishlist data from response
-        List<dynamic> wishlistData = response.data['msg']['wishlist'];
-        return wishlistData;
+        // Handle successful logout, e.g., clear token, update UI, etc.
+        print("Logout successful");
+        print("Response: ${response.data}");
       } else {
-        throw Exception('Failed to fetch wishlist');
+        throw Exception('Failed to logout');
       }
     } catch (e) {
-      print("Error fetching wishlist: $e");
+      print("Error during logout: $e");
       throw e;
     }
   }
-
-
-
-
 }
+
+
 
 /*Future<void> addToWishlist(int roomid) async {
     try {

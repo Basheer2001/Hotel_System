@@ -75,7 +75,7 @@ class ProfileController extends GetxController{
   void onInit() {
     super.onInit();
     MyProfile();
-    getProfile();
+
   }
 
   var profileData = {}.obs;
@@ -106,29 +106,7 @@ class ProfileController extends GetxController{
     }
   }
 
-  void getProfile() async {
-    loading.value = true;
-    AppResponse<Map<String, dynamic>> response = await profileRepo.getProfile();
-    loading.value = false;
 
-    if (response.success) {
-      profileData.value = response.data!;
-    } else {
-      errorMessage.value = response.errorMessage!;
-      Get.defaultDialog(
-        title: "Error",
-        content: Text(response.errorMessage!),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.back();
-            },
-            child: Text("OK"),
-          ),
-        ],
-      );
-    }
-  }
 
 
 

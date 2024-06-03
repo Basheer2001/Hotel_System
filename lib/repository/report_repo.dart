@@ -1,50 +1,43 @@
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
-
-import '../models/app_response.dart';
+import '../constant/sharedprefrence/shared.dart';
+import '../controllers/dashboard/managing_reports_controller/displayreports_controller.dart';
+import '../pages/report/report.dart';
 import '../providers/api_provider.dart';
 
 class ReportRepo extends GetxService {
-  APIProvider apiProvider = Get.find<APIProvider>();
+  final APIProvider apiProvider = Get.find<APIProvider>();
 
-  Future<AppResponse<Map<String, dynamic>>> makeReport(int userId, String title, String description) async {
+  Future<List<Report>> getReports() async {
     try {
-      dio.Response response = await apiProvider.postRequest(
-        "${APIProvider.url}make/reports",
+      String? token = await getToken();
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+
+      final response = await apiProvider.getRequest(
+        "${APIProvider.url}reports",
         {},
-        {
-          "user_id": userId,
-          "title": title,
-          "text_description": description,
-        },
-        token: APIProvider.token, // Pass the token from APIProvider
+        headers: {'Authorization': 'Bearer $token'},
       );
 
-      print("Response status code: ${response.statusCode}");
-      print("Response body: ${response.data}");
+      print("Response data: ${response.data}");
 
       if (response.statusCode == 200) {
-        // Assuming your response has the same structure as the example you provided
-        bool status = response.data["status"];
-        int errNum = response.data["errNum"];
-        if (status) {
-          // Report created successfully
-          Map<String, dynamic> report = response.data["msg"]["report"];
-          return AppResponse<Map<String, dynamic>>(
-            success: true,
-            data: report,
-          );
-        } else {
-          // Report creation failed
-          String message = response.data["msg"]["message"];
-          throw Exception(message);
-        }
+        List<dynamic> reportsJson = response.data['msg']['reports'];
+        return reportsJson.map((json) => Report.fromJson(json)).toList();
       } else {
-        throw Exception("Server responded with status code ${response.statusCode}");
+        throw Exception('Failed to fetch reports');
       }
     } catch (e) {
-      print("Error making report: $e");
-      return AppResponse(success: false, errorMessage: e.toString());
+      print("Error fetching reports: $e");
+      throw e;
     }
   }
 }
+
+
+
+
+
+
+

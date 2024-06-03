@@ -20,6 +20,7 @@ static String? token;
       //  extra: {"withCredentials":true},
           validateStatus: (status){
             return true;
+          //  return status!=null && status>=200 && status<300;
           }
       ),
 
@@ -61,11 +62,6 @@ static String? token;
       throw Exception('Error: $e');
     }
   }
-
-
-
-
-
 
   Future<dio.Response> postRequest(
 
@@ -143,14 +139,16 @@ static String? token;
   }
 
 
-
-
-  
-  
-  
-  
-
 }
+
+
+
+  
+  
+  
+  
+
+
 
 
 

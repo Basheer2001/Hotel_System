@@ -1,26 +1,32 @@
 import 'package:get/get.dart';
 
-import '../models/app_response.dart';
+import '../pages/homepage/report.dart';
 import '../repository/report_repo.dart';
 
-class SomeController extends GetxController {
-  ReportRepo reportRepo = Get.find<ReportRepo>();
+class ReportController extends GetxController {
+  final ReportRepo reportRepo = Get.find<ReportRepo>();
 
-  void createReport() async {
-    AppResponse<Map<String, dynamic>> response = await reportRepo.makeReport(
-      18, // Assuming user ID is 18
-      "room", // Title of the report
-      "picture", // Description of the report
-    );
+  var isLoading = false.obs;
+  var reports = <Report>[].obs;
 
-    if (response.success) {
-      // Report created successfully
-      Map<String, dynamic> report = response.data!;
-      // Handle the created report
-    } else {
-      // Error creating report
-      String errorMessage = response.errorMessage!;
-      // Handle the error
+  @override
+  void onInit() {
+    fetchReports();
+    super.onInit();
+  }
+
+  Future<void> fetchReports() async {
+    try {
+      isLoading.value = true;
+      List<Report> reportsList = (await reportRepo.getReports()).cast<Report>();
+      print("Fetched reports: $reportsList");
+      reports.assignAll(reportsList);
+    } catch (e) {
+      print("Error fetching reports: $e");
+    } finally {
+      isLoading.value = false;
     }
   }
 }
+
+
