@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/pages/report/createreport.dart';
 
 import '../../controllers/report_controller.dart';
 import '../homepage/report.dart';
@@ -16,6 +17,11 @@ class Reports extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Reports'),
+        actions: [
+          ElevatedButton(onPressed: (){
+            Get.to(() =>CreateReport());
+          }, child: Text("Create Report")),
+        ],
       ),
       body: Center(
         child: Obx(() {

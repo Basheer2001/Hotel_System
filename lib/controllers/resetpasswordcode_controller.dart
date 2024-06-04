@@ -57,6 +57,8 @@ class ResetPasswordCodeController extends GetxController{
             ]
         );
       }
-    }}}
+    }}
+
+}
 
 
