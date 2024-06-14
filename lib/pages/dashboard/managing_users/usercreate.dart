@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../constant/appbar/circularappbarshape.dart';
 import '../../../controllers/dashboard/managing_users_controller/createuser_controller.dart';
 
 class UserCreation extends StatelessWidget {
   final UserCreationController controller = Get.put(UserCreationController());
 
+
   @override
   Widget build(BuildContext context) {
+    Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Create User'),
+        title: Text('Create User', style: TextStyle(color: Colors.grey)), // Adjust title color
+        backgroundColor: Colors.black,
+        shape: CircularAppBarShape(),
+          iconTheme: IconThemeData(color: Colors.grey),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -32,7 +39,10 @@ class UserCreation extends StatelessWidget {
                 // Call a method to handle user creation
                 controller.createUser();
               },
-              child: Text('Create User'),
+              child: Text('Create User', style: TextStyle(color: Colors.black)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: customColor,
+              ),
             ),
           ],
         ),
@@ -44,7 +54,11 @@ class UserCreation extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         labelText: labelText,
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
+          borderRadius: BorderRadius.circular(10.0)
+        ),
+
       ),
       onChanged: onChanged,
     );
@@ -54,7 +68,10 @@ class UserCreation extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         labelText: labelText,
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey, width: 1.0),
+            borderRadius: BorderRadius.circular(10.0)
+        ),
       ),
       onChanged: onChanged,
       obscureText: true,
@@ -65,7 +82,10 @@ class UserCreation extends StatelessWidget {
     return DropdownButtonFormField<UserType>(
       decoration: InputDecoration(
         labelText: 'Permission Type',
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey, width: 1.0),
+            borderRadius: BorderRadius.circular(10.0)
+        ),
       ),
       value: controller.userType,
       onChanged: (UserType? value) {

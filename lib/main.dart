@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/Services.dart';
+import 'package:untitled1/controllers/report_controller.dart';
 import 'package:untitled1/providers/api_provider.dart';
 import 'package:untitled1/repository/account_repo.dart';
 import 'package:untitled1/repository/checkemail_repo.dart';
@@ -36,6 +37,7 @@ class AppBinding extends Bindings{
     Get.lazyPut(()=> HomePageRepo());
     Get.lazyPut(()=> ProfileRepo());
     Get.lazyPut(()=>ReportRepo());
+    Get.lazyPut(()=>ReportController());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());

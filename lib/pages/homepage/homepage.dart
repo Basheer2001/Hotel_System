@@ -12,6 +12,7 @@ import '../booking/bookingroom.dart';
 import 'package:untitled1/pages/settings/settings.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../profile/profile.dart';
+import '../report/createreport.dart';
 import '../report/report.dart';
 import '../report/reports.dart';
 import 'hotel.dart';
@@ -177,6 +178,7 @@ class HotelHome extends StatelessWidget {
         title: Text('Reports'),
         onTap: () {
           Get.to(() => Reports());
+         // Get.to(()=>CreateReport());
         },
       ),
       ListTile(

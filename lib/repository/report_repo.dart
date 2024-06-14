@@ -21,17 +21,18 @@ class ReportRepo extends GetxService {
           "title": title,
           "text_description": text,
         }),
+       // cookies: APIProvider.cookies, // Pass cookies if needed
+        token: APIProvider.token,
       );
 
 
-      //cookies = response.headers['set-cookie'];
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
 
-      if (response.statusCode == 200) {
-        if (response.data != null && response.data["report"] != null) {
-          var reportData = response.data["report"];
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data != null && response.data["msg"] != null && response.data["msg"]["report"] != null) {
+          var reportData = response.data["msg"]["report"];
           Report report = Report(
             id: reportData["id"],
             title: reportData["title"],
@@ -43,16 +44,21 @@ class ReportRepo extends GetxService {
             data: report,
           );
         } else {
+          print("Response data structure unexpected: ${response.data}");
           throw Exception("Report details not found in response data");
         }
       } else {
+        print("Server responded with an error: ${response.data}");
         throw Exception("Server responded with status code ${response.statusCode}");
       }
     } catch (e) {
-      print("Error during writing report: $e");
+      // Enhanced error logging
+      print("Error during writing report: ${e.runtimeType} - ${e.toString()}");
+      if (e is DioError) {
+        print("DioError details: ${e.response?.data ?? e.message}");
+      }
       return AppResponse<Report>(success: false, errorMessage: e.toString());
-    }
-  }
+  }}
 
 
   Future<List<Report>> getReports() async {
