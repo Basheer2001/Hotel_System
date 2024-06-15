@@ -10,14 +10,13 @@ class ViewAllUsers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text('View All Users', style: TextStyle(color: Colors.grey)), // Adjust title color
         backgroundColor: Colors.black,
         shape: CircularAppBarShape(),
           iconTheme: IconThemeData(color: Colors.grey)
       ),
-
       body: GetBuilder< ViewAllUsersController>(
         init: controller,
         builder: (controller) {

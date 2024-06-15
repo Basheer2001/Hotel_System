@@ -11,7 +11,7 @@ class UserCreation extends StatelessWidget {
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text('Create User', style: TextStyle(color: Colors.grey)), // Adjust title color
         backgroundColor: Colors.black,

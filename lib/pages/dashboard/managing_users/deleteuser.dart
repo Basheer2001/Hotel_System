@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constant/appbar/circularappbarshape.dart';
+
 class DeleteUser extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _userIdController = TextEditingController();
-
-
 
   void _deleteUser() {
     // Implement your user deletion logic here
@@ -18,19 +18,30 @@ class DeleteUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
+
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
-        title: Text('Delete User'),
+        title: Text('Delete User', style: TextStyle(color: Colors.grey)), // Adjust title color
+        backgroundColor: Colors.black,
+        shape: CircularAppBarShape(),
+        iconTheme: IconThemeData(color: Colors.grey),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            SizedBox(height: 30,),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(10.0)
+                  )
               ),
             ),
             SizedBox(height: 10),
@@ -38,14 +49,24 @@ class DeleteUser extends StatelessWidget {
               controller: _userIdController,
               decoration: InputDecoration(
                 labelText: 'User ID',
-                border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(10.0)
+                  )
               ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _deleteUser,
-              child: Text('Delete User'),
+              child: Text('Delete User', style: TextStyle(color: Colors.black)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: customColor,
+              ),
             ),
+
+
+
+
           ],
         ),
       ),

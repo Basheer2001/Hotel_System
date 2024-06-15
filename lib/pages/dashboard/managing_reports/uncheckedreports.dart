@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 
+import '../../../constant/appbar/circularappbarshape.dart';
+
 class UncheckedReports extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Unchecked Reports'),
-      ),
+        backgroundColor: Colors.blueGrey[50],
+        appBar: AppBar(
+          title: Text('Unckecked Reports', style: TextStyle(color: Colors.grey)), // Adjust title color
+          backgroundColor: Colors.black,
+          shape: CircularAppBarShape(),
+          iconTheme: IconThemeData(color: Colors.grey),
+        ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 30,),
               Text(
                 'Unchecked Reports',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+
                 ),
               ),
               SizedBox(height: 20),

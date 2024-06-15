@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget {
       locale: controller.language,
       theme:ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
+
       ),
       initialRoute: '/dashboard', // Set your initial route
       getPages: routes,

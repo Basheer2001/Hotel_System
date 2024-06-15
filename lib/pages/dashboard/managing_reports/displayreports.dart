@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled1/constant/appbar/circularappbarshape.dart';
 
 class DisplayReports extends StatelessWidget {
   final String userId;
@@ -8,8 +9,12 @@ class DisplayReports extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
-        title: Text('Display Reports'),
+        title: Text('Dispaly Reports', style: TextStyle(color: Colors.grey)), // Adjust title color
+        backgroundColor: Colors.black,
+        shape: CircularAppBarShape(),
+        iconTheme: IconThemeData(color: Colors.grey),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -17,6 +22,7 @@ class DisplayReports extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 30,),
               Text(
                 'Reports for User: $userId',
                 style: TextStyle(

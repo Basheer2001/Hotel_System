@@ -105,6 +105,8 @@ class HotelHome extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
+    Color custommColor = Color.fromRGBO(255, 160, 42, 1.0).withOpacity(0.5);
+
     final HotelHomeController controller = Get.put(HotelHomeController());
 
     return Scaffold(
@@ -145,12 +147,13 @@ class HotelHome extends StatelessWidget {
 
       UserAccountsDrawerHeader(
         decoration: BoxDecoration(
-          color:Colors.black,
+         color:Colors.black,
         ),
         accountName: Text('Lory Demerjian',style: TextStyle(color: Colors.white),),
         accountEmail: Text('Lory@Gmail.com',style: TextStyle(color: Colors.white),),
         currentAccountPicture: CircleAvatar(
           backgroundColor: Colors.white,
+
           child: Text(
             'A',
             style: TextStyle(fontSize: 40.0),

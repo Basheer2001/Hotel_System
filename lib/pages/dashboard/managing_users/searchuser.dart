@@ -23,6 +23,7 @@ class SearchUser extends StatelessWidget {
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text('Search User', style: TextStyle(color: Colors.grey)), // Adjust title color
         backgroundColor: Colors.black,
@@ -71,7 +72,7 @@ class SearchUser extends StatelessWidget {
                 // Call a method to handle user creation
                 controller.SearchUser();
               },
-              child: Text('Create User', style: TextStyle(color: Colors.black)),
+              child: Text('Search ', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: customColor,
               ),
