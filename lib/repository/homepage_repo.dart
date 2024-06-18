@@ -1,14 +1,38 @@
-import 'dart:convert';
 import 'dart:io'; // Import the 'dart:io' library
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 import '../constant/sharedprefrence/shared.dart';
-import '../models/app_response.dart';
-import '../pages/homepage/hotel.dart';
 import '../providers/api_provider.dart';
 
 class HomePageRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
+
+
+  Future<Map<String, dynamic>> getRoomDetails(int roomId) async {
+    try {
+      String? token = await getToken();
+      print(6);
+      if (token == null) {
+        throw Exception("User not logged in");
+      }
+      print(5);
+      final response = await apiProvider.getRequest(
+        "${APIProvider.url}getRoomDetails/$roomId",
+        {},
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        return response.data['data'];
+      } else {
+        throw Exception('Failed to fetch room details');
+      }
+    } catch (e) {
+      print("Error fetching room details: $e");
+      throw e;
+    }
+  }
+
 
   Future<List<dynamic>> getwishlist() async {
     try {
@@ -115,6 +139,11 @@ print(5);
       throw e;
     }
   }
+
+
+
+
+
 }
 
 

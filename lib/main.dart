@@ -10,6 +10,7 @@ import 'package:untitled1/repository/profile_repo.dart';
 import 'package:untitled1/repository/register_repo.dart';
 import 'package:untitled1/repository/report_repo.dart';
 import 'package:untitled1/repository/resetpasswordcode_repo.dart';
+import 'package:untitled1/repository/room_repo.dart';
 import 'package:untitled1/repository/sendresetpassword_repo.dart';
 import 'package:untitled1/repository/verfiycode_repo.dart';
 import 'package:untitled1/routes.dart';
@@ -37,6 +38,7 @@ class AppBinding extends Bindings{
     Get.lazyPut(()=> HomePageRepo());
     Get.lazyPut(()=> ProfileRepo());
     Get.lazyPut(()=>ReportRepo());
+    Get.lazyPut(()=>RoomRepo());
     Get.lazyPut(()=>ReportController());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());

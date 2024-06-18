@@ -19,7 +19,24 @@ class ReportController extends GetxController {
 
   TextEditingController titleController=TextEditingController(text:"room");
   TextEditingController descriptionController=TextEditingController(text:"picture");
+  @override
+  void onInit() {
+    fetchReports();
+    super.onInit();
+  }
 
+  Future<void> fetchReports() async {
+    try {
+      isLoading.value = true;
+      List<Report> reportsList = (await reportRepo.getReports()).cast<Report>();
+      print("Fetched reports: $reportsList");
+      reports.assignAll(reportsList);
+    } catch (e) {
+      print("Error fetching reports: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   void reportsomthing() async{
     firstSubmit.value=true;
@@ -57,24 +74,7 @@ class ReportController extends GetxController {
       }
     }}
 
-  @override
-  void onInit() {
-    fetchReports();
-    super.onInit();
-  }
 
-  Future<void> fetchReports() async {
-    try {
-      isLoading.value = true;
-      List<Report> reportsList = (await reportRepo.getReports()).cast<Report>();
-      print("Fetched reports: $reportsList");
-      reports.assignAll(reportsList);
-    } catch (e) {
-      print("Error fetching reports: $e");
-    } finally {
-      isLoading.value = false;
-    }
-  }
 
 
 

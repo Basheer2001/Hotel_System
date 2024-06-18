@@ -6,16 +6,13 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
-import '../../controllers/dashboard/managing_reports_controller/displayreports_controller.dart';
 import '../../controllers/homepage/homepage_controller.dart';
-import '../booking/bookingroom.dart';
-import 'package:untitled1/pages/settings/settings.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../profile/profile.dart';
-import '../report/createreport.dart';
-import '../report/report.dart';
 import '../report/reports.dart';
-import 'hotel.dart';
+import '../rooms/roomscreen.dart';
+
+
 import 'hoteln.dart';
 import 'hotelnp.dart';
 import 'hotelp.dart';
@@ -34,8 +31,6 @@ class HotelHome extends StatelessWidget {
     {'icon': Icons.pool, 'label': 'Pool'},
     {'icon': Icons.terrain, 'label': 'Hill'},
   ];
-
-
 
   Widget _buildCategoryIcon(IconData icon, String label) {
     Widget destinationScreen;
@@ -100,8 +95,6 @@ class HotelHome extends StatelessWidget {
     );
   }
 
-
-
  @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
@@ -156,39 +149,45 @@ class HotelHome extends StatelessWidget {
 
           child: Text(
             'A',
-            style: TextStyle(fontSize: 40.0),
+            style: TextStyle(fontSize: 40.0,color: Colors.black),
           ),
         ),
       ),
       ListTile(
-        leading: Icon(Icons.dashboard),
-        title: Text('Dashboard'),
+        leading: Icon(Icons.dashboard,color: Colors.black),
+        title: Text('Dashboard',),
         onTap: () {
           Get.to(DashboardScreen());
         },
       ),
       ListTile(
-        leading: Icon(Icons.logout),
-        title: Text('Profile'),
+        leading: Icon(Icons.logout,color: Colors.black),
+        title: Text('Profile',),
         onTap: () {
           Get.to(() => Profile());
 
         },
       ),
-
       ListTile(
-        leading: Icon(Icons.report),
-        title: Text('Reports'),
+        leading: Icon(Icons.report,color: Colors.black),
+        title: Text('Reports',),
         onTap: () {
           Get.to(() => Reports());
          // Get.to(()=>CreateReport());
         },
       ),
       ListTile(
-        leading: Icon(Icons.logout),
-        title: Text('Logout'),
+        leading: Icon(Icons.logout,color: Colors.black),
+        title: Text('Logout',),
         onTap: () {
           Get.find<HotelHomeController>().logout();
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.room_rounded,color: Colors.black),
+        title: Text('Rooms',),
+        onTap: () {
+          Get.to(() => RoomScreen());
         },
       ),
     ],
@@ -361,9 +360,9 @@ class HotelHome extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final hotel = controller.hotels[index];
                   return GestureDetector(
-                    onTap: () {
-                     // Get.to(() => HotelDetailsView(hotel: hotel));
-                         Get.to( () => HotelDetailsView(hotel: hotel, imageUrl: hotel.imageUrl));
+                    onTap: () async{
+
+                      controller.navigateToRoomDetailsPage(hotel.id, hotel.imageUrl);
 
                     },
                     child: Card(
@@ -394,7 +393,7 @@ class HotelHome extends StatelessWidget {
                                       right: 10,
                                       child: GestureDetector(
                                         onTap: () async {
-                                          controller.toggleFavorite(hotel.id); // Toggle favorite status
+                                          controller.navigateToRoomDetailsPage(hotel.id, hotel.imageUrl);// Toggle favorite status
                                         },
                                         child: Icon(
                                           hotel.isLiked ? Icons.favorite : Icons.favorite_border,
@@ -459,229 +458,8 @@ class HotelHome extends StatelessWidget {
   }
 }
 
-class HotelDetailsView extends StatelessWidget {
-  final Hotel hotel;
-  final String imageUrl;
 
-  HotelDetailsView({required this.hotel, required this.imageUrl});
 
-  @override
-  Widget build(BuildContext context) {
-    Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imageUrl),
-               // image: AssetImage(hotel.imageUrl), // Path to your image
-                fit: BoxFit.cover,
-              ),
-            ),
-            alignment: Alignment.bottomCenter, // Align the container to the bottom center
-          ),
-          Positioned(
-            top: 250,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(0.0), // Adjust this value as needed
-                  bottomRight: Radius.circular(0.0), // Adjust this value as needed
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    // color: Colors.black.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    // offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              padding: EdgeInsets.all(18),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Row(
-                      children: [
-                        SizedBox(width: 5,),
-                        Text(
-                          hotel.name,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Icon(Icons.location_on_outlined,color: Colors.blue,),
-                      SizedBox(width: 5,),
-
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      for (int i = 0; i < 4; i++)
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 14,
-                        ),
-                      SizedBox(width: 5),
-                      Text(
-                        '4.0', // Assuming rating is 4.0
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        '100 Reviews', // Assuming reviews is an int value
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        '\$${hotel.price?.toStringAsFixed(2)}', // Assuming price is a double value
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: customColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        _buildCategoryIcon(Icons.wifi, "WiFi"),
-                        _buildCategoryIcon(Icons.ac_unit, "AC"),
-                        _buildCategoryIcon(Icons.local_parking, "Parking"),
-                        _buildCategoryIcon(Icons.restaurant, "Restaurant"),
-                        _buildCategoryIcon(Icons.pool, "pool"),
-                        _buildCategoryIcon(Icons.sports_gymnastics, "Gym"),
-                        _buildCategoryIcon(Icons.electric_bolt, "Electricity"),
-                        // Add more icons here as needed
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
-                  Row(
-                    children: [
-                      Text("Description",style: TextStyle(fontSize: 16,
-                        color: Colors.black,fontWeight: FontWeight.bold,
-                      ),),
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-
-                  Column(
-                    children: [
-                      Text(
-                        hotel.des,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey,
-
-                        ),),
-                    ],
-                  ),
-
-                  SizedBox(height: 15,),
-                  // Add more form fields as needed
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.to(() => RoomBooking());
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          customColor), // Set button color
-                      textStyle: MaterialStateProperty.all<TextStyle>(
-                          TextStyle(color: Colors.white)), // Text style
-                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 40)), // Padding
-                      elevation: MaterialStateProperty.all<double>(10), // Elevation
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // BorderRadius
-                        ),
-                      ),
-                    ),
-                    child: Text('Book Hotel'),
-                  ),
-                ],
-                //
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-Widget _buildCategoryIcon(IconData icon, String label) {
-  return Column(
-    children: [
-      Container(
-        width: 60, // Fixed width for the circular container
-        height: 60, // Fixed height for the circular container
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.grey[200], // Background color of the circular container
-        ),
-        padding: EdgeInsets.all(12), // Adjust padding as needed
-        child: Icon(
-          icon,
-          color: Colors.grey,
-          size: 24, // Set the size of the icon
-        ),
-      ),
-      SizedBox(height: 4),
-      Text(
-        label,
-        style: TextStyle(
-          fontSize: 12,
-          color: Colors.grey,
-        ),
-      ),
-    ],
-  );
-}
 
 class CustomSearch extends SearchDelegate {
   List username = [

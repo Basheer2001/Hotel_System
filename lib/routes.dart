@@ -42,7 +42,7 @@ List<GetPage<dynamic>>? routes =[
  // GetPage(name: AppRoute.uodateprofile, page:()=>UpdateProfile()),
 
   //TODO Dashboard
-  GetPage(name: "/", page: () => DashboardScreen()),
+ // GetPage(name: "/", page: () => DashboardScreen()),
   GetPage(name: AppRoute.dashboardscreen, page: () => DashboardScreen()),  // Add this route
   GetPage(name: AppRoute.viewallusers, page: () => ViewAllUsers()),  // Add this route
   //GetPage(name: AppRoute.edituser, page: () => EditUser()),
@@ -55,7 +55,7 @@ List<GetPage<dynamic>>? routes =[
 
   //TODO Homepage
   GetPage(name: AppRoute.hotelhome, page:()=>HotelHome(token: '',)),
- // GetPage(name: "/", page:()=>HotelHome(token: '',)),
+  GetPage(name: "/", page:()=>HotelHome(token: '',)),
   GetPage(name: AppRoute.favorite, page: () => Favorite(wishlistData: [])),
   //GetPage(name: "/", page: () => Report()),
 
