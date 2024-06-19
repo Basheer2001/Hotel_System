@@ -65,6 +65,10 @@ static String? token;
 
   }
 
+
+
+
+
   Future<dio.Response> getRequest(String method, Map<String, dynamic>? queryParams,
       {required Map<String, String> headers}) async {
 

@@ -7,23 +7,25 @@ import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
 import '../../controllers/homepage/homepage_controller.dart';
+import '../../controllers/services/services_controller.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../profile/profile.dart';
 import '../report/reports.dart';
 import '../rooms/roomscreen.dart';
-import 'hotel.dart';
+import '../rooms/roomserachscreen.dart';
+import '../services/services.dart';
+import '../services/servicespage.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
-import 'hotelp.dart';
 import 'hotels.dart';
 
-//
 class HotelHome extends StatelessWidget {
   final String token;
 
  HotelHome({required this.token,Key? key}) : super(key: key);
 
   final HotelHomeController controller = Get.put(HotelHomeController());
+  final ServicesController servicesController = Get.find<ServicesController>();
 
   // Define categories
   final List<Map<String, dynamic>> categories = [
@@ -187,7 +189,28 @@ class HotelHome extends StatelessWidget {
         leading: Icon(Icons.room_rounded,color: Colors.black),
         title: Text('Rooms',),
         onTap: () {
-          Get.to(() => RoomScreen());
+
+         Get.to(() => RoomScreen());
+
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.room_service,color: Colors.black),
+        title: Text('Services',),
+        onTap: () async {
+          // Fetch services data
+          await servicesController.fetchServices();
+
+          // Navigate to ServicesPage with the fetched data
+          Get.to(() => ServicesPage(services: servicesController.services));
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.search,color: Colors.black),
+        title: Text('Search',),
+        onTap: () {
+          Get.to(()=>RoomSearch());
+
         },
       ),
     ],
@@ -323,13 +346,13 @@ class HotelHome extends StatelessWidget {
                     fillColor: Colors.white, // Background color for the text field
                   ),
                   style: TextStyle(color: Colors.black),
-                  onSubmitted: (searchText) {
+                /*  onSubmitted: (searchText) {
                     // Trigger search here
                     controller.searchRooms(search: searchText,
                         view: 'sea', averageRating: 4.5,
                       basePrice: 149,
                     );
-                  },// Text style
+                  },*/// Text style
                 ),
                 SizedBox(height: 15,),
                 Text(
@@ -400,7 +423,7 @@ class HotelHome extends StatelessWidget {
                                       right: 10,
                                       child: GestureDetector(
                                         onTap: () async {
-                                          controller.navigateToRoomDetailsPage(hotel.id, hotel.imageUrl);// Toggle favorite status
+                                         controller.toggleFavorite(hotel.id);// Toggle favorite status
                                         },
                                         child: Icon(
                                           hotel.isLiked ? Icons.favorite : Icons.favorite_border,
@@ -566,9 +589,6 @@ class CustomSearch extends SearchDelegate {
 
 
 }
-
-
-
 
 
 

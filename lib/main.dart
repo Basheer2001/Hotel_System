@@ -17,12 +17,13 @@ import 'package:untitled1/routes.dart';
 import 'controllers/homepage/homepage_controller.dart';
 import 'controllers/register1_controller.dart';
 import 'controllers/resetpasswordcode_controller.dart';
+import 'controllers/roomsearch_controller.dart';
+import 'controllers/services/services_controller.dart';
 import 'controllers/verfiycode_controller.dart';
 import 'core/localaization/changeLocal.dart';
 import 'core/localaization/translation.dart';
-
-
-
+import 'repository/roomsearch_repo.dart';
+import 'repository/services_repo.dart';
 
 class AppBinding extends Bindings{
   @override
@@ -39,7 +40,12 @@ class AppBinding extends Bindings{
     Get.lazyPut(()=> ProfileRepo());
     Get.lazyPut(()=>ReportRepo());
     Get.lazyPut(()=>RoomRepo());
+    Get.lazyPut(()=>RoomSearchRepo());
+    Get.put(RoomSearchController());
+    Get.put(ServicesRepo());
     Get.lazyPut(()=>ReportController());
+    Get.lazyPut(()=>ServicesController());
+
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());
