@@ -7,7 +7,7 @@ import '../providers/api_provider.dart';
 class HomePageRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
 
-
+//
   Future<Map<String, dynamic>> getRoomDetails(int roomId) async {
     try {
       String? token = await getToken();
