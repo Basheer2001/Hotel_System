@@ -11,8 +11,7 @@ import '../dashboard/dashboardscreen.dart';
 import '../profile/profile.dart';
 import '../report/reports.dart';
 import '../rooms/roomscreen.dart';
-
-
+import 'hotel.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
 import 'hotelp.dart';
@@ -24,6 +23,7 @@ class HotelHome extends StatelessWidget {
 
  HotelHome({required this.token,Key? key}) : super(key: key);
 
+  final HotelHomeController controller = Get.put(HotelHomeController());
 
   // Define categories
   final List<Map<String, dynamic>> categories = [
@@ -134,7 +134,7 @@ class HotelHome extends StatelessWidget {
         ),
 
       drawer: Drawer(
-  child: ListView(
+      child: ListView(
     padding: EdgeInsets.zero,
     children: [
 
@@ -322,7 +322,14 @@ class HotelHome extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white, // Background color for the text field
                   ),
-                  style: TextStyle(color: Colors.black), // Text style
+                  style: TextStyle(color: Colors.black),
+                  onSubmitted: (searchText) {
+                    // Trigger search here
+                    controller.searchRooms(search: searchText,
+                        view: 'sea', averageRating: 4.5,
+                      basePrice: 149,
+                    );
+                  },// Text style
                 ),
                 SizedBox(height: 15,),
                 Text(
@@ -458,9 +465,6 @@ class HotelHome extends StatelessWidget {
   }
 }
 
-
-
-
 class CustomSearch extends SearchDelegate {
   List username = [
     "Price",
@@ -542,7 +546,7 @@ class CustomSearch extends SearchDelegate {
                     if (filteredList[index] == "View") {
                       Get.to(HotelN());
                     } else if (filteredList[index] == "Price") {
-                      Get.to(HotelP());
+                     // Get.to(() => HotelP());
                     } else if (filteredList[index] == "Number of Persons") {
                       Get.to(HotelNP());
                     } else if (filteredList[index] == "Services") {
@@ -562,6 +566,8 @@ class CustomSearch extends SearchDelegate {
 
 
 }
+
+
 
 
 

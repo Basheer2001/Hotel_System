@@ -1,65 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../controllers/homepage/homepage_controller.dart';
+import 'hotel.dart'; // Import your Hotel model
 
-class HotelP extends StatelessWidget {
-  const HotelP({Key? key}) : super(key: key);
+/*class HotelP extends StatelessWidget {
+  final HotelHomeController homePageController = Get.put(HotelHomeController());
 
   @override
   Widget build(BuildContext context) {
-    // Sample list of rooms
-    final List<Room> rooms = [
-      Room(
-        imageUrl: 'assets/images/p1.jpg',
-        des: "A cozy room with a beautiful view, perfect for a romantic getaway.",
-        price: 100.0,
-        offers: ["10% Off on Spa Services", "Free Breakfast Included"],
-      ),
-      Room(
-        imageUrl: 'assets/images/m.jpg',
-        des: "Spacious room with modern amenities, ideal for a comfortable stay.",
-        price: 1000.0,
-        offers: ["20% Off on Room Service", "Complimentary Airport Transfer"],
-      ),
-      Room(
-        imageUrl: 'assets/images/p1.jpg',
-        des: "Comfortable room for two with access to the hotel's gym.",
-        price: 250.0,
-        offers: ["15% Off on Laundry Service", "Free Gym Access"],
-      ),
-      Room(
-        imageUrl: 'assets/images/sea.jpg',
-        des: "Room with a view of the sea, perfect for a relaxing vacation.",
-        price: 500.0,
-        offers: ["Special Discount on Extended Stays", "Free Wi-Fi"],
-      ),
-    ];
-
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: ListView.builder(
-          itemCount: rooms.length,
-          itemBuilder: (context, index) {
-            return RoomCard(room: rooms[index]);
-          },
-        ),
+        child: Obx(() {
+          if (homePageController.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+              itemCount: homePageController.hotels.length,
+              itemBuilder: (context, index) {
+                Hotel hotel = homePageController.hotels[index];
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      hotel.name,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: hotel.rooms.length,
+                      itemBuilder: (context, roomIndex) {
+                        Room room = hotel.rooms[roomIndex];
+                        return RoomCard(room: room);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        }),
       ),
     );
   }
-}
-
-class Room {
-  final String imageUrl;
-  final double price;
-  final String des;
-  final List<String> offers;
-
-  Room({
-    required this.imageUrl,
-    required this.des,
-    required this.price,
-    required this.offers,
-  });
 }
 
 class RoomCard extends StatelessWidget {
@@ -94,7 +83,7 @@ class RoomCard extends StatelessWidget {
                 tag: 'room_image_${room.imageUrl}',
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
+                  child: Image.network(
                     room.imageUrl,
                     fit: BoxFit.cover,
                     height: 140,
@@ -113,15 +102,19 @@ class RoomCard extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      '\$${room.price?.toStringAsFixed(2)}',
+                      '\$${room.price.toStringAsFixed(2)}',
                       style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     SizedBox(height: 8),
                     Text(
                       "Offers:",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
                     ),
                     SizedBox(height: 4),
                     Column(
@@ -139,4 +132,5 @@ class RoomCard extends StatelessWidget {
       ),
     );
   }
-}
+}*/
+

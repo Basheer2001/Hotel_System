@@ -286,7 +286,6 @@ class HotelHomeController extends GetxController {
     );
   }
 
-
   Future<void> logout() async {
     try {
       await homePageRepo.logout();
@@ -309,7 +308,32 @@ class HotelHomeController extends GetxController {
     }
   }
 
+  void searchRooms({
+    required String search,
+    required String view,
+    required double averageRating,
+    required int basePrice,
+  }) async {
+    try {
+      isLoading.value = true;
+      // Call searchRooms method from HomePageRepo
+      List<dynamic> roomData = await homePageRepo.searchRooms(
+        search: search,
+        view: view,
+        averageRating: averageRating,
+        basePrice: basePrice,
+      );
 
+      // Convert dynamic data to Hotel objects assuming Hotel model
+      hotels.assignAll(roomData.map((data) => Hotel.fromJson(data)).toList());
+
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      print('Error searching rooms: $e');
+      // Handle error, e.g., show error message
+    }
+  }
 
 }
 

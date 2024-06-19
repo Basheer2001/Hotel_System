@@ -140,7 +140,41 @@ print(5);
     }
   }
 
+  Future<List<dynamic>> searchRooms({
+    required String search,
+    required String view,
+    required double averageRating,
+    required int basePrice,
+  }) async {
+    try {
+      // Define query parameters
+      Map<String, dynamic> queryParams = {
+        'search': search,
+        'view': view,
+        'average_rating': averageRating.toString(),
+        'base_price': basePrice.toString(),
+      };
 
+      // Call POST request directly using Dio instance in APIProvider
+      dio.Response response = await apiProvider.postRequest(
+        "${APIProvider.url}searchRooms",
+        queryParams,
+        {}, // Replace with any headers if needed
+        cookies: APIProvider.cookies!.first, // Adjust as needed
+      );
+
+      if (response.statusCode == 200) {
+        // Extract room data from response
+        List<dynamic> roomData = response.data['rooms']; // Adjust according to your API response structure
+        return roomData;
+      } else {
+        throw Exception('Failed to search rooms');
+      }
+    } catch (e) {
+      print('Error searching rooms: $e');
+      throw e;
+    }
+  }
 
 
 
