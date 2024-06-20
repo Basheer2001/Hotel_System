@@ -6,6 +6,7 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
+import 'package:untitled1/pages/services/mybookingservice.dart';
 import '../../controllers/homepage/homepage_controller.dart';
 import '../../controllers/services/services_controller.dart';
 import '../dashboard/dashboardscreen.dart';
@@ -13,6 +14,7 @@ import '../profile/profile.dart';
 import '../report/reports.dart';
 import '../rooms/roomscreen.dart';
 import '../rooms/roomserachscreen.dart';
+import '../services/servicerequestpage.dart';
 import '../services/services.dart';
 import '../services/servicespage.dart';
 import 'hoteln.dart';
@@ -100,8 +102,7 @@ class HotelHome extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
-    Color custommColor = Color.fromRGBO(255, 160, 42, 1.0).withOpacity(0.5);
-
+    int bookingId = 2;
     final HotelHomeController controller = Get.put(HotelHomeController());
 
     return Scaffold(
@@ -195,22 +196,31 @@ class HotelHome extends StatelessWidget {
         },
       ),
       ListTile(
-        leading: Icon(Icons.room_service,color: Colors.black),
-        title: Text('Services',),
-        onTap: () async {
-          // Fetch services data
-          await servicesController.fetchServices();
-
-          // Navigate to ServicesPage with the fetched data
-          Get.to(() => ServicesPage(services: servicesController.services));
-        },
-      ),
-      ListTile(
         leading: Icon(Icons.search,color: Colors.black),
         title: Text('Search',),
         onTap: () {
           Get.to(()=>RoomSearch());
 
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.room_service,color: Colors.black),
+        title: Text('Services',),
+        onTap: () async {
+          // Fetch services data
+          /*await servicesController.fetchServices();
+          Get.to(() => ServicesPage(services: servicesController.services));*/
+          await servicesController.fetchServices();
+          Get.to(() => ServicesPage(services: servicesController.services));
+        },
+      ),
+
+      ListTile(
+        leading: Icon(Icons.cleaning_services,color: Colors.black),
+        title: Text('MY Booking Servcies',),
+        onTap: () async {
+          await servicesController.fetchBookingServices(bookingId);
+          Get.to(() => MyBookingService(services: servicesController.services));
         },
       ),
     ],
@@ -248,42 +258,33 @@ class HotelHome extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        prefixIcon: InkWell(
-                                          child: Icon(Icons.search),
-                                          onTap: () {
-                                            showSearch(
-                                              context: context,
-                                              delegate: CustomSearch(),
-                                            );
-                                          },
+
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Activities',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                          borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                                        SizedBox(width:200,),
+                                        ElevatedButton(onPressed: (){
+                                          Get.to(()=>ServiceRequestPage());
+                                        },
+                                            child:Text("Service",style: TextStyle(color: Colors.black),),
+                                          style:OutlinedButton.styleFrom(
+                                            foregroundColor: Colors.black,
+                                            side: BorderSide(color: Colors.grey, width: 2.0), // Border color and width
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                                            ),
+                                          ),
                                         ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                          borderSide: BorderSide(color: Colors.grey, width: 2.0),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                          borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                                        ),
-                                        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                      ),
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(height: 16,),
-                                    Text(
-                                      'Activities',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
+
+
+                                      ],
                                     ),
                                     SizedBox(height: 10),
                                     GridView.count(
@@ -296,7 +297,8 @@ class HotelHome extends StatelessWidget {
                                         Image.asset('assets/images/activity.jpg'),
                                         Image.asset('assets/images/c.jpg'),
                                       ],
-                                    ),
+                                    )
+
                                   ],
                                 ),
                               ),

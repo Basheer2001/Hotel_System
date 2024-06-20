@@ -212,7 +212,7 @@ class RoomDetailsPage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         // Navigate to room booking or any other action
-                        Get.to(() => RoomBooking());
+                        Get.to(() => BookingScreen());
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(customColor),

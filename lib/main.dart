@@ -4,6 +4,7 @@ import 'package:untitled1/Services.dart';
 import 'package:untitled1/controllers/report_controller.dart';
 import 'package:untitled1/providers/api_provider.dart';
 import 'package:untitled1/repository/account_repo.dart';
+import 'package:untitled1/repository/bookingroom_repo.dart';
 import 'package:untitled1/repository/checkemail_repo.dart';
 import 'package:untitled1/repository/homepage_repo.dart';
 import 'package:untitled1/repository/profile_repo.dart';
@@ -45,7 +46,7 @@ class AppBinding extends Bindings{
     Get.put(ServicesRepo());
     Get.lazyPut(()=>ReportController());
     Get.lazyPut(()=>ServicesController());
-
+    Get.lazyPut(()=>BookingRoomRepo());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());

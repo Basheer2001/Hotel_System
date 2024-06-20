@@ -1,66 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RoomBookingController extends GetxController {
-  late final RxString name;
-  late final RxString email;
-  late final RxString phoneNumber;
-  late final RxInt numberOfGuests;
-  late final Rx<DateTime> checkInDate;
-  late final Rx<DateTime> checkOutDate;
-  late final Rx<DateTime> selectedDate; // Define selectedDate
-  late final List<DateTime> reservedDates; // Define list of reservedDates
+import '../../models/app_response.dart';
+import '../../pages/booking/bookingroom.dart';
+import '../../repository/bookingroom_repo.dart';
 
-  final formKey = GlobalKey<FormState>();
 
-  @override
-  void onInit() {
-    super.onInit();
-    name = ''.obs;
-    email = ''.obs;
-    phoneNumber = ''.obs;
-    numberOfGuests = 1.obs;
-    checkInDate = DateTime.now().obs;
-    checkOutDate = DateTime.now().add(Duration(days: 1)).obs;
-    selectedDate = DateTime.now().obs; // Initialize selectedDate
-    reservedDates = []; // Initialize reservedDates list
-  }
 
-  Future<void> selectCheckInDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != checkInDate.value) {
-      checkInDate.value = picked;
-    }
-  }
+class BookingRoomController extends GetxController {
 
-  Future<void> selectCheckOutDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: checkOutDate.value,
-      firstDate: checkInDate.value.add(Duration(days: 1)),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != checkOutDate.value) {
-      checkOutDate.value = picked;
-    }
-  }
+  BookingRoomRepo bookingRepo = Get.find<BookingRoomRepo>();
 
-  void submitReservation() {
-    // Here you can handle the logic for submitting the reservation
-    print('Submitting reservation...');
-    print('Name: ${name.value}');
-    print('Email: ${email.value}');
-    print('Phone Number: ${phoneNumber.value}');
-    print('Number of Guests: ${numberOfGuests.value}');
-    print('Check-in Date: ${checkInDate.value}');
-    print('Check-out Date: ${checkOutDate.value}');
-    // Add the selected date to the list of reserved dates
-    reservedDates.add(selectedDate.value);
-    // Other reservation submission logic...
-  }
+  GlobalKey<FormState> formKey=GlobalKey<FormState>();
+
+  TextEditingController roomIdTextController = TextEditingController(text:"1");
+  TextEditingController checkInDateTextController = TextEditingController(text:"2024-6-24");
+  TextEditingController checkOutDateTextController = TextEditingController(text:"2024-06-25");
+  TextEditingController numAdultsTextController = TextEditingController(text:"2");
+  TextEditingController numChildrenTextController = TextEditingController(text:"1");
+  TextEditingController paymentMethodTextController = TextEditingController(text:"cash");
+
+  var firstSubmit =false.obs;
+
+  var loginLoadingState=false.obs;
+
+
+  void bookRoom() async{
+    firstSubmit.value=true;
+    if(formKey.currentState!.validate()) {
+      loginLoadingState.value = true;
+      AppResponse response = await bookingRepo.booking(
+          roomIdTextController.text,
+          checkInDateTextController.text,checkOutDateTextController.text,numAdultsTextController.text,
+          numChildrenTextController.text,paymentMethodTextController.text,
+      );
+      loginLoadingState.value = false;
+      if (response.success) {
+        Get.to(() => BookingSuccessScreen());
+        Get.defaultDialog(
+            title: "Success",
+            content: Text(""),
+            actions: [
+              TextButton(onPressed: () {
+                Get.back();
+              },
+                  child: Text("ok")),
+            ]
+        );
+      } else {
+        Get.defaultDialog(
+            title: "Error",
+            content: Text(response.errorMessage!),
+            actions: [
+              TextButton(onPressed: () {
+                Get.back();
+              },
+                  child: Text("ok")),
+            ]
+        );
+      }
+    }}
 }

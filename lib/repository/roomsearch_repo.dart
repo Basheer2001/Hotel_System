@@ -12,10 +12,6 @@ import 'dart:convert';
 
 class RoomSearchRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
-
-
-
-
   Future<AppResponse<List<Room>>> searchRooms(String search,
       String view,
       String basePrice,
