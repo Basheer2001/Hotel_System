@@ -28,7 +28,7 @@ import 'package:untitled1/pages/homepage/favorite.dart';
 
 List<GetPage<dynamic>>? routes =[
   //TODO AUTH
- //GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
+ GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
   GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
   //GetPage(name:"/", page: ()=> const Login()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),

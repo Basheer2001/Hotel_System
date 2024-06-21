@@ -220,6 +220,7 @@ class HotelHome extends StatelessWidget {
         title: Text('MY Booking Servcies',),
         onTap: () async {
           await servicesController.fetchBookingServices(bookingId);
+          print(servicesController.services);
           Get.to(() => MyBookingService(services: servicesController.services));
         },
       ),

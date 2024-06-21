@@ -19,13 +19,13 @@ class ProfileRepo extends GetxService{
     try {
       var formData = dio.FormData.fromMap({
         "first_name":  firstname,
-        "last_name": lastname,
+       // "last_name": lastname,
 
         "phone":number,
         "new_password":newpassword,
         "new_password_confirmation":newpasswordconfirmation,
         "current_password":currentpassword,
-        "address" : address,
+       // "address" : address,
         // Append the image file if available
         if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
       });
@@ -33,9 +33,20 @@ class ProfileRepo extends GetxService{
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}user/profile",
         {},
-        formData,
+          jsonEncode({
+            "first_name":  firstname,
+            // "last_name": lastname,
 
-        token:  myServices.sharedPreferences.getString("token")
+            "phone":number,
+            "new_password":newpassword,
+            "new_password_confirmation":newpasswordconfirmation,
+            "current_password":currentpassword,
+          }),
+
+       // token:  myServices.sharedPreferences.getString("token"),
+        token: APIProvider.token
+          //cookies: myServices.sharedPreferences.getString("cookies")
+        //cookies: APIProvider.cookies!.first
       );
 
       print("\n2");
@@ -62,7 +73,7 @@ class ProfileRepo extends GetxService{
         throw Exception("Server responded with status code ${response.statusCode}");
       }
     } on dio.DioException catch (e) {
-      print("Dio error during login: $e");
+      print("Dio error : $e");
       String errorMessage = "Network error occurred";
       if (e.response != null) {
         errorMessage = "Server error: ${e.response!.statusCode}";
@@ -70,7 +81,7 @@ class ProfileRepo extends GetxService{
       }
       return AppResponse(success: false, errorMessage: errorMessage);
     } catch (e) {
-      print("Error during login: $e");
+      print("Error : $e");
       return AppResponse(success: false, errorMessage: e.toString());
     }
   }

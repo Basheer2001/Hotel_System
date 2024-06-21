@@ -55,9 +55,10 @@ class ServicesController extends GetxController {
     }
   }
 
- /* void submitServiceRequest() async {
+ void submitServiceRequest() async {
     firstSubmit.value = true;
     if (formKey.currentState!.validate()) {
+      print("111");
       requestLoadingState.value = true;
       int serviceId = int.parse(serviceIdController.text);
       int bookingId = int.parse(bookingIdController.text);
@@ -93,7 +94,11 @@ class ServicesController extends GetxController {
           ],
         );
       }
-    }}
+    }
+    else {
+      print("000");
+    }
+  }
 
   void cancelServiceRequest() async {
     firstSubmit.value = true;
@@ -133,7 +138,7 @@ class ServicesController extends GetxController {
         );
       }
     }
-  }*/
+  }
 
 
 }

@@ -44,7 +44,7 @@ class RegisterRepo extends GetxService {
         formData,// Pass formData instead of jsonEncode
           cookies:  APIProvider.cookies!.first
       );
-      APIProvider.cookies =response.headers['set-cookie'];
+      //APIProvider.cookies =response.headers['set-cookie'];
       //APIProvider.token = response.data["data"];
       String token = response.data["data"];
       myServices.sharedPreferences.setString("token", token);

@@ -12,11 +12,11 @@ class ServicesRepo extends GetxService {
 
   Future<List<Service>> getBookingServices(int bookingId) async {
     try {
+      String? token = await getToken();
       final response = await apiProvider.getRequest(
         "${APIProvider.url}bookings/$bookingId/services",
         {},
-        headers: {},
-      );
+        headers: {'Authorization': 'Bearer $token'},      );
 
       print("Response data: ${response.data}");
 
@@ -64,6 +64,8 @@ class ServicesRepo extends GetxService {
 
 
   Future<AppResponse<String>> cancelServiceRequest(int serviceId, int bookingId) async {
+    String? token = await getToken();
+
     try {
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}services/cancel",
@@ -72,6 +74,7 @@ class ServicesRepo extends GetxService {
           "service_id": serviceId,
           "booking_id": bookingId,
         }),
+       // token: token
 
       );
 
@@ -94,13 +97,17 @@ class ServicesRepo extends GetxService {
     print("\n1");
 
     try {
+      String? token = await getToken();
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}request/services",
         {},
+
+
         jsonEncode({
           "service_id": serviceId,
           "booking_id": bookingId,
         }),
+        token: token,
       );
       print("\n2");
       APIProvider.cookies = response.headers['set-cookie'];

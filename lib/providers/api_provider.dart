@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+
+import '../Services.dart';
 class APIProvider extends GetxService{
  ////
 // static String url = "http://192.168.1.110:8000/api/";
@@ -7,6 +9,7 @@ static String? token;
  static String url="http://127.0.0.1:8000/api/";
   late dio.Dio _dio;
  static List<String>? cookies;
+
 
 
  // Getter for the token

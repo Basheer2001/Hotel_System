@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import '../Services.dart';
 import '../models/app_response.dart';
 import '../providers/api_provider.dart';
 
+MyServices myServices=Get.find();
 
 
 class CheckEmailRepo extends GetxService{
@@ -24,6 +26,7 @@ class CheckEmailRepo extends GetxService{
       );
       print("\n2");
       APIProvider.cookies =response.headers['set-cookie'];
+      myServices.sharedPreferences.setString("cookies", APIProvider.cookies!.first);
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");

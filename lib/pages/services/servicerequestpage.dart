@@ -73,9 +73,14 @@ class ServiceRequestPage extends StatelessWidget {
                   return Row(
                     children: [
                       ElevatedButton(
-                        onPressed: (){},
-                        //controller.submitServiceRequest,
-                        child: Text("Submit", style: TextStyle(color: Colors.black)),
+                        onPressed: (){
+                          print('11');
+                          controller.submitServiceRequest();
+
+
+                          /////////////////////////////////////////////
+                        },
+                        child: Text("Submit1", style: TextStyle(color: Colors.black)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: customColor,
                         ),
@@ -84,8 +89,11 @@ class ServiceRequestPage extends StatelessWidget {
 
 
                       ElevatedButton (
-                        onPressed:(){},
-                        //controller.cancelServiceRequest,
+                        onPressed:(){
+                          controller.cancelServiceRequest();
+                        },
+                        ////////////////////////////////////////////
+
                         child: Text('Cancel ', style: TextStyle(color: Colors.black)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: customColor,
