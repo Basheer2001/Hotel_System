@@ -119,6 +119,7 @@ class HotelHome extends StatelessWidget {
             );
           },),
           actions: [
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child:
@@ -214,7 +215,6 @@ class HotelHome extends StatelessWidget {
           Get.to(() => ServicesPage(services: servicesController.services));
         },
       ),
-
       ListTile(
         leading: Icon(Icons.cleaning_services,color: Colors.black),
         title: Text('MY Booking Servcies',),
@@ -224,6 +224,41 @@ class HotelHome extends StatelessWidget {
           Get.to(() => MyBookingService(services: servicesController.services));
         },
       ),
+      Divider(),
+      ListTile(
+        leading: Icon(Icons.language, color: Colors.black), // Icon representing language
+        title: Row(
+          children: [
+            Text(
+              'Language', // Title text
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(width: 16), // Spacer between title and dropdown
+            DropdownButton<String>(
+              value: 'English', // Default value or get from locale
+              onChanged: (String? language) {
+                if (language == 'Arabic') {
+                  Get.updateLocale(Locale('ar')); // Set Arabic locale
+                } else {
+                  Get.updateLocale(Locale('en')); // Set English locale
+                }
+              },
+              items: <String>['English', 'Arabic'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ),)
+
+
+
     ],
   ),
 ),

@@ -27,6 +27,19 @@ class ServicesController extends GetxController {
     super.onInit();
   }
 
+
+  Future<void> fetchServices() async {
+    try {
+      isLoading.value = true;
+      List<Service> servicesList = (await servicesRepo.getServices()).cast<Service>();
+      services.assignAll(servicesList);
+    } catch (e) {
+      print("Error fetching services: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   Future<void> fetchBookingServices(int bookingId) async {
     try {
       isLoading.value = true;
@@ -43,17 +56,6 @@ class ServicesController extends GetxController {
   }
 
 
-  Future<void> fetchServices() async {
-    try {
-      isLoading.value = true;
-      List<Service> servicesList = (await servicesRepo.getServices()).cast<Service>();
-      services.assignAll(servicesList);
-    } catch (e) {
-      print("Error fetching services: $e");
-    } finally {
-      isLoading.value = false;
-    }
-  }
 
  void submitServiceRequest() async {
     firstSubmit.value = true;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-
 import '../../controllers/homepage/roomhill_controller.dart';
 
+import 'package:get/get.dart'; // Import GetX package
 
 class RooHillView extends GetView<RoomHillController> {
   final List<Room> room = [
@@ -40,8 +40,15 @@ class RooHillView extends GetView<RoomHillController> {
       backgroundColor: Colors.blueGrey[50], // Set background color
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back), // Back button icon
+              onPressed: () {
+                Get.back(); // Navigate back using GetX
+              },
+            ),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,

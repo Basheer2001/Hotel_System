@@ -13,22 +13,15 @@ class OnBoarding extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(OnBoardingControllerImp()) ;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey[50],
         body: SafeArea(
           child: Column(children: [
             const Expanded(
               flex: 3,
               child: CustomSliderOnBoarding(),
             ),
-            Expanded(
-                flex: 1,
-                child: Column(
-                  children: const [
-                    CustomDotControllerOnBoarding(),
-                    Spacer(flex: 2),
-                    CustomButtonOnBoarding()
-                  ],
-                ))
+            CustomButtonOnBoarding(),
+SizedBox(height: 20,)
           ]),
         ));
   }

@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:table_calendar/table_calendar.dart';
-import '../../controllers/booking/roombooking_controller.dart';
-import '../homepage/homepage.dart';
+import 'package:untitled1/controllers/booking/roombooking_controller.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-/*class BookingScreen extends StatelessWidget {
+class BookingFormPage extends StatelessWidget {
   final BookingRoomController bookingController = Get.put(BookingRoomController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Book a Room"),
+        title: Text('Book Room'),
       ),
-      body: Form(
-        key: bookingController.formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Form(
+          key: bookingController.formKey,
+          child: ListView(
             children: [
               TextFormField(
                 controller: bookingController.roomIdController,
@@ -28,7 +23,10 @@ import 'package:get/get.dart';
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter a room ID";
+                    return 'Please enter Room ID';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid number';
                   }
                   return null;
                 },
@@ -36,10 +34,9 @@ import 'package:get/get.dart';
               TextFormField(
                 controller: bookingController.checkInDateController,
                 decoration: InputDecoration(labelText: "Check-in Date"),
-                keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter a check-in date";
+                    return 'Please enter Check-in Date';
                   }
                   return null;
                 },
@@ -47,10 +44,9 @@ import 'package:get/get.dart';
               TextFormField(
                 controller: bookingController.checkOutDateController,
                 decoration: InputDecoration(labelText: "Check-out Date"),
-                keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter a check-out date";
+                    return 'Please enter Check-out Date';
                   }
                   return null;
                 },
@@ -61,7 +57,10 @@ import 'package:get/get.dart';
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter the number of adults";
+                    return 'Please enter Number of Adults';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid number';
                   }
                   return null;
                 },
@@ -72,7 +71,10 @@ import 'package:get/get.dart';
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter the number of children";
+                    return 'Please enter Number of Children';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid number';
                   }
                   return null;
                 },
@@ -82,31 +84,19 @@ import 'package:get/get.dart';
                 decoration: InputDecoration(labelText: "Payment Method"),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter a payment method";
+                    return 'Please enter Payment Method';
                   }
                   return null;
                 },
               ),
               SizedBox(height: 20),
-              ElevatedButton(onPressed: bookingController.bookRoom,  child: Text("Book Room"),)
-             ,
+              ElevatedButton(
+                onPressed: bookingController.bookRoom,
+                child: Text("Submit"),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}*/
-
-class BookingSuccessScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Booking Success"),
-      ),
-      body: Center(
-        child: Text("Your booking was successful!"),
       ),
     );
   }

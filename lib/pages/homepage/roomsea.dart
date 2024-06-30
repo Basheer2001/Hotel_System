@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import '../../controllers/homepage/roomsea_controller.dart';
 
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart'; // Import GetX package
 
 class RoomSeaView extends GetView<RoomSeaController> {
   final List<Room> room = [
@@ -30,7 +34,6 @@ class RoomSeaView extends GetView<RoomSeaController> {
       "Experience unparalleled luxury and impeccable service at our five-star hotel, where every detail is meticulously crafted to exceed your expectations.",
       price: 250.0,
     ),
-
   ];
 
   @override
@@ -41,8 +44,15 @@ class RoomSeaView extends GetView<RoomSeaController> {
       backgroundColor: Colors.blueGrey[50], // Set background color
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back), // Back button icon
+              onPressed: () {
+                Get.back(); // Navigate back using GetX
+              },
+            ),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,

@@ -51,6 +51,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../booking/bookingformpage.dart';
 import '../booking/bookingroom.dart';
 
 class RoomDetailsPage extends StatelessWidget {
@@ -212,7 +213,7 @@ class RoomDetailsPage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         // Navigate to room booking or any other action
-                        Get.to(() => BookingScreen());
+                       Get.to(() => BookingFormPage());
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(customColor),
@@ -227,7 +228,7 @@ class RoomDetailsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      child: Text('Book Hotel'),
+                      child: Text('Book Room'),
                     ),
                   )
                 ],

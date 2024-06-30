@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/app_response.dart';
+import '../pages/booking/bookingclass.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/profile_repo.dart';
 import 'homepage/homepage_controller.dart';
@@ -29,6 +30,8 @@ class ProfileController extends GetxController{
 
   var loginLoadingState=false.obs;
   var avatarImagePath = ''.obs;
+
+  var bookings = <Booking>[].obs;
 
   void updateprofile() async{
     firstSubmit.value=true;

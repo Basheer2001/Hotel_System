@@ -37,6 +37,22 @@ class MyTranslation extends Translations{
       "30":"خدمة سريعة",
       "31":"نشاطات مميزة و ممتعة",
       "32": "دخل كلمة المرور الحالية",
+      "33":"المفضلة",
+      "34":"تصفح العروض الموجودة",
+      "35":"تصفح",
+      "36":"فئات",
+      "37":"بحر",
+      "38":"مسبح",
+      "39":"جبل",
+
+  //drawer
+      "39":"لوحة القيادة",
+      "40":"حساب تعريفي",
+      "41":"التقارير",
+      "42":"تسجيل خروج",
+      "45":"الاعدادات",
+
+
 
 
     },
@@ -73,6 +89,20 @@ class MyTranslation extends Translations{
       "30":"Fast Delivery",
       "31":"Unique and fun activities",
       "32": "Enter current password",
+      "33":"Favorites",
+      "34":"Browse Existing Offers",
+      "35":"Browse",
+      "36":"categories",
+      "37":"Sea",
+      "38":"Pool",
+      "39":"Hill",
+
+    //drawer
+      "41":"Dashboard",
+      "42":"Profile",
+      "43":"Reprots",
+      "44":"Logout",
+      "45":"Settings"
 },
   };
 

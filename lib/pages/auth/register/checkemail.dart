@@ -147,7 +147,10 @@ class Checkemail extends GetView<CheckemailController>  {
 
 
 
-/*body: Container(
+/*
+ Get.put(CheckemailController());
+
+body: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         child: Form(
           key:controller.formKey,

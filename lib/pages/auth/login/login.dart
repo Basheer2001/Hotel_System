@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
@@ -8,7 +9,8 @@ import '../../../constant/auth/customtexttitleauth.dart';
 import '../../../controllers/login_controller.dart';
 import '../../../core/function/alertexitapp.dart';
 import '../forgetpassword/sendresetpassword.dart';
-class Login extends GetView<loginController> {
+
+/*class Login extends GetView<loginController> {
   const Login({Key? key}) : super(key: key);
 
   @override
@@ -234,11 +236,354 @@ class Login extends GetView<loginController> {
 
     );
   }
+}*/
+
+
+
+
+class Login extends GetView<loginController> {
+  const Login({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(loginController());
+    return Scaffold(
+      body: WillPopScope(
+        onWillPop:alertExitApp,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Adjust horizontal padding as needed
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+            crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch content horizontally
+            children: [
+              SizedBox(height: 10), // Top space
+              Text(
+                "Sign In",
+                style: TextStyle(color: Colors.black, fontSize: 35),
+                textAlign: TextAlign.center, // Center align the text
+              ),
+              SizedBox(height: 6), // Space between title and subtitle
+              Text(
+                "Hii Welcome back, you have been missed",
+                style: TextStyle(color: Colors.grey, fontSize: 15),
+                textAlign: TextAlign.center, // Center align the text
+              ),
+              SizedBox(height: 50), // Space below subtitle
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Text(
+                      "Email",
+                      style: TextStyle(color: Colors.black, fontSize: 13),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: TextFormField(
+                      controller: controller.usernameTextController,
+                      autovalidateMode: !controller.firstSubmit.value
+                          ? AutovalidateMode.disabled
+                          : AutovalidateMode.always,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return "Required Field";
+                        } else if (!GetUtils.isEmail(value)) {
+                          return "Wrong Email";
+                        }
+                        return null;
+                      },
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey.shade200,
+                        hintText: '8'.tr,
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        suffixIcon: Icon(Icons.email, color: Colors.grey), // Email icon on the right side
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Text(
+                      "Password",
+                      style: TextStyle(color: Colors.black, fontSize: 13),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Obx(() => TextFormField(
+                      controller: controller.PasswordTextController,
+                      autovalidateMode: !controller.firstSubmit.value
+                          ? AutovalidateMode.disabled
+                          : AutovalidateMode.always,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return "Required Field";
+                        }
+                        return null;
+                      },
+                      obscureText: controller.obscureText.value, // Use obscureText.value to toggle visibility
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey.shade200,
+                        hintText: '',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            controller.toggleObscureText(); // Toggle obscureText value
+                          },
+                          child: Icon(
+                            controller.obscureText.value ? Icons.visibility : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    )),
+                  ),
+
+                ],
+              ),
+              SizedBox(height: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Text(
+                      "Check Password",
+                      style: TextStyle(color: Colors.black, fontSize: 13),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: TextFormField(
+                      controller: controller.checkPasswordTextController,
+                      autovalidateMode: !controller.firstSubmit.value
+                          ? AutovalidateMode.disabled
+                          : AutovalidateMode.always,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return "Required Field";
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey.shade200,
+                        hintText: 'Re-enter your password',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            controller.checkpassword(); // Call checkPassword method from controller
+                          },
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.to(SendResetPassword());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text(
+                        "Forget Password",
+                        style: TextStyle(
+                          color: Color(0xFF003398),
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  controller.login();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Adjust padding as needed
+                  ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  "Sign In",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              SizedBox(height: 10),
+            Column(
+              children: [
+                // Above content
+                SizedBox(height: 20), // Space before divider (adjust as needed)
+
+                // Divider with text
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "or sign up with",
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Below content
+                SizedBox(height: 20), // Space after divider (adjust as needed)
+              ],
+            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      backgroundImage: AssetImage('assets/images/google.png'),
+                      foregroundColor: Colors.grey, // Color of the border
+                      foregroundImage: AssetImage('assets/images/google.png'),
+                    ),
+                    SizedBox(width: 20),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      backgroundImage: AssetImage('assets/images/facebook.png'),
+                      foregroundColor: Colors.grey, // Color of the border
+                      foregroundImage: AssetImage('assets/images/facebook.png'),
+                    ),
+                    SizedBox(width: 20),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      backgroundImage: AssetImage('assets/images/apple.png'),
+                      foregroundColor: Colors.grey, // Color of the border
+                      foregroundImage: AssetImage('assets/images/apple.png'),
+                    ),
+                  ],
+                ),
+              ),
+           SizedBox(height: 20,),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an account? ",
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Sign Up',
+                          style: TextStyle(
+                            color: Color(0xFF003398),
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+    Get.to(Checkemail());}
+
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20), // Bottom space
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
-
-
-
-
 
 
 

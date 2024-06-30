@@ -28,6 +28,8 @@ class loginController extends GetxController{
 
   var logoutstatue = false.obs;
 
+  var obscureText = true.obs;
+
   final HotelHomeController controller = Get.find<HotelHomeController>();
 
 
@@ -42,6 +44,9 @@ class loginController extends GetxController{
     token.value = prefs.getString('token') ?? '';
   }
 
+  void toggleObscureText() {
+    obscureText.toggle();
+  }
 
 
   void login() async{
