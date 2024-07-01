@@ -13,6 +13,7 @@ import '../../../constant/color.dart';
 import '../../../controllers/verfiycode_controller.dart';
 import '../../../repository/checkemail_repo.dart';
 
+/*
 class VerfiyCode extends GetView<VerfiyCodeController> {
   const VerfiyCode({super.key});
 
@@ -142,6 +143,96 @@ class VerfiyCode extends GetView<VerfiyCodeController> {
 
   }
 }
+*/
+
+
+
+
+class VerfiyCode extends GetView<VerfiyCodeController> {
+  const VerfiyCode({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(VerfiyCodeController());
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Verify Code"),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 50),
+                Text(
+                  "Enter Verification Code",
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Please enter the verification code sent to your email",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: OtpTextField(
+                    numberOfFields: 6,
+                    borderColor: Colors.grey,
+                    fieldWidth: 40.0,
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    onCodeChanged: (String code) {
+                      // Handle code changes
+                    },
+                    onSubmit: (String verificationCode) {
+                      // Store the OTP code in the controller
+                      controller.otpCode.value = verificationCode;
+                    },
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    controller.verifyCode(); // Call the verification method
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    ),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Verify",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
 
 //THE PREVOUIS DESGIN
 /*

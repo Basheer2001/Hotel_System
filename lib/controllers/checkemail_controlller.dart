@@ -49,3 +49,4 @@ class CheckemailController extends GetxController{
       }
     }}
 }
+

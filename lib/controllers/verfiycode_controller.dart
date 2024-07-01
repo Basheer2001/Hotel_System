@@ -6,6 +6,7 @@ import '../pages/auth/Register/register1.dart';
 import '../repository/checkemail_repo.dart';
 import '../repository/verfiycode_repo.dart';
 
+/*
 class VerfiyCodeController extends GetxController{
 
   VerfiyCodeRepo  verfyCodeRepo=Get.find<VerfiyCodeRepo>();
@@ -17,6 +18,8 @@ class VerfiyCodeController extends GetxController{
   var firstSubmit =false.obs;
 
   var loginLoadingState=false.obs;
+
+
 
   void verfiycode(String text) async{
     print("\nverfiycode\n");
@@ -56,5 +59,53 @@ class VerfiyCodeController extends GetxController{
         );
       }
     }}}
+*/
 
 
+class VerfiyCodeController extends GetxController {
+  VerfiyCodeRepo verfyCodeRepo = Get.find<VerfiyCodeRepo>();
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var otpCode = ''.obs;  // Store the OTP code
+  var firstSubmit = false.obs;
+  var loginLoadingState = false.obs;
+
+  void verifyCode() async {
+    firstSubmit.value = true;
+    if (formKey.currentState!.validate()) {
+      loginLoadingState.value = true;
+
+      AppResponse response = await verfyCodeRepo.verfiycode(otpCode.value);
+
+      loginLoadingState.value = false;
+      if (response.success) {
+        Get.to(() => Register1());
+        Get.defaultDialog(
+          title: "Success",
+          content: Text(""),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("ok"),
+            ),
+          ],
+        );
+      } else {
+        Get.defaultDialog(
+          title: "Error",
+          content: Text(response.errorMessage!),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("ok"),
+            ),
+          ],
+        );
+      }
+    }
+  }
+}

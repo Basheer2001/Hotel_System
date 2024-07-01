@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 
 //basheeralkhiat86
-class Checkemail extends GetView<CheckemailController>  {
+/*class Checkemail extends GetView<CheckemailController>  {
   const Checkemail ({Key? key}) : super(key: key);
 
   @override
@@ -109,25 +109,8 @@ class Checkemail extends GetView<CheckemailController>  {
                       children: [
                         CustomButtomAuth(text: "11", onPressed: () {
                           print("1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                          /*var response = await http.post(
-                            Uri.parse("http://192.168.1.5:8000/api/register/email"),
-                            headers: {
-                              // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjg4MTU4MDY4LCJleHAiOjE2ODgxNjE2NjgsIm5iZiI6MTY4ODE1ODA2OCwianRpIjoiNWV1bGxwUE5KOVJqaGpRaCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PVSbBmnk68xPDpHBbzunLICybCDK-RGQqvRdb_adJO8',
-                              'Content-Type': 'application/json',
-                              //'Cookie': CheckEmailRepo.cookies!.first,
-                            },
-                            body: jsonEncode(
-                                {
-                                   "email": "basheeralkhiat86@gmail.com" ,
-                            }
-                            ),
+                          controller.Checkemail();}),
 
-                          );
-                          var js = jsonDecode(response.body);
-
-                          print(js);*/
-                          controller.Checkemail();
-                        }),
                         SizedBox(width: 20,),
 
                       ],
@@ -142,7 +125,124 @@ class Checkemail extends GetView<CheckemailController>  {
       )
     );
   }
+}*/
+ // Adjust the import based on your file structure
+
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class Checkemail extends GetView<CheckemailController> {
+  const Checkemail({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(CheckemailController());
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Check Email"),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 50), // Reduced top space
+                Text(
+                  "Check Email",
+                  style: TextStyle(color: Colors.black, fontSize: 35),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10), // Space below title
+                Text(
+                  "Enter your email to proceed",
+                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 30), // Space below subtitle
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child:
+                  TextFormField(
+                    controller: controller.usernameTextController,
+                    autovalidateMode: !controller.firstSubmit.value
+                        ? AutovalidateMode.disabled
+                        : AutovalidateMode.always,
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return "Required Field";
+                      } else if (!GetUtils.isEmail(value)) {
+                        return "Wrong Email";
+                      }
+                      return null;
+                    },
+                    style: TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey.shade200,
+                      hintText: 'Enter your email',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      suffixIcon: Icon(Icons.email, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20), // Space below text field
+                ElevatedButton(
+                  onPressed: () {
+                    controller.Checkemail(); // Call the checkEmail method from the controller
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    ),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Check Email",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
+
+
+
+
+
 
 
 
@@ -227,3 +327,25 @@ body: Container(
           ]),
         ),
       ),*/
+
+
+
+//  var response = await http.post(
+//Uri.parse("http://192.168.1.5:8000/api/register/email"),
+//  headers: {
+// 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjg4MTU4MDY4LCJleHAiOjE2ODgxNjE2NjgsIm5iZiI6MTY4ODE1ODA2OCwianRpIjoiNWV1bGxwUE5KOVJqaGpRaCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PVSbBmnk68xPDpHBbzunLICybCDK-RGQqvRdb_adJO8',
+//  'Content-Type': 'application/json',
+//'Cookie': CheckEmailRepo.cookies!.first,
+//   },
+//body: jsonEncode(
+// {
+//  "email": "basheeralkhiat86@gmail.com" ,
+//  }
+//   ),
+
+//  );
+// var js = jsonDecode(response.body);
+
+//  print(js);
+
+// }),
