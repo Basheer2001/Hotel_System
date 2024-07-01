@@ -10,6 +10,7 @@ import '../../../controllers/login_controller.dart';
 import '../../../core/function/alertexitapp.dart';
 import '../forgetpassword/sendresetpassword.dart';
 
+//TODO THE OLD LOGIN DESGIN
 /*class Login extends GetView<loginController> {
   const Login({Key? key}) : super(key: key);
 
@@ -576,7 +577,8 @@ class Login extends GetView<loginController> {
                   ),
                 ),
               ),
-              SizedBox(height: 20), // Bottom space
+              SizedBox(height: 20),
+              // Bottom space
             ],
           ),
         ),

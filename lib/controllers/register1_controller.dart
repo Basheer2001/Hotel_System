@@ -36,6 +36,7 @@ class Register1Controller extends GetxController{
   var avatarImagePath = ''.obs;
   //File? image;
 
+  var agreeTermsCondition = false.obs;
 
   void Register()async {
     firstSubmit.value=true;

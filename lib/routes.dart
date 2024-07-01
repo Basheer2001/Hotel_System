@@ -32,13 +32,14 @@ List<GetPage<dynamic>>? routes =[
 // GetPage(name:"/", page: ()=>const OnBoarding()),
 
  //GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
-  GetPage(name:"/", page: ()=> const Login()),
+   GetPage(name:"/", page: ()=> const Login()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
  GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
 
  GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
   GetPage(name:AppRoute.verifycode, page: () => VerfiyCode()),
   GetPage(name: AppRoute.verifycode, page: () => VerfiyCode()),
+ //GetPage(name:"/" , page:()=>Register1()),
   GetPage(name:AppRoute.register1 , page:()=>Register1()),
   GetPage(name:AppRoute.sendresetpassword , page:()=>SendResetPassword()),
   GetPage(name: AppRoute.resetpasswordcode, page:()=>ResetPasswordCode()),
