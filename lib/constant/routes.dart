@@ -21,6 +21,9 @@ class AppRoute {
   static const String banunbanuser="/banunbanuser";
   static const String deleteuser="/deleteuser";
   static const String searchuser="/searchuser";
+  static const String adminallrooms="/adminallrooms";
+  static const String  adminroomsearch="/ adminroomsearch";
+
 
  //Reservation
   static const String reservation="/reservation";

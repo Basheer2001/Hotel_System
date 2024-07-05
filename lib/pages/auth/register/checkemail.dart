@@ -214,7 +214,7 @@ class Checkemail extends GetView<CheckemailController> {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                    MaterialStateProperty.all<Color>( Color(0xFF2B74FE)),
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(vertical: 15, horizontal: 20),

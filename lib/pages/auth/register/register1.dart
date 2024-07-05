@@ -749,7 +749,7 @@ class Register1 extends GetView<Register1Controller> {
                               TextSpan(
                                 text: 'Terms&Condition',
                                 style: TextStyle(
-                                  color: Color(0xFF003398),
+                                  color:  Color(0xFF2B74FE),
                                   decoration: TextDecoration.underline,
                                 ),
                               ),

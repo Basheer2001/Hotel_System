@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../controllers/dashboard/managing_reports_controller/uncheckedreports_controller.dart';
+import 'adminnprofile/adminprofile.dart';
+import 'adminnprofile/login_admin.dart';
+import 'managing_reports/adminsearchroom.dart';
+import 'managing_reports/checkreportpage.dart';
 import 'managing_reports/displayreports.dart';
+import 'managing_reports/showactivereports.dart';
 import 'managing_reports/uncheckedreports.dart';
+import 'managing_rooms/adminallrooms.dart';
+import 'managing_rooms/adminroomdetails.dart';
 import 'managing_rooms/createroom.dart';
 import 'managing_rooms/deleteroom.dart';
 import 'managing_users/banunbanuser.dart';
@@ -253,14 +259,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 leading: Icon(Icons.person_add),
                 title: Text('Create New User'),
                 onTap: () {
-                  Get.to(() => UserCreation());
+                  Get.to(() => CreateUser());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.account_circle),
                 title: Text('Get Profile'),
                 onTap: () {
-                  Get.to(() => GetProfile(userId: ''));
+                  Get.to(() => UserProfile());
                 },
               ),
               ListTile(
@@ -299,26 +305,28 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 : Icon(Icons.arrow_right, color: Colors.black),
             children: [
               ListTile(
-                leading: Icon(Icons.person),
-                title: Text('Display Reports'),
-                onTap: () {
-                  Get.to(() => DisplayReports(userId: ''));
-                },
-              ),
-              ListTile(
                 leading: Icon(Icons.radio_button_unchecked),
-                title: Text('UncheckedReports'),
+                title: Text('Show Someone Report'),
                 onTap: () {
-                  Get.to(() => UncheckedReports());
+                  Get.to(() => DisplayReports());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.check),
-                title: Text('MultipleReportsCheck'),
+                title: Text('ShowActiveReports'),
                 onTap: () {
-                  Get.to(() => MultipleReportsCheck(reportsArray: []));
+                 Get.to(() => ShowActiveReports());
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.check),
+                title: Text('CheckReports'),
+                onTap: () {
+                  Get.to(() => CheckReportsPage());
+                },
+              ),
+
+
             ],
           ),
           ExpansionTile(
@@ -335,18 +343,27 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             children: [
               ListTile(
                 leading: Icon(Icons.person),
-                title: Text('Create Room'),
+                title: Text('Get Room Details '),
                 onTap: () {
-                  Get.to(() => CreateRoom());
+                  Get.to(() => AdminRoomDetails());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.delete),
-                title: Text('Delete Room'),
+                title: Text('ShowALLRooms'),
                 onTap: () {
-                  Get.to(() => DeleteRoom());
+                  Get.to(() => AdminAllRooms());
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.delete),
+                title: Text(' Search a room'),
+                onTap: () {
+                  Get.to(() => AdminRoomSearch());
+                },
+              ),
+
+
             ],
           ),
           ListTile(
@@ -362,6 +379,36 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             onTap: () {
               // Handle logout
             },
+          ),
+
+          ExpansionTile(
+            leading: Icon(Icons.report,color: managingReportsExpanded ? Colors.orange : Colors.black),
+            title: Text('Admin Profile'),
+            onExpansionChanged: (value) {
+              setState(() {
+                managingReportsExpanded = value;
+              });
+            },
+            trailing: managingReportsExpanded
+                ? Icon(Icons.arrow_drop_down, color: Colors.orange)
+                : Icon(Icons.arrow_right, color: Colors.black),
+            children: [
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text('login admin'),
+                onTap: () {
+                  Get.to(() =>LoginAdmin());
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.radio_button_unchecked),
+                title: Text('Admin Profile'),
+                onTap: () {
+                  Get.to(() => AdminProfile());
+                },
+              ),
+
+            ],
           ),
         ],
       ),

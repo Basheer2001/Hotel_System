@@ -1,13 +1,8 @@
 
 import 'dart:io';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:image_picker/image_picker.dart';
-import 'package:untitled1/pages/onboarding.dart';
-
 import '../models/app_response.dart';
 import '../pages/auth/Register/verfiycode.dart';
 import '../pages/homepage/homepage.dart';

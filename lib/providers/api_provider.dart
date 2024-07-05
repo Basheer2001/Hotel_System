@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '../Services.dart';
 class APIProvider extends GetxService{
  ////
- static String url = "http://192.168.1.110:8000/api/";
+ //static String url = "http://192.168.1.110:8000/api/";
 static String? token;
- //static String url = "http://127.0.0.1:8000/api/";
+ static String url = "http://127.0.0.1:8000/api/";
   late dio.Dio _dio;
  static List<String>? cookies;
 
@@ -55,6 +55,7 @@ static String? token;
     print(6);
     dio.Response response=await _dio.post(method,queryParameters: queryParams,data: body);
     print(7);
+    print(response.statusCode);
     if(response.statusCode==200){
       // getc();
       return response;
@@ -107,9 +108,35 @@ static String? token;
   }
 
 
-
-
   Future<dio.Response> putRequest(
+      String method,
+      Map<String, dynamic> queryParams,
+      dynamic body, {
+        required Map<String, String> headers,
+      }) async {
+    try {
+      return await _dio.put(
+        method,
+        queryParameters: queryParams,
+        data: body,
+        options: dio.Options(headers: headers),
+      );
+    } on dio.DioException catch (e) {
+      if (e.response != null) {
+        print('Dio error: ${e.response!.statusCode} - ${e.response!.data}');
+        throw Exception('Server error: ${e.response!.statusCode}');
+      } else {
+        print('Dio error: ${e.message}');
+        throw Exception('Network error: ${e.message}');
+      }
+    } catch (e) {
+      print('General error: $e');
+      throw Exception('Error: $e');
+    }
+  }
+
+
+ /* Future<dio.Response> putRequest(
       String method, Map<String,dynamic> queryParams)async{
     dio.Response response=await _dio.put(method,queryParameters: queryParams);
     if(response.statusCode==200){
@@ -121,7 +148,8 @@ static String? token;
     }else{
       throw Exception('unkown error');
     }
-  }
+  }*/
+
 
   Future<dio.Response> deleteRequest(String method, {Map<String, String> headers = const {}}) async {
     try {

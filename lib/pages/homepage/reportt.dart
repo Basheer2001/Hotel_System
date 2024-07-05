@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-class Report extends StatelessWidget {
+class Reportt extends StatelessWidget {
   final String title;
   final String value;
 
-  const Report({required this.title, required this.value, Key? key}) : super(key: key);
+  const Reportt({required this.title, required this.value, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

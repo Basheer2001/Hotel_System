@@ -7,6 +7,7 @@ import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
 import 'package:untitled1/pages/services/mybookingservice.dart';
+import '../../constant/appbar/circularappbarshape.dart';
 import '../../controllers/homepage/homepage_controller.dart';
 import '../../controllers/services/services_controller.dart';
 import '../dashboard/dashboardscreen.dart';
@@ -20,6 +21,10 @@ import '../services/servicespage.dart';
 import 'hoteln.dart';
 import 'hotelnp.dart';
 import 'hotels.dart';
+
+
+
+
 
 class HotelHome extends StatelessWidget {
   final String token;
@@ -66,6 +71,8 @@ class HotelHome extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
+              //color: Color(0xFF2B74FE),
+
               border: Border.all(
                 color: Colors.grey,
                 width: 2.0,
@@ -82,7 +89,9 @@ class HotelHome extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Icon(
               icon,
-              color: Colors.grey,
+              color: Colors.blueGrey,
+             // color: Color(0xFF2B74FE),
+
               size: 24,
             ),
           ),
@@ -90,8 +99,15 @@ class HotelHome extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey,
+              fontSize: 15,
+              color: Colors.white70,
+              shadows: [
+                Shadow(
+                  color: Colors.black.withOpacity(0.5),
+                  offset: Offset(0, 2), // Adjust the offset of the shadow as needed
+                  blurRadius: 4, // Adjust the blur radius as needed
+                ),
+              ],
             ),
           ),
         ],
@@ -102,17 +118,78 @@ class HotelHome extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
-    int bookingId = 2;
+    Color transparentBlue = Color.fromRGBO(43, 116, 254, 0.2);
+
+    int bookingId = 3;
     final HotelHomeController controller = Get.put(HotelHomeController());
 
     return Scaffold(
-      backgroundColor: Colors.blueGrey[50],
-      appBar: AppBar(
-        backgroundColor:Colors.blueGrey[50],
+       /* appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.blue[300],
+title:     Text(
+  "welcome To Our App",
+  style: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize:20,
+
+    color: Colors.white70,
+    shadows: [
+      Shadow(
+        color: Colors.black.withOpacity(0.5),
+        offset: Offset(0, 2), // Adjust the offset of the shadow as needed
+        blurRadius: 4, // Adjust the blur radius as needed
+      ),
+    ],
+  ),
+),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child:
+              ElevatedButton (
+                onPressed: () async {
+                  await controller.navigateToFavorites();
+                },
+                child: Text('Favorites', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF2B74FE),
+                  side: BorderSide(
+                    color:Color(0xFF2B74FE), // Border color
+                    width: 2.0, // Border width
+                    style: BorderStyle.solid, // Border style
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+
+                    // Rectangular shape
+                  ),
+
+                ),
+              ),
+
+            ),
+          ],
+   iconTheme: IconThemeData(color: Colors.grey), // Icon color for the app bar
+
+   leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu,color:Colors.white70,),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },),
+
+   ),*/
+     /* appBar: AppBar(
+       // backgroundColor:Colors.blueGrey[50],
+        backgroundColor: Colors.cyan,
         leading: Builder(
           builder: (context) {
             return IconButton(
-              icon: const Icon(Icons.menu),
+              icon: const Icon(Icons.menu,color: Colors.black,),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -127,15 +204,102 @@ class HotelHome extends StatelessWidget {
                 onPressed: () async {
                 await controller.navigateToFavorites();
                 },
-                child: Text('Favorites', style: TextStyle(color: Colors.black)),
+                child: Text('Favorites', style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: customColor,
+                  backgroundColor: Color(0xFF2B74FE),
+                  side: BorderSide(
+                    color:Color(0xFF2B74FE), // Border color
+                    width: 2.0, // Border width
+                    style: BorderStyle.solid, // Border style
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)), // Rectangular shape
+                  ),
+
                 ),
               ),
 
             ),
           ],
+        ),*/
+
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBar(
+          elevation: 0,
+          //backgroundColor: Colors.blue[300],
+          flexibleSpace: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/images/seaa.jpg', // Replace with your image path
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.5),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          title: Text(
+            "Welcome To Our App",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.white70,
+              shadows: [
+                Shadow(
+                  color: Colors.black.withOpacity(0.5),
+                  offset: Offset(0, 2),
+                  blurRadius: 4,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: ElevatedButton(
+                onPressed: () async {
+                  await controller.navigateToFavorites();
+                },
+                child: Text('Favorites', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF2B74FE),
+                  side: BorderSide(
+                    color: Color(0xFF2B74FE),
+                    width: 2.0,
+                    style: BorderStyle.solid,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
+                ),
+              ),
+            ),
+          ],
+          iconTheme: IconThemeData(color: Colors.grey),
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.menu, color: Colors.white70),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
         ),
+      ),
 
       drawer: Drawer(
       child: ListView(
@@ -144,7 +308,7 @@ class HotelHome extends StatelessWidget {
 
       UserAccountsDrawerHeader(
         decoration: BoxDecoration(
-         color:Colors.black,
+         color:Colors.blue[300],
         ),
         accountName: Text('Lory Demerjian',style: TextStyle(color: Colors.white),),
         accountEmail: Text('Lory@Gmail.com',style: TextStyle(color: Colors.white),),
@@ -158,14 +322,14 @@ class HotelHome extends StatelessWidget {
         ),
       ),
       ListTile(
-        leading: Icon(Icons.dashboard,color: Colors.black),
+        leading: Icon(Icons.dashboard,color: Color(0xFF2B74FE)),
         title: Text('Dashboard',),
         onTap: () {
           Get.to(DashboardScreen());
         },
       ),
       ListTile(
-        leading: Icon(Icons.logout,color: Colors.black),
+        leading: Icon(Icons.logout,color: Color(0xFF2B74FE)),
         title: Text('Profile',),
         onTap: () {
           Get.to(() => Profile());
@@ -173,22 +337,22 @@ class HotelHome extends StatelessWidget {
         },
       ),
       ListTile(
-        leading: Icon(Icons.report,color: Colors.black),
+        leading: Icon(Icons.report,color:Color(0xFF2B74FE)),
         title: Text('Reports',),
         onTap: () {
-          Get.to(() => Reports());
+        //  Get.to(() => Reports());
          // Get.to(()=>CreateReport());
         },
       ),
       ListTile(
-        leading: Icon(Icons.logout,color: Colors.black),
+        leading: Icon(Icons.logout,color: Color(0xFF2B74FE)),
         title: Text('Logout',),
         onTap: () {
           Get.find<HotelHomeController>().logout();
         },
       ),
       ListTile(
-        leading: Icon(Icons.room_rounded,color: Colors.black),
+        leading: Icon(Icons.room_rounded,color: Color(0xFF2B74FE)),
         title: Text('Rooms',),
         onTap: () {
 
@@ -197,7 +361,7 @@ class HotelHome extends StatelessWidget {
         },
       ),
       ListTile(
-        leading: Icon(Icons.search,color: Colors.black),
+        leading: Icon(Icons.search,color: Color(0xFF2B74FE)),
         title: Text('Search',),
         onTap: () {
           Get.to(()=>RoomSearch());
@@ -205,18 +369,18 @@ class HotelHome extends StatelessWidget {
         },
       ),
       ListTile(
-        leading: Icon(Icons.room_service,color: Colors.black),
+        leading: Icon(Icons.room_service,color: Color(0xFF2B74FE)),
         title: Text('Services',),
         onTap: () async {
           // Fetch services data
-          /*await servicesController.fetchServices();
-          Get.to(() => ServicesPage(services: servicesController.services));*/
+          await servicesController.fetchServices();
+          Get.to(() => ServicesPage(services: servicesController.services));
           await servicesController.fetchServices();
           Get.to(() => ServicesPage(services: servicesController.services));
         },
       ),
       ListTile(
-        leading: Icon(Icons.cleaning_services,color: Colors.black),
+        leading: Icon(Icons.cleaning_services,color: Color(0xFF2B74FE)),
         title: Text('MY Booking Servcies',),
         onTap: () async {
           await servicesController.fetchBookingServices(bookingId);
@@ -226,7 +390,7 @@ class HotelHome extends StatelessWidget {
       ),
       Divider(),
       ListTile(
-        leading: Icon(Icons.language, color: Colors.black), // Icon representing language
+        leading: Icon(Icons.language, color: Color(0xFF2B74FE)), // Icon representing language
         title: Row(
           children: [
             Text(
@@ -262,266 +426,328 @@ class HotelHome extends StatelessWidget {
     ],
   ),
 ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              SizedBox(height:10 ,),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Browse existing offers",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                    OutlinedButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SingleChildScrollView(
-                              child: Container(
-                                padding: EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Activities',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(width:200,),
-                                        ElevatedButton(onPressed: (){
-                                          Get.to(()=>ServiceRequestPage());
-                                        },
-                                            child:Text("Service",style: TextStyle(color: Colors.black),),
-                                          style:OutlinedButton.styleFrom(
-                                            foregroundColor: Colors.black,
-                                            side: BorderSide(color: Colors.grey, width: 2.0), // Border color and width
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10.0), // Rounded corners
-                                            ),
-                                          ),
-                                        ),
-
-
-
-                                      ],
-                                    ),
-                                    SizedBox(height: 10),
-                                    GridView.count(
-                                      shrinkWrap: true,
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 10,
-                                      children: [
-                                        Image.asset('assets/images/activity.jpg'),
-                                        Image.asset('assets/images/activity.jpg'),
-                                        Image.asset('assets/images/c.jpg'),
-                                      ],
-                                    )
-
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Text("Browse"),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        side: BorderSide(color: Colors.grey, width: 2.0), // Border color and width
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0), // Rounded corners
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search...', // Add a hint text
-                    hintStyle: TextStyle(color: Colors.grey), // Style for the hint text
-                    prefixIcon: InkWell(
-                      child: Icon(Icons.search, color: Colors.black), // Customize the icon color
-                      onTap: () {
-                        showSearch(
-                          context: context,
-                          delegate: CustomSearch(),
-                        );
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
-                      borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
-                      borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
-                      borderSide: BorderSide(color: Colors.blue, width: 2.0), // Bold border when focused
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // Padding inside the text field
-                    filled: true,
-                    fillColor: Colors.white, // Background color for the text field
-                  ),
-                  style: TextStyle(color: Colors.black),
-                /*  onSubmitted: (searchText) {
-                    // Trigger search here
-                    controller.searchRooms(search: searchText,
-                        view: 'sea', averageRating: 4.5,
-                      basePrice: 149,
-                    );
-                  },*/// Text style
-                ),
-                SizedBox(height: 15,),
-                Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  height: 80, // Adjust the height as needed
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: categories.map((category) {
-                      return _buildCategoryIcon(category['icon'], category['label']);
-                    }).toList(),
-                  ),
-                ),
-              ],
-            ),
+      body:
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/seaa.jpg'), // Path to your image
+            fit: BoxFit.cover, // You can change the fit property as needed
           ),
-          // Expanded to make sure the grid takes the remaining space
-          Expanded(
-            child: Obx(() {
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.75, // Aspect ratio for each item
-                ),
-                itemCount: controller.hotels.length,
-                itemBuilder: (context, index) {
-                  final hotel = controller.hotels[index];
-                  return GestureDetector(
-                    onTap: () async{
+          color:Colors.blue[300],
+          ),
 
-                      controller.navigateToRoomDetailsPage(hotel.id, hotel.imageUrl);
 
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Stack(
+        child:
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 30,),
+              /*    Row(
+
+                    children: [
+
+                      SizedBox(width:360,),
+                      ElevatedButton (
+                      onPressed: () async {
+                            await controller.navigateToFavorites();
+                            },
+                              child: Text('Favorites', style: TextStyle(color: Colors.white)),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF2B74FE),
+                                side: BorderSide(
+                                  color:Color(0xFF2B74FE), // Border color
+                                  width: 2.0, // Border width
+                                  style: BorderStyle.solid, // Border style
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(7.0)), // Rectangular shape
+                                ),
+
+                              ),
+                            ),
+                    ],
+                  ),*/
+
+
+                SizedBox(height:10 ,),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-                                      child: Container(
-                                        height: 250,
-                                        child: Image.asset(
-                                          hotel.imageUrl,
-                                          fit: BoxFit.cover,
-                                          width: double.infinity,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 10,
-                                      right: 10,
-                                      child: GestureDetector(
-                                        onTap: () async {
-                                         controller.toggleFavorite(hotel.id);// Toggle favorite status
-                                        },
-                                        child: Icon(
-                                          hotel.isLiked ? Icons.favorite : Icons.favorite_border,
-                                          color: hotel.isLiked ? Colors.red : Colors.grey, // Change color based on isLiked status
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
+                          SizedBox(width: 10,),
+                          Text(
+                            "Browse existing offers",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize:20,
+                              color: Colors.white70,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  offset: Offset(0, 2), // Adjust the offset of the shadow as needed
+                                  blurRadius: 4, // Adjust the blur radius as needed
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      hotel.name,
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '\$${hotel.price}',
-                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                        ), RatingBar.builder(
-                                          initialRating: hotel.rating ?? 0,
-                                          minRating: 0,
-                                          direction: Axis.horizontal,
-                                          allowHalfRating: true,
-                                          itemCount: 5,
-                                          itemSize: 16,
-                                          itemBuilder: (context, _) => Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
-                                          ),
-                                          onRatingUpdate: (rating) {
-                                            // Update the rating of the hotel
-                                            hotel.rating = rating;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
+                      OutlinedButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SingleChildScrollView(
+                                child: Container(
+                                  padding: EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Activities',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(width:200,),
+                                          ElevatedButton(onPressed: (){
+                                            Get.to(()=>ServiceRequestPage());
+                                          },
+                                              child:Text("Service",style: TextStyle(color: Colors.black),),
+                                            style:OutlinedButton.styleFrom(
+                                              foregroundColor: Colors.black,
+                                              side: BorderSide(color: Color(0xFF2B74FE), width: 2.0), // Border color and width
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                                              ),
+                                            ),
+                                          ),
+
+
+
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      GridView.count(
+                                        shrinkWrap: true,
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 10,
+                                        crossAxisSpacing: 10,
+                                        children: [
+                                          Image.asset('assets/images/activity.jpg'),
+                                          Image.asset('assets/images/activity.jpg'),
+                                          Image.asset('assets/images/c.jpg'),
+                                        ],
+                                      )
+
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Text("Browse"),
+                        style: OutlinedButton.styleFrom(
+
+                          foregroundColor:Colors.white70,
+                          side: BorderSide(color: Colors.white70, width: 2.0), // Border color and width
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20,),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search...', // Add a hint text
+                      hintStyle: TextStyle(color:Colors.grey), // Style for the hint text
+                      prefixIcon: InkWell(
+                        child: Icon(Icons.search, color:Colors.grey), // Customize the icon color
+                        onTap: () {
+                          showSearch(
+                            context: context,
+                            delegate: CustomSearch(),
+                          );
+                        },
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                        borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                        borderSide: BorderSide(color: Colors.grey, width: 2.0), // Bold border
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)), // Rounded corners
+                        borderSide: BorderSide(color: Colors.blue, width: 2.0), // Bold border when focused
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // Padding inside the text field
+                      filled: true,
+                      fillColor: Colors.white, // Background color for the text field
                     ),
-                  );
-                },
-              );
-            }),
-          ),
-        ],
+                    style: TextStyle(color: Colors.black),
+
+                  ),
+                  SizedBox(height: 15,),
+                  Row(
+                    children: [
+                      SizedBox(width: 10,),
+                      Text(
+                        'Categories',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white70,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withOpacity(0.5),
+                              offset: Offset(0, 2), // Adjust the offset of the shadow as needed
+                              blurRadius: 4, // Adjust the blur radius as needed
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    height: 80, // Adjust the height as needed
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: categories.map((category) {
+                        return _buildCategoryIcon(category['icon'], category['label']);
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Expanded to make sure the grid takes the remaining space
+            Expanded(
+              child: Obx(() {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Number of columns
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.75, // Aspect ratio for each item
+                  ),
+                  itemCount: controller.hotels.length,
+                  itemBuilder: (context, index) {
+                    final hotel = controller.hotels[index];
+                    return GestureDetector(
+                      onTap: () async{
+
+                        controller.navigateToRoomDetailsPage(hotel.id, hotel.imageUrl);
+
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Stack(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                                        child: Container(
+                                          height: 250,
+                                          child: Image.asset(
+                                            hotel.imageUrl,
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 10,
+                                        right: 10,
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                           controller.toggleFavorite(hotel.id);// Toggle favorite status
+                                          },
+                                          child: Icon(
+                                            hotel.isLiked ? Icons.favorite : Icons.favorite_border,
+                                            color: hotel.isLiked ? Colors.red : Colors.grey, // Change color based on isLiked status
+                                          ),
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        hotel.name,
+                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            '\$${hotel.price}',
+                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          ), RatingBar.builder(
+                                            initialRating: hotel.rating ?? 0,
+                                            minRating: 0,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 16,
+                                            itemBuilder: (context, _) => Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {
+                                              // Update the rating of the hotel
+                                              hotel.rating = rating;
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }),
+            ),
+          ],
+        ),
       ),
+
+
     );
   }
 }
@@ -630,7 +856,13 @@ class CustomSearch extends SearchDelegate {
 
 
 
-
+/* onSubmitted: (searchText) {
+                      // Trigger search here
+                      controller.searchRooms(search: searchText,
+                          view: 'sea', averageRating: 4.5,
+                        basePrice: 149,
+                      );
+                    },*/// Text style
 
 
 

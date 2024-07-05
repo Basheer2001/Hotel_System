@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled1/controllers/dashboard/managing_rooms_controller/createroom_controller.dart';
+import 'package:untitled1/controllers/dashboard/managing_rooms_controller/adminroom_controller.dart';
 
 import '../../../constant/appbar/circularappbarshape.dart';
 
 
-class CreateRoom extends StatelessWidget {
+/*class CreateRoom extends StatelessWidget {
   final CreateRoomController controller = Get.put(CreateRoomController());
   final Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
 
@@ -89,4 +89,4 @@ class CreateRoom extends StatelessWidget {
       }).toList(),
     );
   }
-}
+}*/

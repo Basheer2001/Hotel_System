@@ -468,7 +468,7 @@ class Login extends GetView<loginController> {
                   controller.login();
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 43, 116, 254)),
                   foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                     EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Adjust padding as needed

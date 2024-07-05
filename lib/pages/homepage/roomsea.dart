@@ -47,11 +47,18 @@ class RoomSeaView extends GetView<RoomSeaController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back), // Back button icon
-              onPressed: () {
-                Get.back(); // Navigate back using GetX
-              },
+            Container(
+
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Colors.white,
+              ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back), // Back button icon
+                onPressed: () {
+                  Get.back(); // Navigate back using GetX
+                },
+              ),
             ),
             Expanded(
               child: ListView.builder(
@@ -97,6 +104,16 @@ class RoomCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white, // Set card background color
               borderRadius: BorderRadius.circular(8),
+              border: Border(
+                top: BorderSide(
+                  color: Color(0xFF2B74FE), // Set the border color
+                  width: 2, // Set the border width
+                ),
+                left: BorderSide(
+                  color: Color(0xFF2B74FE), // Set the border color
+                  width: 2, // Set the border width
+                ),
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),

@@ -33,6 +33,45 @@ class ProfileController extends GetxController{
 
   var bookings = <Booking>[].obs;
 
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    MyProfile();
+
+  }
+
+  var profileData = {}.obs;
+  var loading = false.obs;
+  var errorMessage = ''.obs;
+
+  void MyProfile() async {
+    loading.value = true;
+    AppResponse<Map<String, dynamic>> response = await profileRepo.MyProfile();
+    loading.value = false;
+
+    if (response.success) {
+      profileData.value = response.data!;
+    } else {
+      errorMessage.value = response.errorMessage!;
+      Get.defaultDialog(
+        title: "Error",
+        content: Text(response.errorMessage!),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    }
+  }
+
+
+
   void updateprofile() async{
     firstSubmit.value=true;
     if(formKey.currentState!.validate()){
@@ -73,45 +112,6 @@ class ProfileController extends GetxController{
       }
     }
   }
-
-  @override
-  void onInit() {
-    super.onInit();
-    MyProfile();
-
-  }
-
-  var profileData = {}.obs;
-  var loading = false.obs;
-  var errorMessage = ''.obs;
-
-  void MyProfile() async {
-    loading.value = true;
-    AppResponse<Map<String, dynamic>> response = await profileRepo.MyProfile();
-    loading.value = false;
-
-    if (response.success) {
-      profileData.value = response.data!;
-    } else {
-      errorMessage.value = response.errorMessage!;
-      Get.defaultDialog(
-        title: "Error",
-        content: Text(response.errorMessage!),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.back();
-            },
-            child: Text("OK"),
-          ),
-        ],
-      );
-    }
-  }
-
-
-
-
 
 
 

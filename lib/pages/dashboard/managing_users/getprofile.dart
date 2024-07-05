@@ -2,64 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/appbar/circularappbarshape.dart';
+import '../../../controllers/dashboard/managing_users_controller/getprofile_controller.dart';
 
 
-class GetProfile extends StatelessWidget {
-  final String userId;
-
-  void _deleteUser() {
-    // Implement your user deletion logic here
-
-    //String userId = _userIdController.text;
-    // Call your API or service to delete the user
-    Get.snackbar('User Deleted', 'The user has been successfully deleted.');
-  }
-
-  GetProfile({required this.userId});
+class UserProfile extends GetView<GetProfileController> {
+  const UserProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
+    Get.put(GetProfileController());
+
     return Scaffold(
-      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
-          title: Text('View All Users', style: TextStyle(color: Colors.grey)), // Adjust title color
-          backgroundColor: Colors.black,
-          shape: CircularAppBarShape(),
-          iconTheme: IconThemeData(color: Colors.grey)
+        title: Text('User Profile'),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-         crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 30,),
-              TextField(
-               // controller: _userIdController,
-                decoration: InputDecoration(
-                    labelText: 'User ID',
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                        borderRadius: BorderRadius.circular(10.0)
-                    )
-                ),
-              ),
-              SizedBox(height: 15,),
-              ElevatedButton(
-                onPressed: (){},
-                child: Text('Get User Profile', style: TextStyle(color: Colors.black)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: customColor,
-                ),
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Obx(
+              () {
+            if (controller.loading.value) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (controller.errorMessage.value.isNotEmpty) {
+              return Center(child: Text(controller.errorMessage.value));
+            }
+
+            var profileData = controller.profileData;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('First Name: ${profileData['first_name']}'),
+                Text('Last Name: ${profileData['last_name']}'),
+                Text('Phone: ${profileData['phone']}'),
+                Text('Address: ${profileData['address']}'),
+                Text('Personal ID: ${profileData['personal_id']}'),
+                // Add more fields as necessary
+              ],
+            );
+          },
         ),
       ),
     );
   }
-
 }
 
 

@@ -1,91 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/constant/appbar/circularappbarshape.dart';
+import 'package:get/get.dart';
+import '../../../controllers/dashboard/managing_reports_controller/adminreport_Controller.dart';
+import '../../../repository/dashboard/admin_report/adminreport_repo.dart';
+
 
 class DisplayReports extends StatelessWidget {
-  final String userId;
-
-  DisplayReports({required this.userId});
+  final AdminReportController adminreportsController = Get.put(AdminReportController());
 
   @override
   Widget build(BuildContext context) {
+    // Call fetchUserReports when this widget is built, for user ID 3 as per the endpoint
+    adminreportsController.fetchUserReports(3);
+
     return Scaffold(
-      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
-        title: Text('Dispaly Reports', style: TextStyle(color: Colors.grey)), // Adjust title color
-        backgroundColor: Colors.black,
-        shape: CircularAppBarShape(),
-        iconTheme: IconThemeData(color: Colors.grey),
+        title: Text('Reports'),
+        /* actions: [
+          ElevatedButton(onPressed: (){
+            Get.to(() => CreateReport());
+          }, child: Text("Create Report")),
+        ],*/
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 30,),
-              Text(
-                'Reports for User: $userId',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 20),
-              ReportCard(
-                title: 'Daily Revenue',
-                value: '\$500',
-              ),
-              SizedBox(height: 10),
-              ReportCard(
-                title: 'Weekly Occupancy Rate',
-                value: '70%',
-              ),
-              SizedBox(height: 10),
-              ReportCard(
-                title: 'Monthly Expenses',
-                value: '\$2000',
-              ),
-              // Add more report cards as needed
-            ],
-          ),
-        ),
+      body: Center(
+        child: Obx(() {
+          if (adminreportsController.isLoading.value) {
+            return CircularProgressIndicator();
+          } else if (adminreportsController.reports.isEmpty) {
+            return Text('No reports available');
+          } else {
+            return ListView.builder(
+              itemCount: adminreportsController.reports.length,
+              itemBuilder: (context, index) {
+                Report report = adminreportsController.reports[index];
+                return ListTile(
+                  title: Text(report.title),
+                  subtitle: Text(report.description), // Displaying the description
+                );
+              },
+            );
+          }
+        }),
       ),
     );
   }
 }
 
-class ReportCard extends StatelessWidget {
-  final String title;
-  final String value;
-
-  ReportCard({required this.title, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

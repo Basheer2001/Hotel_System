@@ -1,61 +1,105 @@
 
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-enum UserType { user, work, Banuser }
-
-
-class UserCreationController extends GetxController {
-  String firstName = '';
-  String lastName = '';
-  String password = '';
-  String confirmPassword = '';
-  String permissionId = '';
-  String phone='';
-  String personalid='';
-  String address='';
-  UserType? userType;
+import '../../../models/app_response.dart';
+import '../../../repository/dashboard/managing_users/createuser_repo.dart';
+import 'package:image_picker/image_picker.dart';
 
 
-  void createUser() {
-    // Validate input fields and create user
-    if (firstName.isEmpty ||
-        lastName.isEmpty ||
-        password.isEmpty ||
-        confirmPassword.isEmpty ||
-        permissionId.isEmpty) {
-      // Show error message
-      Get.snackbar(
-        'Error',
-        'All fields are required',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+
+
+class CreateUserController extends GetxController {
+  final CreateUserRepo registerRepo = Get.find<CreateUserRepo>();
+
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  TextEditingController firstnameTextController =
+  TextEditingController(text: "ahemad");
+  TextEditingController lastnameTextController =
+  TextEditingController(text: "beyrouthy");
+  TextEditingController passwordTextController =
+  TextEditingController(text: "3320233202");
+  TextEditingController confirmationTextController =
+  TextEditingController(text: "3320233202");
+  TextEditingController phoneTextController =
+  TextEditingController(text: "1231231");
+  TextEditingController addressTextController =
+  TextEditingController(text: "Syria");
+  TextEditingController personalidTextController =
+  TextEditingController(text: "1asd");
+  TextEditingController bioTextController = TextEditingController(text: "hi");
+  TextEditingController permissionidTextController =
+  TextEditingController(text: "1");
+  TextEditingController emailTextController =
+  TextEditingController(text: "serlyserlydemirgian@gmail.com");
+
+  var firstSubmit = false.obs;
+  var registerLoadingState = false.obs;
+  var avatarImagePath = ''.obs;
+  var agreeTermsCondition = false.obs;
+
+  void registerUser() async {
+    firstSubmit.value = true;
+    if (formkey.currentState!.validate()) {
+      registerLoadingState.value = true;
+
+      File? imageFile;
+      if (avatarImagePath.value.isNotEmpty) {
+        imageFile = File(avatarImagePath.value);
+      }
+
+      AppResponse<Map<String, dynamic>> response = await registerRepo.createUser(
+        firstname: firstnameTextController.text,
+        lastname: lastnameTextController.text,
+        password: passwordTextController.text,
+        confirmation: confirmationTextController.text,
+        phone: phoneTextController.text,
+        address: addressTextController.text,
+        bio: bioTextController.text,
+        personalid: personalidTextController.text,
+        email: emailTextController.text,
+        permissionid: permissionidTextController.text,
+        photo: imageFile,
       );
-      return;
+
+      registerLoadingState.value = false;
+
+      if (response.success) {
+        Get.defaultDialog(
+          title: "Success",
+          content: Text("User registration successful"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      } else {
+        Get.defaultDialog(
+          title: "Error",
+          content: Text(response.errorMessage ?? "Unknown error occurred"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      }
     }
+  }
 
-    if (password != confirmPassword) {
-      // Show error message
-      Get.snackbar(
-        'Error',
-        'Passwords do not match',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-      return;
+  void pickImage(BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      avatarImagePath.value = pickedFile.path;
     }
-
-    print('User created:');
-    print('First Name: $firstName');
-    print('Last Name: $lastName');
-    print('Password: $password');
-    print('Permission ID: $permissionId');
-    print('User Type: ${userType.toString()}');
-
-    Get.snackbar(
-      'Success',
-      'User created successfully',
-    );
   }
 }
