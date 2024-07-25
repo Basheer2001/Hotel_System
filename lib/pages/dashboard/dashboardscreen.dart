@@ -1,24 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'adminnprofile/adminprofile.dart';
-import 'adminnprofile/login_admin.dart';
-import 'managing_reports/adminsearchroom.dart';
-import 'managing_reports/checkreportpage.dart';
-import 'managing_reports/displayreports.dart';
-import 'managing_reports/showactivereports.dart';
-import 'managing_reports/uncheckedreports.dart';
-import 'managing_rooms/adminallrooms.dart';
-import 'managing_rooms/adminroomdetails.dart';
-import 'managing_rooms/createroom.dart';
-import 'managing_rooms/deleteroom.dart';
-import 'managing_users/banunbanuser.dart';
-import 'managing_users/edituser.dart';
-import 'managing_users/getprofile.dart';
-import 'managing_users/usercreate.dart';
-import 'managing_users/viewallusers.dart';
-import 'managing_users/searchuser.dart';
-import 'managing_users/deleteuser.dart';
+
 import 'package:syncfusion_flutter_charts/charts.dart' as charts;
 
 
@@ -252,42 +235,42 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 leading: Icon(Icons.person),
                 title: Text('View All Users'),
                 onTap: () {
-                  Get.to(() => ViewAllUsers());
+                 // Get.to(() => ViewAllUsers());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.person_add),
                 title: Text('Create New User'),
                 onTap: () {
-                  Get.to(() => CreateUser());
+                 // Get.to(() => CreateUser());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.account_circle),
                 title: Text('Get Profile'),
                 onTap: () {
-                  Get.to(() => UserProfile());
+                 // Get.to(() => UserProfile());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.block),
                 title: Text('Ban/Unban User'),
                 onTap: () {
-                  Get.to(() => BanUnbanUser());
+               //   Get.to(() => BanUnbanUser());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.delete),
                 title: Text('Delete User'),
                 onTap: () {
-                  Get.to(() => DeleteUser());
+                //  Get.to(() => DeleteUser());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.search),
                 title: Text('Search User'),
                 onTap: () {
-                  Get.to(() => SearchUser());
+               //   Get.to(() => SearchUser());
                 },
               ),
             ],
@@ -308,21 +291,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 leading: Icon(Icons.radio_button_unchecked),
                 title: Text('Show Someone Report'),
                 onTap: () {
-                  Get.to(() => DisplayReports());
+                 // Get.to(() => DisplayReports());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.check),
                 title: Text('ShowActiveReports'),
                 onTap: () {
-                 Get.to(() => ShowActiveReports());
+               //  Get.to(() => ShowActiveReports());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.check),
                 title: Text('CheckReports'),
                 onTap: () {
-                  Get.to(() => CheckReportsPage());
+                //  Get.to(() => CheckReportsPage());
                 },
               ),
 
@@ -345,21 +328,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 leading: Icon(Icons.person),
                 title: Text('Get Room Details '),
                 onTap: () {
-                  Get.to(() => AdminRoomDetails());
+                //  Get.to(() => AdminRoomDetails());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.delete),
                 title: Text('ShowALLRooms'),
                 onTap: () {
-                  Get.to(() => AdminAllRooms());
+                //  Get.to(() => AdminAllRooms());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.delete),
                 title: Text(' Search a room'),
                 onTap: () {
-                  Get.to(() => AdminRoomSearch());
+                //  Get.to(() => AdminRoomSearch());
                 },
               ),
 
@@ -397,14 +380,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 leading: Icon(Icons.person),
                 title: Text('login admin'),
                 onTap: () {
-                  Get.to(() =>LoginAdmin());
+               //   Get.to(() =>LoginAdmin());
                 },
               ),
               ListTile(
                 leading: Icon(Icons.radio_button_unchecked),
                 title: Text('Admin Profile'),
                 onTap: () {
-                  Get.to(() => AdminProfile());
+                //  Get.to(() => AdminProfile());
                 },
               ),
 

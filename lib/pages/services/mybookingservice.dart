@@ -12,19 +12,50 @@ class MyBookingService extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Booking Services'),
+        title: Text('My Booking Services',
+            style: TextStyle(color: Colors.blue,
+              shadows: [
+                Shadow(
+                  offset: Offset(5.0, 5.0), // Shadow position
+                  blurRadius: 3.0, // Shadow blur
+                  color: Colors.grey, // Shadow color
+                ),
+              ],
+
+            )
+        ),
+        backgroundColor: Colors.black,
+        shape: CircularAppBarShape(),
+        iconTheme: IconThemeData(color: Colors.grey),
       ),
-      body: ListView.builder(
-        itemCount: services.length,
-        itemBuilder: (context, index) {
-          final service = services[index];
-          return ListTile(
-            title: Text(service.name),
-          //  subtitle: Text(service.description),
-         //   trailing: Text('\$${service.price}'),
-          );
-        },
+      body:
+      Padding(
+        padding: const EdgeInsets.only(top:30),
+        child: ListView.builder(
+          itemCount: services.length,
+          itemBuilder: (context, index) {
+            final service = services[index];
+            IconData serviceIcon = Icons.local_offer;
+            return Card(
+              elevation: 4, // Adjust elevation as needed
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: ListTile(
+                leading: Icon(
+                  serviceIcon,
+                  color: Colors.blue, // Adjust icon color as needed
+                ),
+                title: Text(
+                  service.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
+
     );
   }
 }

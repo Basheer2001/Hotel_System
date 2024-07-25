@@ -395,6 +395,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../controllers/profile_Controller.dart';
+import '../../constant/appbar/circularappbarshape.dart';
 
 class UpdateProfile extends StatelessWidget {
   UpdateProfile({Key? key}) : super(key: key);
@@ -404,8 +405,22 @@ class UpdateProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
+
       appBar: AppBar(
-        title: Text('Update Profile'),
+          title: Text('Update Your Profile', style: TextStyle(color: Colors.blue,
+            shadows: [
+              Shadow(
+                offset: Offset(5.0, 5.0), // Shadow position
+                blurRadius: 3.0, // Shadow blur
+                color: Colors.grey, // Shadow color
+              ),
+            ],
+
+          )), // Adjust title color
+          backgroundColor: Colors.black,
+          shape: CircularAppBarShape(),
+          iconTheme: IconThemeData(color: Colors.grey)
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -413,15 +428,20 @@ class UpdateProfile extends StatelessWidget {
           key: controller.formKey,
           child: ListView(
             children: [
-              Obx(() => CircleAvatar(
-                radius: 60,
-                backgroundImage: controller.avatarImagePath.value.isEmpty
-                    ? null
-                    : FileImage(File(controller.avatarImagePath.value)),
-                child: IconButton(
-                  icon: Icon(Icons.camera_alt),
-                  onPressed: () => _pickImage(),
-                ),
+              SizedBox(height: 30,),
+              Obx(() => Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: controller.avatarImagePath.value.isEmpty
+                        ? null
+                        : FileImage(File(controller.avatarImagePath.value)),
+                    child: IconButton(
+                      icon: Icon(Icons.camera_alt),
+                      onPressed: () => _pickImage(),
+                    ),
+                  ),
+                ],
               )),
               SizedBox(height: 20),
               buildTextField(controller.firstnameTextController, 'First Name', 'Enter your first name'),
@@ -432,12 +452,27 @@ class UpdateProfile extends StatelessWidget {
               buildTextField(controller.newpasswordTextController, 'New Password', 'Enter your new password', obscureText: true),
               buildTextField(controller.newpasswordconfirmation, 'Confirm New Password', 'Confirm your new password', obscureText: true),
               SizedBox(height: 20),
-              Obx(() => ElevatedButton(
+              Obx(() =>
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      ),
+                      elevation: MaterialStateProperty.all<double>(10),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )
+                    ),),
                 onPressed: controller.loginLoadingState.value ? null : () => controller.updateprofile(),
                 child: controller.loginLoadingState.value
                     ? CircularProgressIndicator()
-                    : Text('Save'),
-              )),
+                    : Text('Update ', style: TextStyle(color: Colors.white)),
+
+              )
+
+              ),
             ],
           ),
         ),
@@ -445,7 +480,12 @@ class UpdateProfile extends StatelessWidget {
     );
   }
 
-  Widget buildTextField(TextEditingController controller, String label, String hint, {bool obscureText = false, TextInputType keyboardType = TextInputType.text}) {
+  Widget buildTextField(
+      TextEditingController controller,
+      String label,
+      String hint,
+      {bool obscureText = false, TextInputType keyboardType = TextInputType.text}
+      ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: TextFormField(
@@ -457,7 +497,41 @@ class UpdateProfile extends StatelessWidget {
           hintText: hint,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.grey, // Default border color
+              width: 2.0, // Default border width, increased for boldness
+            ),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.grey, // Border color when focused
+              width: 3.0, // Border width when focused, increased for boldness
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.grey, // Border color when enabled
+              width: 2.0, // Border width when enabled, increased for boldness
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.red, // Border color when there's an error
+              width: 2.0, // Border width when there's an error, increased for boldness
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(
+              color: Colors.red, // Border color when focused and there's an error
+              width: 3.0, // Border width when focused and there's an error, increased for boldness
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {

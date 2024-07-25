@@ -6,7 +6,10 @@ class APIProvider extends GetxService{
  ////
  //static String url = "http://192.168.1.110:8000/api/";
 static String? token;
- static String url = "http://127.0.0.1:8000/api/";
+static String url = "http://127.0.0.1:8000/api/";
+//static String url = "http://192.168.1.4:8000/api/";
+
+
   late dio.Dio _dio;
  static List<String>? cookies;
 
@@ -32,8 +35,10 @@ static String? token;
   }
 
   Future<dio.Response> postRequest(
-
-      String method, Map<String,dynamic> queryParams,dynamic body,{String? cookies,String?token})async{
+      String method,
+      Map<String,dynamic> queryParams,
+      dynamic body,
+      {String? cookies,String?token})async{
     // print(1);
     // DioForBrowser dioForBrowser = DioForBrowser(_dio.options);
     // print(2);
@@ -55,6 +60,7 @@ static String? token;
     print(6);
     dio.Response response=await _dio.post(method,queryParameters: queryParams,data: body);
     print(7);
+    print(response);
     print(response.statusCode);
     if(response.statusCode==200){
       // getc();

@@ -84,14 +84,32 @@ class RoomDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.4, // Set a fixed height for the image
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(imageUrl),
-                  fit: BoxFit.cover, // Adjust this property to contain or cover the image
+            Stack(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: double.infinity, // Set a fixed height for the image
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20), // Add rounded corners to the bottom left
+                      bottomRight: Radius.circular(20), // Add rounded corners to the bottom right
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(imageUrl),
+                      fit: BoxFit.cover, // Adjust this property to contain or cover the image
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: 20, // Adjust the top position as needed
+                  left: 10, // Adjust the left position as needed
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back,color: Colors.black,),
+                    onPressed: () {
+Get.back();                    },
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.all(18),
@@ -203,17 +221,14 @@ class RoomDetailsPage extends StatelessWidget {
                         viewIcon,
                         color: Colors.blue,
                       ),
-
-
                     ],
                   ),
-
                   SizedBox(height: 20),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
                         // Navigate to room booking or any other action
-                       Get.to(() => BookingFormPage());
+                        Get.to(() => BookingFormPage());
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(customColor),
@@ -228,17 +243,21 @@ class RoomDetailsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      child: Text('Book Room'),
+                      child: Text(
+                        'Book Room',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-
           ],
         ),
       ),
     );
+  }
+
   }
 
   Widget _buildCategoryIcon(IconData icon, String label) {
@@ -270,7 +289,7 @@ class RoomDetailsPage extends StatelessWidget {
       ],
     );
   }
-}
+
 
 
 /* ElevatedButton(

@@ -99,6 +99,7 @@ class RoomCard extends StatelessWidget {
                   width: 2, // Set the border width
                 ),
                 left: BorderSide(
+
                   color: Color(0xFF2B74FE), // Set the border color
                   width: 2, // Set the border width
                 ),

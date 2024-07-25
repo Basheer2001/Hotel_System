@@ -13,12 +13,5 @@ class CircularAppBarShape extends ContinuousRectangleBorder {
     return path;
   }
 
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
-    super.paint(canvas, rect, textDirection: textDirection);
 
-    // Apply background color to the app bar
-    final Paint paint = Paint()..color = Colors.white60;
-    canvas.drawPath(getOuterPath(rect, textDirection: textDirection)!, paint);
-  }
 }

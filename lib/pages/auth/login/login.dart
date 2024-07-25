@@ -11,7 +11,7 @@ import '../../../core/function/alertexitapp.dart';
 import '../forgetpassword/sendresetpassword.dart';
 
 //TODO THE OLD LOGIN DESGIN
-/*class Login extends GetView<loginController> {
+class Login extends GetView<loginController> {
   const Login({Key? key}) : super(key: key);
 
   @override
@@ -237,12 +237,12 @@ import '../forgetpassword/sendresetpassword.dart';
 
     );
   }
-}*/
+}
 
 
 
 
-class Login extends GetView<loginController> {
+/*class Login extends GetView<loginController> {
   const Login({Key? key}) : super(key: key);
 
   @override
@@ -585,7 +585,7 @@ class Login extends GetView<loginController> {
       ),
     );
   }
-}
+}*/
 
 
 

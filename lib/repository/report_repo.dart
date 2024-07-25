@@ -53,8 +53,6 @@ class ReportRepo extends GetxService {
         token: APIProvider.token,
       );
 
-
-
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
 

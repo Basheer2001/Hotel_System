@@ -12,7 +12,16 @@ class RoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Rooms', style: TextStyle(color: Colors.grey)), // Adjust title color
+          title: Text('Rooms', style: TextStyle(color: Colors.blue,
+            shadows: [
+              Shadow(
+                offset: Offset(5.0, 5.0), // Shadow position
+                blurRadius: 3.0, // Shadow blur
+                color: Colors.grey, // Shadow color
+              ),
+            ],
+
+          )), // Adjust title color
           backgroundColor: Colors.black,
           shape: CircularAppBarShape(),
           iconTheme: IconThemeData(color: Colors.grey)
@@ -84,7 +93,7 @@ class RoomScreen extends StatelessWidget {
                     ),
                     trailing: Icon(
                       Icons.room_rounded,
-                      color: Colors.teal,
+                      color: Colors.blue,
                     ),
                   ),
                 );
@@ -96,6 +105,7 @@ class RoomScreen extends StatelessWidget {
     );
   }
 }
+
 
 
 

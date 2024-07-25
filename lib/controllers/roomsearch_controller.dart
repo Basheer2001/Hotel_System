@@ -55,9 +55,4 @@ class RoomSearchController extends GetxController {
       }
     }
   }
-
-
-
-
-
 }

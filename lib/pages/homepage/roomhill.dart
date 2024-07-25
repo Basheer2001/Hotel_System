@@ -34,7 +34,7 @@ class RooHillView extends GetView<RoomHillController> {
 
   @override
   Widget build(BuildContext context) {
-    Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
+
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[50], // Set background color
@@ -86,7 +86,7 @@ class Room {
 
 class RoomCard extends StatelessWidget {
   final Room room;
-
+  Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
   RoomCard({required this.room});
 
   @override

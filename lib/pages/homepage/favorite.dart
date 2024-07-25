@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../constant/appbar/circularappbarshape.dart';
 
 class Favorite extends StatelessWidget {
@@ -13,10 +11,27 @@ class Favorite extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Favorite', style: TextStyle(color: Colors.grey)), // Adjust title color
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.grey), // Back button icon
+          onPressed: () {
+            Get.back(); // Navigate back using GetX
+          },
+        ),
+          title: Text('Favorite',
+              style: TextStyle(color: Colors.blue,
+            shadows: [
+              Shadow(
+                offset: Offset(5.0, 5.0), // Shadow position
+                blurRadius: 3.0, // Shadow blur
+                color: Colors.grey, // Shadow color
+              ),
+            ],
+
+          )), // Adjust title color
           backgroundColor: Colors.black,
           shape: CircularAppBarShape(),
-          iconTheme: IconThemeData(color: Colors.grey)
+
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -73,7 +88,7 @@ class Favorite extends StatelessWidget {
                         ),
                         trailing: Icon(
                           Icons.room_rounded,
-                          color: Colors.teal,
+                          color: Colors.blue,
                         ),
                       ),
                     );

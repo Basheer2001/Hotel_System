@@ -13,16 +13,6 @@ class AppRoute {
   static const String uodateprofile="/profile";
   static const String favorite="/favorite";
 
-  //Dashboard
-  static const String dashboardscreen="/dashboardscreen";
-  static const String viewallusers="/viewallusers";
-  static const String edituser="/edituser";
-  static const String getprofile="/getprofile";
-  static const String banunbanuser="/banunbanuser";
-  static const String deleteuser="/deleteuser";
-  static const String searchuser="/searchuser";
-  static const String adminallrooms="/adminallrooms";
-  static const String  adminroomsearch="/ adminroomsearch";
 
 
  //Reservation

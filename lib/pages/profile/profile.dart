@@ -142,7 +142,8 @@ class Profile extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[50], // Set background color
-      body: Obx(() {
+      body:
+      Obx(() {
         if (controller.loading.value) {
           return Center(child: CircularProgressIndicator());
         }
@@ -158,6 +159,12 @@ class Profile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+Row(
+  children: [
+    InkWell(onTap: (){Get.back();},
+        child: Icon(Icons.arrow_back,color: Colors.grey))
+  ],
+),
               // Avatar and Update Button Section
               Center(
                 child: Column(
@@ -174,7 +181,7 @@ class Profile extends StatelessWidget {
                         Get.to(() => UpdateProfile());
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(customColor),
+                        backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),
                         textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(color: Colors.white)),
                         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                           EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -308,7 +315,7 @@ class Profile extends StatelessWidget {
             Get.to(() => BookingFormPage());
           },
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(customColor),
+            backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),
             textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(color: Colors.white)),
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
               EdgeInsets.symmetric(vertical: 15, horizontal: 40),
