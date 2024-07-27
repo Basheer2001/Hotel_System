@@ -123,6 +123,7 @@ class SendResetPassword extends GetView<SendResetPasswordController> {
 */
 
 //basheeralkhiat86
+/*
 class SendResetPassword extends GetView<SendResetPasswordController> {
   const SendResetPassword({Key? key}) : super(key: key);
 
@@ -380,6 +381,145 @@ class SendResetPassword extends GetView<SendResetPasswordController> {
     );
   }
 }
+*/
+
+class SendResetPassword extends GetView<SendResetPasswordController> {
+  const SendResetPassword({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(SendResetPasswordController());
+    return Scaffold(
+      body: WillPopScope(
+        onWillPop: alertExitApp,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0), // Adjust horizontal padding as needed
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+              crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch content horizontally
+              children: [
+                SizedBox(height: 10), // Top space
+                Text(
+                  "12".tr,
+                  style: TextStyle(color: Colors.black, fontSize: 35),
+                  textAlign: TextAlign.center, // Center align the text
+                ),
+                SizedBox(height: 6), // Space between title and subtitle
+                Text(
+                  "7".tr,
+                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                  textAlign: TextAlign.center, // Center align the text
+                ),
+                SizedBox(height: 50), // Space below subtitle
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text(
+                        "Email",
+                        style: TextStyle(color: Colors.black, fontSize: 13),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child:
+                      Obx(
+                            () => TextFormField(
+                          controller: controller.usernameTextController,
+                          autovalidateMode: !controller.firstSubmit.value
+                              ? AutovalidateMode.disabled
+                              : AutovalidateMode.always,
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return "Required Field";
+                            } else if (!GetUtils.isEmail(value)) {
+                              return "Wrong Email";
+                            }
+                            return null;
+                          },
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.grey.shade200,
+                            hintText: '8'.tr,
+                            hintStyle: TextStyle(color: Colors.grey),
+                            contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                            suffixIcon: Icon(Icons.email, color: Colors.grey), // Email icon on the right side
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        controller.resetpassword();
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xFF003398)),
+                        foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 20), // Adjust padding as needed
+                        ),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        "12".tr,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                ),
+                // Bottom space
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
 
 /*body: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
