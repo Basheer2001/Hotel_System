@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
 
       ),
-      initialRoute: '/dashboard', // Set your initial route
+      //initialRoute: '/dashboard', // Set your initial route
       getPages: routes,
 
     );

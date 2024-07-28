@@ -1,4 +1,6 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +9,8 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
+import 'package:untitled1/pages/rooms/roomsResult.dart';
+import 'package:untitled1/pages/rooms/roomsfilter.dart';
 import 'package:untitled1/pages/services/mybookingservice.dart';
 import '../../constant/appbar/circularappbarshape.dart';
 import '../../controllers/homepage/homepage_controller.dart';
@@ -53,12 +57,6 @@ class HotelHome extends StatelessWidget {
   ];
 
   // Screens for navigation bar
-  final List<Widget> _screens = [
-    RoomSearch(),
-    RoomSearch(),
-    RoomSearch(),
-    Profile(),
-  ];
 
   Widget _buildCategoryIcon(IconData icon, String label) {
     Widget destinationScreen;
@@ -177,6 +175,9 @@ class HotelHome extends StatelessWidget {
               decoration: BoxDecoration(
                 color:Colors.black,
               ),
+              onDetailsPressed: (){
+                Get.to(()=>Profile());
+              },
               accountName: Text('Lory Demerjian',style: TextStyle(color: Colors.white),),
               accountEmail: Text('Lory@Gmail.com',style: TextStyle(color: Colors.white),),
               currentAccountPicture: CircleAvatar(
@@ -195,14 +196,14 @@ class HotelHome extends StatelessWidget {
                 Get.to(DashboardScreen());
               },
             ),
-            ListTile(
-              leading: Icon(Icons.person,color: Colors.black),
-              title: Text('Profile',),
-              onTap: () {
-                Get.to(() => Profile());
-
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.person,color: Colors.black),
+            //   title: Text('Profile',),
+            //   onTap: () {
+            //     Get.to(() => Profile());
+            //
+            //   },
+            // ),
             ListTile(
               leading: Icon(Icons.logout,color: Colors.black),
               title: Text('Logout',),
@@ -210,14 +211,14 @@ class HotelHome extends StatelessWidget {
                 Get.find<HotelHomeController>().logout();
               },
             ),
-            ListTile(
-              leading: Icon(Icons.search,color: Colors.black),
-              title: Text('Search',),
-              onTap: () {
-                Get.to(()=>RoomSearch());
-
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.search,color: Colors.black),
+            //   title: Text('Search',),
+            //   onTap: () {
+            //     Get.to(()=>RoomSearch());
+            //
+            //   },
+            // ),
             ListTile(
               leading: Icon(Icons.location_on_sharp,color: Colors.black),
               title: Text('Location',),
@@ -554,7 +555,7 @@ class HotelHome extends StatelessWidget {
 
 
       ),
-     /* floatingActionButton: FloatingActionButton(
+      /* floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add,size: 30,),
         backgroundColor: Colors.blue,
@@ -572,10 +573,10 @@ class HotelHome extends StatelessWidget {
               Get.to(() => Profile());
               break;
             case 2:
-              Get.to(() => RoomSearch());
+              Get.to(() => RoomFilter());
               break;
             case 3:
-              Get.to(() => Profile());
+              Get.to(() => RoomScreen());
               break;
           }
         },
@@ -583,7 +584,7 @@ class HotelHome extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.meeting_room_sharp), label: "rooms"),
         ],
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
@@ -1418,3 +1419,22 @@ class CustomSearch extends SearchDelegate {
                         basePrice: 149,
                       );
                     },*/// Text style
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

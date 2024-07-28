@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled1/pages/rooms/roomdetailclass.dart';
+import 'package:untitled1/pages/rooms/roomsfilter.dart';
 
 import '../../constant/appbar/circularappbarshape.dart';
 import '../../controllers/room/room_controller.dart'; // Replace with correct import
@@ -26,17 +28,33 @@ class RoomScreen extends StatelessWidget {
           shape: CircularAppBarShape(),
           iconTheme: IconThemeData(color: Colors.grey)
       ),
-      body: Obx(() {
-        if (roomController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        } else if (roomController.error.value.isNotEmpty) { // Check if error is not empty
-          return Center(child: Text('Error: ${roomController.error.value}'));
-        } else if (roomController.rooms.isEmpty) {
-          return Center(child: Text('No rooms available'));
-        } else {
-          return _buildRoomList(roomController.rooms);
-        }
-      }),
+      body: Stack(
+        children:<Widget>[ 
+          Positioned(
+            right: 20,
+            bottom: 40,
+            child: FloatingActionButton(
+              backgroundColor: Colors.grey,
+                
+                onPressed: (){
+                  Get.to(()=>RoomFilter());
+                },
+                    child: Icon(Icons.filter_list_alt),
+            ),
+          ),
+          Obx(() {
+          if (roomController.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          } else if (roomController.error.value.isNotEmpty) { // Check if error is not empty
+            return Center(child: Text('Error: ${roomController.error.value}'));
+          } else if (roomController.rooms.isEmpty) {
+            return Center(child: Text('No rooms available'));
+          } else {
+            return _buildRoomList(roomController.rooms);
+          }
+        }),
+        ]
+      ),
     );
   }
 
