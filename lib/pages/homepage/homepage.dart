@@ -27,7 +27,7 @@ import 'hoteln.dart';
 import 'hotelnp.dart';
 import 'hotels.dart';
 
-//
+
 class HotelHome extends StatelessWidget {
   final String token;
 
