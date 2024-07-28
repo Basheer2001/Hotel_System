@@ -12,7 +12,7 @@ import '../../pages/profile/profile.dart';
 import '../../pages/rooms/roomclass.dart';
 import '../../repository/homepage_repo.dart';
 
-//
+
 class HotelHomeController extends GetxController {
 
   //final isLoading = false.obs;
