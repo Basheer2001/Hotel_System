@@ -123,7 +123,7 @@ class HotelHome extends StatelessWidget {
       ),
     );
   }
-
+//
   @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);

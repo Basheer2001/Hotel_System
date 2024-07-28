@@ -27,7 +27,7 @@ class RoomScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           shape: CircularAppBarShape(),
           iconTheme: IconThemeData(color: Colors.grey)
-      ),
+      ),//
       body: Stack(
         children:<Widget>[ 
           Positioned(

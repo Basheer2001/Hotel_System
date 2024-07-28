@@ -36,7 +36,7 @@ class RoomSearchController extends GetxController {
       );
 
       isLoading.value = false;
-
+//
       if (response.success) {
         rooms.assignAll(response.data!);
       } else {

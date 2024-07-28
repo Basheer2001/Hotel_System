@@ -40,7 +40,7 @@ class RoomsResult extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-
+//
             Expanded(
               child: Obx(() {
                 if (roomSearchController.isLoading.value) {
