@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:untitled1/pages/homepage/homepage.dart';
+import 'package:untitled1/pages/rooms/roomserachscreen.dart';
 import '../../constant/sharedprefrence/shared.dart';
 import '../../pages/auth/login/login.dart';
 import '../../pages/homepage/favorite.dart';
 import '../../pages/homepage/hotel.dart';
 import '../../pages/homepage/roomdetailspage.dart';
+import '../../pages/profile/profile.dart';
 import '../../pages/rooms/roomclass.dart';
 import '../../repository/homepage_repo.dart';
 
 //
 class HotelHomeController extends GetxController {
 
-  final isLoading = false.obs;
+  //final isLoading = false.obs;
+  var currentIndex = 0.obs; // Reactive variable
 
   HomePageRepo homePageRepo = Get.find<HomePageRepo>();
 

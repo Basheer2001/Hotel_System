@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,6 +15,7 @@ import '../../controllers/services/services_controller.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../fluttermap/googlemapview.dart';
 import '../hotel_weather/view.dart';
+import '../navigation/navigation-screen.dart';
 import '../profile/profile.dart';
 import '../report/reports.dart';
 import '../rooms/roomscreen.dart';
@@ -38,6 +40,23 @@ class HotelHome extends StatelessWidget {
     {'icon': Icons.beach_access, 'label': 'Sea'},
     {'icon': Icons.pool, 'label': 'Pool'},
     {'icon': Icons.terrain, 'label': 'Hill'},
+    {'icon': Icons.house, 'label': 'house'},
+  ];
+
+  //navigation bar
+  final List<IconData> iconList = [
+    Icons.home,
+    Icons.settings,
+    Icons.search,
+    Icons.person,
+  ];
+
+  // Screens for navigation bar
+  final List<Widget> _screens = [
+    RoomSearch(),
+    RoomSearch(),
+    RoomSearch(),
+    Profile(),
   ];
 
   Widget _buildCategoryIcon(IconData icon, String label) {
@@ -48,6 +67,9 @@ class HotelHome extends StatelessWidget {
         break;
       case 'Pool':
         destinationScreen = RoomPoolView();
+        break;
+      case 'Hill':
+        destinationScreen = RooHillView();
         break;
       case 'Hill':
         destinationScreen = RooHillView();
@@ -173,19 +195,11 @@ class HotelHome extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout,color: Colors.black),
+              leading: Icon(Icons.person,color: Colors.black),
               title: Text('Profile',),
               onTap: () {
                 Get.to(() => Profile());
 
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.report,color: Colors.black),
-              title: Text('Reports',),
-              onTap: () {
-               // Get.to(() => Reports());
-                // Get.to(()=>CreateReport());
               },
             ),
             ListTile(
@@ -196,31 +210,11 @@ class HotelHome extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.room_rounded,color: Colors.black),
-              title: Text('Rooms',),
-              onTap: () {
-
-                Get.to(() => RoomScreen());
-
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.search,color: Colors.black),
               title: Text('Search',),
               onTap: () {
                 Get.to(()=>RoomSearch());
 
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.room_service,color: Colors.black),
-              title: Text('Services',),
-              onTap: () async {
-                // Fetch services data
-                /*await servicesController.fetchServices();
-          Get.to(() => ServicesPage(services: servicesController.services));*/
-                await servicesController.fetchServices();
-                Get.to(() => ServicesPage(services: servicesController.services));
               },
             ),
             ListTile(
@@ -240,6 +234,41 @@ class HotelHome extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: Icon(Icons.transform,color: Colors.black),
+              title: Text('Navigation Screen',),
+              onTap: () async {
+                await servicesController.fetchBookingServices(bookingId);
+                print(servicesController.services);
+                Get.to(() =>  SideNavigationScreen()
+                );
+              },
+            ),
+            /* ListTile(
+              leading: Icon(Icons.report,color: Colors.black),
+              title: Text('Reports',),
+              onTap: () {
+               // Get.to(() => Reports());
+                // Get.to(()=>CreateReport());
+              },
+            ),*/
+            /* ListTile(
+              leading: Icon(Icons.room_rounded,color: Colors.black),
+              title: Text('Rooms',),
+              onTap: () {
+
+                Get.to(() => RoomScreen());
+
+              },
+            ),*/
+            /* ListTile(
+              leading: Icon(Icons.room_service,color: Colors.black),
+              title: Text('Services',),
+              onTap: () async {
+                await servicesController.fetchServices();
+                Get.to(() => ServicesPage(services: servicesController.services));
+              },
+            ),*/
+            /*ListTile(
               leading: Icon(Icons.cleaning_services,color: Colors.black),
               title: Text('MY Booking Servcies',),
               onTap: () async {
@@ -247,9 +276,7 @@ class HotelHome extends StatelessWidget {
                 print(servicesController.services);
                 Get.to(() => MyBookingService(services: servicesController.services));
               },
-            ),
-
-
+            ),*/
           ],
         ),
       ),
@@ -521,9 +548,47 @@ class HotelHome extends StatelessWidget {
               );
             }),
           ),
+
         ],
+
+
       ),
-    );
+     /* floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add,size: 30,),
+        backgroundColor: Colors.blue,
+      ),*/
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Obx(() => BottomNavigationBar(
+        currentIndex: controller.currentIndex.value,
+        onTap: (index) {
+          controller.currentIndex.value = index;
+          switch (index) {
+            case 0:
+              Get.to(() => HotelHome(token: token));
+              break;
+            case 1:
+              Get.to(() => Profile());
+              break;
+            case 2:
+              Get.to(() => RoomSearch());
+              break;
+            case 3:
+              Get.to(() => Profile());
+              break;
+          }
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+      )
+
+      ),    );
   }
 }
 

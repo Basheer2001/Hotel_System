@@ -27,7 +27,7 @@ List<GetPage<dynamic>>? routes =[
 // GetPage(name:"/", page: ()=>const OnBoarding()),
 
  //GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
-  GetPage(name:"/", page: ()=> const Login()),
+ // GetPage(name:"/", page: ()=> const Login()),
   GetPage(name:AppRoute.login, page: ()=> const Login()),
  GetPage(name:AppRoute.checkemail, page: () => Checkemail()),
 
