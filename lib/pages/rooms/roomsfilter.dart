@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled1/pages/rooms/roomsResult.dart';
 
 import '../../controllers/roomsearch_controller.dart';
 
@@ -233,7 +234,10 @@ class _RoomFilterState extends State<RoomFilter> {
 
                   SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: roomSearchController.searchRooms,
+                    onPressed:(){
+                      roomSearchController.searchRooms;
+                      Get.to(()=>RoomsResult());
+                    } ,
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>((Colors.blueAccent)),
                       textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(color: Colors.white)),
