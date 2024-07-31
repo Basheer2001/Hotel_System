@@ -15,16 +15,18 @@ import 'package:untitled1/pages/report/report.dart';
 import 'package:untitled1/pages/report/reports.dart';
 import 'package:untitled1/repository/account_repo.dart';
 import 'package:untitled1/repository/profile_repo.dart';
+import 'Services.dart';
 import 'constant/routes.dart';
 import 'pages/auth/login/login.dart';
 import 'pages/profile/updateprofile.dart';
 import 'package:untitled1/pages/homepage/favorite.dart';
 /////////
+MyServices myServices=Get.find();
 
 List<GetPage<dynamic>>? routes =[
   //TODO AUTH
- //GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
- GetPage(name:"/", page: ()=> HotelHome(token: "token")),
+ GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
+ GetPage(name:"/", page: ()=> Login()),
 
  GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),
  // GetPage(name:"/", page: ()=> const Login()),

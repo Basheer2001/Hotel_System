@@ -17,8 +17,8 @@ class loginController extends GetxController{
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
   TextEditingController usernameTextController=TextEditingController(text:"basheeralkhiat86@gmail.com");
-  TextEditingController PasswordTextController=TextEditingController(text:"12345678");
-  TextEditingController checkPasswordTextController=TextEditingController(text:"12345678");
+  TextEditingController PasswordTextController=TextEditingController(text:"123456789");
+  TextEditingController checkPasswordTextController=TextEditingController(text:"123456789");
 
   var token = "".obs;
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 import '../Services.dart';
 import '../models/app_response.dart';
@@ -28,60 +29,111 @@ class ProfileRepo extends GetxService{
       ) async {
     print("\n1");
     try {
-
-      var formData = dio.FormData.fromMap({
-        "first_name": firstname,
-        "last_name": lastname,
-        "number":number,
-        "newpassword": newpassword,
-        "password_confirmation":newpasswordconfirmation,
-        "current_password": currentpassword,
-        "address": address,
-
-        if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
-      });
-
-      dio.Response response = await apiProvider.postRequest(
-          "${APIProvider.url}user/profile",
-          {},
-          formData,// Pass formData instead of jsonEncode
-          token: APIProvider.token
+      http.Response response0 = await apiProvider.postRequest(
+        "${APIProvider.url}user/profile",
+        {},
+        {
+          "first_name": firstname,
+              "last_name": lastname,
+              // "number":number,
+              // "newpassword": newpassword,
+              // "password_confirmation":newpasswordconfirmation,
+              // "current_password": currentpassword,
+              // "address": address,
+        },
+        token: myServices.sharedPreferences.getString('token')
       );
-      print("\n2");
-      APIProvider.cookies =response.headers['set-cookie'];
+      var response=jsonDecode(response0.body);
 
-      String token = response.data["data"];
+      //
+      // print("Response status code: ${response.statusCode}");
+      // print("Response body: ${response.data}");
+      // print("Response token: $token");
 
-      print("Response status code: ${response.statusCode}");
-      print("Response cookies: ${ APIProvider.cookies}");
-      print("Response header: ${response.headers}");
-      print("Response body: ${response.data}");
-      print("Response token: $token");
-
-      if (response.statusCode == 200) {
-        if (response.data != null && response.data["data"] != null) {
+      if (response0.statusCode == 200) {
+        if (response0 != null) {
           return AppResponse<String>(
             success: true,
-            data: response.data["data"],
           );
         } else {
           throw Exception("Token not found in response data");
         }
       } else {
-        throw Exception("Server responded with status code ${response.statusCode}");
+        throw Exception("Server responded with status code ${response0.statusCode}");
       }
-    } on dio.DioException catch (e) {
-      print("Dio error : $e");
+    }
+    //catch(e){print(e);};
+    on dio.DioException catch (e) {
+      print("Dio error during login: $e");
       String errorMessage = "Network error occurred";
       if (e.response != null) {
         errorMessage = "Server error: ${e.response!.statusCode}";
         // Optionally, handle different types of Dio errors (e.g., timeouts, connectivity issues)
       }
       return AppResponse(success: false, errorMessage: errorMessage);
-    } catch (e) {
-      print("Error : $e");
+    }
+    catch (e) {
+      print("Error during login: $e");
       return AppResponse(success: false, errorMessage: e.toString());
     }
+    // try {
+    //
+    //   var formData = dio.FormData.fromMap({
+    //     "first_name": firstname,
+    //     "last_name": lastname,
+    //     "number":number,
+    //     "newpassword": newpassword,
+    //     "password_confirmation":newpasswordconfirmation,
+    //     "current_password": currentpassword,
+    //     "address": address,
+    //
+    //     if (photo != null) 'photo': await dio.MultipartFile.fromFile(photo.path),
+    //   });
+    //
+    //   dio.Response response = await apiProvider.postRequest(
+    //       '${APIProvider.url}user/profile',
+    //       {},
+    //       formData,// Pass formData instead of jsonEncode
+    //       token: APIProvider.token
+    //   );
+    //   print("\n2");
+    //   // APIProvider.cookies =response.headers['set-cookie'];
+    //   //
+    //   // String token = response.data["data"];
+    //
+    //   print("Response status code: ${response.statusCode}");
+    //   print("Response cookies: ${ APIProvider.cookies}");
+    //   print("Response header: ${response.headers}");
+    //   print("Response body: ${response.data}");
+    //   //print("Response token: $token");
+    //
+    //   if (response.statusCode == 200) {
+    //     if (response.data != null && response.data["data"] != null) {
+    //       return AppResponse<String>(
+    //         success: true,
+    //         data: response.data["data"],
+    //       );
+    //     } else {
+    //       throw Exception("Token not found in response data");
+    //     }
+    //   } else {
+    //     throw Exception("Server responded with status code ${response.statusCode}");
+    //   }
+    // //} on dio.DioException catch (e) {
+    // }
+    // // on dio.DioException catch (e) {
+    // //   print("Dio error : $e");
+    // //   String errorMessage = "Network error occurred";
+    // //   if (e.response != null) {
+    // //     errorMessage = "Server error: ${e.response!.statusCode}";
+    // //     // Optionally, handle different types of Dio errors (e.g., timeouts, connectivity issues)
+    // //   }
+    // //   return AppResponse(success: false, errorMessage: errorMessage);
+    // // }
+    //    catch (e) {
+    //   print("Error : $e");
+    //   return AppResponse(success: false, errorMessage: e.toString());
+    // }
   }
 
 /*

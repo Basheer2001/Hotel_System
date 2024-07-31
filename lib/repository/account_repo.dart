@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 import '../Services.dart';
 import '../models/app_response.dart';
@@ -14,35 +15,39 @@ class AccountRepo extends GetxService{
 
   Future<AppResponse<String>> login(String username, String password) async {
     try {
-      dio.Response response = await apiProvider.postRequest(
+      http.Response response0 = await apiProvider.postRequest(
         "${APIProvider.url}login",
         {},
-        jsonEncode({
+        {
           "email": username,
           "password": password,
-        }),
+        },
       );
+      var response=jsonDecode(response0.body);
 
-      String token = response.data["data"];
+      String token = response["data"];
       myServices.sharedPreferences.setString("token", token);
+      APIProvider.token=token;
+      //
+      // print("Response status code: ${response.statusCode}");
+      // print("Response body: ${response.data}");
+      // print("Response token: $token");
 
-      print("Response status code: ${response.statusCode}");
-      print("Response body: ${response.data}");
-      print("Response token: $token");
-
-      if (response.statusCode == 200) {
-        if (response.data != null && response.data["data"] != null) {
+      if (response0.statusCode == 200) {
+        if (response0 != null && response["data"] != null) {
           return AppResponse<String>(
             success: true,
-            data: response.data["data"],
+            data: response["data"],
           );
         } else {
           throw Exception("Token not found in response data");
         }
       } else {
-        throw Exception("Server responded with status code ${response.statusCode}");
+        throw Exception("Server responded with status code ${response0.statusCode}");
       }
-    } on dio.DioException catch (e) {
+     }
+     //catch(e){print(e);};
+      on dio.DioException catch (e) {
       print("Dio error during login: $e");
       String errorMessage = "Network error occurred";
       if (e.response != null) {
@@ -50,7 +55,8 @@ class AccountRepo extends GetxService{
         // Optionally, handle different types of Dio errors (e.g., timeouts, connectivity issues)
       }
       return AppResponse(success: false, errorMessage: errorMessage);
-    } catch (e) {
+    }
+    catch (e) {
       print("Error during login: $e");
       return AppResponse(success: false, errorMessage: e.toString());
     }
