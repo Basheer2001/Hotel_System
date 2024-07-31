@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled1/Services.dart';
 import 'package:untitled1/controllers/report_controller.dart';
 import 'package:untitled1/providers/api_provider.dart';
@@ -64,6 +65,8 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   AppBinding().dependencies();
   await initialServices();
+  // SharedPreferences pref = await SharedPreferences.getInstance();
+  // pref.clear();
   runApp(const MyApp());
 }
 
