@@ -112,7 +112,7 @@ class APIProvider extends GetxService {
     print('token is ${pref.get('token')}');
 
     // if (response.statusCode == 200) {
-    //   // getc();
+    //   // getc();  //
     //   return response;
     // }
     // else if (response.statusCode == 400) {
