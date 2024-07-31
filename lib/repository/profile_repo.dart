@@ -49,7 +49,7 @@ class ProfileRepo extends GetxService{
       // print("Response status code: ${response.statusCode}");
       // print("Response body: ${response.data}");
       // print("Response token: $token");
-
+//
       if (response0.statusCode == 200) {
         if (response0 != null) {
           return AppResponse<String>(

@@ -28,7 +28,7 @@ class AccountRepo extends GetxService{
       String token = response["data"];
       myServices.sharedPreferences.setString("token", token);
       APIProvider.token=token;
-      //
+      ////
       // print("Response status code: ${response.statusCode}");
       // print("Response body: ${response.data}");
       // print("Response token: $token");

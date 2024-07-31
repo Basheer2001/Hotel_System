@@ -47,7 +47,7 @@ class loginController extends GetxController{
   void toggleObscureText() {
     obscureText.toggle();
   }
-
+//
 
   void login() async{
     firstSubmit.value=true;

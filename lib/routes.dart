@@ -20,7 +20,7 @@ import 'constant/routes.dart';
 import 'pages/auth/login/login.dart';
 import 'pages/profile/updateprofile.dart';
 import 'package:untitled1/pages/homepage/favorite.dart';
-/////////
+///////////
 MyServices myServices=Get.find();
 
 List<GetPage<dynamic>>? routes =[
