@@ -53,6 +53,7 @@ class AppBinding extends Bindings{
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());
 
+
     Get.put(HotelHomeController());
    // Get.put(HotelHomeController(Get.arguments));
 

@@ -40,58 +40,46 @@ class ReportRepo extends GetxService {
     }
   }
 
-  Future<AppResponse<Report>> reportsomthing(String title, String text) async {
+  Future<AppResponse<Map<String, dynamic>>> createReport(String title, String textDescription) async {
     try {
       dio.Response response = await apiProvider.postRequest(
-        "${APIProvider.url}make/reports",
+        "${APIProvider.url}reports",
         {},
         jsonEncode({
           "title": title,
-          "text_description": text,
+          "text_description": textDescription,
         }),
-       // cookies: APIProvider.cookies, // Pass cookies if needed
-        token: APIProvider.token,
       );
 
-      print("Response status code: ${response.statusCode}");
-      print("Response body: ${response.data}");
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        if (response.data != null && response.data["msg"] != null && response.data["msg"]["report"] != null) {
-          var reportData = response.data["msg"]["report"];
-          Report report = Report(
-            id: reportData["id"],
-            title: reportData["title"],
-            description: reportData["text_description"],
-          );
-
-          return AppResponse<Report>(
-            success: true,
-            data: report,
-          );
-        } else {
-          print("Response data structure unexpected: ${response.data}");
-          throw Exception("Report details not found in response data");
-        }
+      if (response.statusCode == 201 && response.data["status"] == true) {
+        return AppResponse<Map<String, dynamic>>(
+          success: true,
+          data: response.data["msg"]["report"],
+        );
       } else {
-        print("Server responded with an error: ${response.data}");
-        throw Exception("Server responded with status code ${response.statusCode}");
+        throw Exception(response.data["msg"]);
       }
+    } on dio.DioException catch (e) {
+      print("Dio error during report creation: $e");
+      String errorMessage = "Network error occurred";
+      if (e.response != null) {
+        errorMessage = "Server error: ${e.response!.statusCode}";
+      }
+      return AppResponse(success: false, errorMessage: errorMessage);
     } catch (e) {
-      // Enhanced error logging
-      print("Error during writing report: ${e.runtimeType} - ${e.toString()}");
-      if (e is DioError) {
-        print("DioError details: ${e.response?.data ?? e.message}");
-      }
-      return AppResponse<Report>(success: false, errorMessage: e.toString());
-  }}
-
-
-
-
-
-
+      print("Error during report creation: $e");
+      return AppResponse(success: false, errorMessage: e.toString());
+    }
+  }
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,11 +13,13 @@ import '../../constant/appbar/circularappbarshape.dart';
 import '../../controllers/homepage/homepage_controller.dart';
 import '../../controllers/roomsearch_controller.dart';
 import '../../controllers/services/services_controller.dart';
+import '../bookings/roomsView.dart';
 import '../dashboard/dashboardscreen.dart';
 import '../fluttermap/googlemapview.dart';
 import '../hotel_weather/view.dart';
 import '../navigation/navigation-screen.dart';
 import '../profile/profile.dart';
+import '../report/createreport.dart';
 import '../report/reports.dart';
 import '../rooms/roomscreen.dart';
 import '../rooms/roomserachscreen.dart';
@@ -39,6 +38,7 @@ class HotelHome extends StatelessWidget {
 
   final HotelHomeController controller = Get.put(HotelHomeController());
   final ServicesController servicesController = Get.find<ServicesController>();
+//  final ReviewController  reviewController=Get.put(ReviewController());
 
   // Define categories
   final List<Map<String, dynamic>> categories = [
@@ -245,14 +245,23 @@ class HotelHome extends StatelessWidget {
                 );
               },
             ),
-            /* ListTile(
+             ListTile(
               leading: Icon(Icons.report,color: Colors.black),
               title: Text('Reports',),
               onTap: () {
                // Get.to(() => Reports());
-                // Get.to(()=>CreateReport());
+                Get.to(()=>CreateReport());
               },
-            ),*/
+            ),
+
+            ListTile(
+              leading: Icon(Icons.home_work_outlined,color: Colors.black),
+              title: Text('Book Hotel',),
+              onTap: () async{
+                Get.to(roomsView());
+              },
+            ),
+
             /* ListTile(
               leading: Icon(Icons.room_rounded,color: Colors.black),
               title: Text('Rooms',),
@@ -519,7 +528,8 @@ class HotelHome extends StatelessWidget {
                                         Text(
                                           '\$${hotel.price}',
                                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                        ), RatingBar.builder(
+                                        ),
+                                        RatingBar.builder(
                                           initialRating: hotel.rating ?? 0,
                                           minRating: 0,
                                           direction: Axis.horizontal,
@@ -533,6 +543,7 @@ class HotelHome extends StatelessWidget {
                                           onRatingUpdate: (rating) {
                                             // Update the rating of the hotel
                                             hotel.rating = rating;
+
                                           },
                                         ),
                                       ],
@@ -555,11 +566,7 @@ class HotelHome extends StatelessWidget {
 
 
       ),
-      /* floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add,size: 30,),
-        backgroundColor: Colors.blue,
-      ),*/
+
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(() => BottomNavigationBar(
         currentIndex: controller.currentIndex.value,

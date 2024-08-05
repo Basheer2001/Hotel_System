@@ -16,7 +16,8 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Services', style: TextStyle(color: Colors.blue,
+        title: Text('Services',
+            style: TextStyle(color: Colors.blue,
           shadows: [
             Shadow(
               offset: Offset(5.0, 5.0), // Shadow position

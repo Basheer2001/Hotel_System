@@ -18,7 +18,16 @@ class ServiceRequestPage extends StatelessWidget {
       backgroundColor: Colors.blueGrey[50],
 
       appBar: AppBar(
-        title: Text('Service Request', style: TextStyle(color: Colors.grey)), // Adjust title color
+        title: Text('Service Request/Cancel', style: TextStyle(color: Colors.blue,
+          shadows: [
+            Shadow(
+              offset: Offset(5.0, 5.0), // Shadow position
+              blurRadius: 3.0, // Shadow blur
+              color: Colors.grey, // Shadow color
+            ),
+          ],
+
+        )), // Adjust title color
         backgroundColor: Colors.black,
         shape: CircularAppBarShape(),
         iconTheme: IconThemeData(color: Colors.grey),
@@ -82,7 +91,10 @@ class ServiceRequestPage extends StatelessWidget {
                         },
                         child: Text("Submit1", style: TextStyle(color: Colors.black)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: customColor,
+                            backgroundColor:Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4), // Adjust border radius to make it more rectangular
+                          ),
                         ),
                       ),
                       SizedBox(width: 40),
@@ -96,7 +108,10 @@ class ServiceRequestPage extends StatelessWidget {
 
                         child: Text('Cancel ', style: TextStyle(color: Colors.black)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: customColor,
+                          backgroundColor:Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4), // Adjust border radius to make it more rectangular
+                          ),
                         ),
                       ),
 

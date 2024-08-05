@@ -12,13 +12,14 @@ class ReportController extends GetxController {
 
   var isLoading = false.obs;
   var reports = <Reportt>[].obs;
+  var reportCreationLoadingState = false.obs;
 
 
   var firstSubmit =false.obs;
   var loginLoadingState=false.obs;
 
-  TextEditingController titleController=TextEditingController(text:"room");
-  TextEditingController descriptionController=TextEditingController(text:"picture");
+  TextEditingController titleController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
   @override
   void onInit() {
     fetchReports();
@@ -38,49 +39,46 @@ class ReportController extends GetxController {
     }
   }
 
-  void reportsomthing() async{
-    firstSubmit.value=true;
-    if(formKey.currentState!.validate()) {
-      loginLoadingState.value = true;
-      AppResponse response = await reportRepo.reportsomthing(
+
+  void createReport() async {
+    if (formKey.currentState!.validate()) {
+      reportCreationLoadingState.value = true;
+      AppResponse<Map<String, dynamic>> response = await reportRepo
+          .createReport(
         titleController.text,
         descriptionController.text,
       );
-      loginLoadingState.value = false;
+      reportCreationLoadingState.value = false;
+
       if (response.success) {
-        print("Verification Code Response: ${response.data}");
-        // Get.to(() => Report();
         Get.defaultDialog(
-            title: "Success",
-            content: Text(""),
-            actions: [
-              TextButton(onPressed: () {
+          title: "Success",
+          content: Text("Report created successfully"),
+          actions: [
+            TextButton(
+              onPressed: () {
                 Get.back();
               },
-                  child: Text("ok")),
-            ]
+              child: Text("OK"),
+            ),
+          ],
         );
       } else {
         Get.defaultDialog(
-            title: "Error",
-            content: Text(response.errorMessage!),
-            actions: [
-              TextButton(onPressed: () {
+          title: "Error",
+          content: Text(response.errorMessage ?? "Unknown error"),
+          actions: [
+            TextButton(
+              onPressed: () {
                 Get.back();
               },
-                  child: Text("ok")),
-            ]
+              child: Text("OK"),
+            ),
+          ],
         );
       }
-    }}
-
-
-
-
-
-
-
-
+    }
+  }
 }
 
 

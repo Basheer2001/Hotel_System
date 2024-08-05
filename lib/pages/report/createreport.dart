@@ -4,66 +4,52 @@ import 'package:get/get.dart';
 import '../../controllers/report_controller.dart';
 
 class CreateReport extends StatelessWidget {
-  CreateReport({super.key});
-
-
-  final ReportController controller = Get.find<ReportController>();
+  final ReportController reportController = Get.put(ReportController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: AppBar(
-        title: Text('Create Report'),
-      ),
-
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: controller.formKey,
-          child: ListView(
+      appBar: AppBar(title: Text('Create Report')),
+      body: Form(
+        key: reportController.formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
             children: [
-
-              buildTextField(controller.titleController, 'First Name', 'Enter your first name'),
-              buildTextField(controller.descriptionController, 'Last Name', 'Enter your last name'),
-
+              TextFormField(
+                controller: reportController.titleController,
+                decoration: InputDecoration(labelText: 'Title'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a title';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: reportController.descriptionController,
+                decoration: InputDecoration(labelText: 'Description'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a description';
+                  }
+                  return null;
+                },
+              ),
               SizedBox(height: 20),
-              Obx(() => ElevatedButton(
-                onPressed: controller.loginLoadingState.value ? null : () => controller.reportsomthing(),
-                child: controller.loginLoadingState.value
-                    ? CircularProgressIndicator()
-                    : Text('Save'),
-              )),
+              Obx(() {
+                if (reportController.reportCreationLoadingState.value) {
+                  return CircularProgressIndicator();
+                }
+                return ElevatedButton(
+                  onPressed: reportController.createReport,
+                  child: Text('Create Report'),
+                );
+              }),
             ],
           ),
         ),
       ),
     );
   }
-
-
-  Widget buildTextField(TextEditingController controller, String label, String hint, { TextInputType keyboardType = TextInputType.text}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: TextFormField(
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: hint,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter $label';
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-
 }
