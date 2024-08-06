@@ -275,9 +275,9 @@ import '../Services.dart';
 class APIProvider extends GetxService{
   ////
   //
- // static String url = "http://192.168.1.110:8000/api/";
+  static String url = "http://192.168.1.110:8000/api/";
   static String? token;
-  static String url = "http://127.0.0.1:8000/api/";
+//static String url = "http://127.0.0.1:8000/api/";
 //static String url = "http://192.168.1.4:8000/api/";
 
 
@@ -289,18 +289,20 @@ class APIProvider extends GetxService{
   // Getter for the token
 //Dio getc()=>Dio()..httpClientAdapter=BrowserHttpClientAdapter(withCredentials: true);
   APIProvider(){
+
     _dio=dio.Dio(
       dio.BaseOptions(
         // baseUrl: "http://192.168.1.110:8000/api/user/profile",
         //  connectTimeout: Duration(seconds: 30),
         // 10 minutes in milliseconds
         //  extra: {"withCredentials":true},
-          headers: {
-            'Cookie': cookies==null?null:cookies,
-            //'Authorization' :"Bearer ${APIProvider.token}"
-            'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmFmOWUzNWYyZGIyMjdjMWMzMGRmZjkzOGY2ZmY1MThkNWMxNDM4MGU5NGVlNTIwNmVmNTRmYzFiNWNiYzY3MGE0MmRiMWQzMjhiODc4YWMiLCJpYXQiOjE3MjI3MTczOTQuMDYxMzY1LCJuYmYiOjE3MjI3MTczOTQuMDYxMzY5LCJleHAiOjE3NTQyNTMzOTQuMDMyODI5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Sb0lK55eII5OU6nB9RUR1kZXZ68fLaURkHcZT5F1IfxnCyWer3IMuUzMBhKvF6xQ3BwK2ErDl9Jn_mT_pP6c12Jky6AKthPbIGOGw-5YpOM6HUBbZpLq2e1XD7Fi71TgrqexbdxCbZ68eBqa_0m1Uip_m0vogfdWvUC-xT7plhJ0CbRwtsPFjSBRmPMAWZkR26gNkS7nCqviwWp5veMYRrIvfjNvMLR8PvSSDABHgjV_6n0AJejptNFLFk9lIJ3mYKtQGmNEtF1RMY2YWWbEqPCY_twPnt4goEyK8kqYSQGu_8xBPN9F5L8kaVisro8JzurTdtKuoVsaOC6oNx41VTkECw2OtkWiU5QwQyBR-vkd2yC1oChX7oPn9J8ZMuNI4YNwpRondgNaUyhRPNF_Drbtwf9gmbc3COyvaTWR3CqatiRx2vYP7jPvAOsZGIGfszod0DZewVT6eYvbwLmkCAOg-HPRL8Fvc5gxbAa8-7uJTFZInvOL6VyTNOSsjzauZ2wYw7WdctGIt7Vx52zjBRuqR02crhu2iQPrIirES32Pz0doBNPgaq19TLYKCUeBu6Rxj3IFT-pxm_35pS6xaux1VhuIAEha_DD8PE1qJkiTxUk-3Li__XxrCCouFOL0XMJwLu7zJYZbLQEGxtgd8Qy6gp9zrVLmo9uarRBqUV8'
-          },   //                '     eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWUzYWNhY2UzZTgyNjYzNDIwOWZkZGJmYzIyZGI3ODdmNDM2ZjRiZTNhYmQ4MDc5ZmM1ZDYyMzk1NzE5Nzg3MWQ3YzE5MmM3MjA0ZDVmNDUiLCJpYXQiOjE3MjI0NTE2MDQuNjAxNjU5LCJuYmYiOjE3MjI0NTE2MDQuNjAxNjY2LCJleHAiOjE3NTM5ODc2MDQuNTg2MjI2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KSLsIUTVdVMi-78Rxi9zIV0dE9NsEDIVCb0GcoC8BCXcxdxnly5asRYK4LxOJuuL_AI7bQFh9wyZQB-Qbm0dyoCUksNaHeh9hBpVeNBiat7LsZcHVkjYbr_lmG6euXXhV3TyUEyh6tKU0v3xSIMyShIWF3rTLyA6CabwwRkZvLMqhkyQI1sqmcI09hWIDTQZ9pzvMZ-p11oDiWeHpJa_6MJKI3ZmHvklzdljQgUR-g2IzIBorfUYJKDFMwnLD1FDmNpMtSPLbp133WKA8wRMghcUh5z21ylT9_LCVcX3a4sc8i_OGCSdDhBRsQAFcDuvTyG2KoHG6FEfET6DbnpxPUg4tk6rboMQoEfzCZ2lcxhnQZeAo7yY5YCxn0kq54ZlrnGz6UE-sfITnqqlZyzPzEacQ4eVZUuRoowoLFyb7c7crVYMGfbituSkKPypxyOa2jdLyHQJ059BkLp_LF1T8btUQzT54TBf6m8FIFfYGBPq8mEa9RlRCKTFApxZT47HYJeTSk5fOd93vgYiCz53jK9tXQxA59rNQZbOTsf4ar2gf2UqvTX3kEouIS8sQrw5eYdzYvx2gkAn6o6F4jZEVToSWWANpFyPfhjEfaLcuKKzwxdFGulWOZ7azNsYbxqr4Q0hIYK8kExMItVe8FuQXxG7U4J4M9E7f5mtd3gCceU'
-          //                       eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDZlMzY3NDMyZTFjYzcwY2YwNDFjMDJhNmE3ZGEzNGM5MDRlNzQxZjU4MzUwMmZhYjE0YzZlMWYzZTBjNjg4M2FhMjQ4MGI2OGZhZDhhMmIiLCJpYXQiOjE3MjI0NTIxMDguMDI5OTE5LCJuYmYiOjE3MjI0NTIxMDguMDI5OTIzLCJleHAiOjE3NTM5ODgxMDguMDAxMjM5LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.qMP7z3zHtwSrxb6TY7sSX9OwPOm7vlLPm4PVS3FXl3OF7BLXLZAI_vA7HnAH__Jaiaw6DPPIgzCqK_lJWP7GJL5Mcwjm_Ks2Rxn7BGPOl3XR8Jl-kq0EgW2KkoSkRL2N8NzzQsF0XAXCQDHxB1KpDHzq2qFWUp1xucXGFRdq2h4Q8tiXDJ0F_JN874yrC8sbh_Qj9g-x1juSNB720iC2NRLPaaMqiIuxIYgKe8uFW7aimbnZzttCP5RkyDhOooID4YkE5-ejWZgjStZPWIXs1OvosnLWcOEVARXFNJu9yfbzz_dhbcc5YpO7A1JwmIbm81P4goqzrsYnj3UZ5tT_KqpqQsk9KjiBXcKjCjuBYKaxS1AghOvt49NIqyLzlVydR0AQEIbIIocFO1e3NHYowgYJG40G3hLjCIZ0mnOY71XGS-jbjMRQUnhOYZ00_7-_6o_DHURu0rPOvvbjq0E2NUhsY9iYmEjG2cRE5dZNGAiEQ8_pORZas99OXy0UIdu1HYSB8VUJCHRP5QJDLqvj9rcFD9cQIa7E1a8xMlrpG-92-z94WiBtryjvnymrvDACKsSNmbiATQIqNGOF38BJVeZlxnIks_DSHl5P7hryMnNqZ68zAq6fwPaRBrwvLor1bNfylkYx5v73CoiqD3ohgJQ3FDn00C3SAAPX4V_j73k
+        //   headers: {
+        //     'Cookie': APIProvider.cookies==null?null:cookies?.first,
+        //     'Authorization' :"Bearer $token",
+        //     //'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2I2ZjNhMjlhODZmODY2OTlmYWIzMTcxZTAzY2Q5M2Y2N2Q3ZTc2OTBiMDJmMjkwZjg0NzBmNGI2OTQwMTk0YWUzMmY4NWIwNGE0OTRkMzQiLCJpYXQiOjE3MjI3ODMyNTIuNzcxNDI4LCJuYmYiOjE3MjI3ODMyNTIuNzcxNDM4LCJleHAiOjE3NTQzMTkyNTIuNzEzNDczLCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.dQ_pZPF4SI5abNmE5_s2_sjvCSLabe4XRmXTY3hoD2WLY-Gj5w6HWiZlT7aszrTnAIwUQtQpyidRcKijc5nkwtYKv9t0dVj4CViaZW1zYbvgfZiQpJVR8N5JJVhvoC0KlNkm29o_Y9ky8iondIjfBEuEUlV7PUFvJp9K1_p7As8VlaPWhBTEZEUvklsKdMkrRCxAfkiF19ib2DmXqq20Lt6F00HXya9Zc5Fg4mUtzzoBRbaFyZ76nssmCo1UCSLmAE9_QIdgXNWuNFD_UPYmqJQibIAnHmSo4eNMSiHAMsZpXJHqYIo9wg51_5HccthJgN_AC2BNul7HNY36zqDUU7y5ay7Yz92-56DnPFjXRi2WRMfEj0VggOyZ_N4fUeICwKha7_LTFptwVtuU76FQs-esb0DRyWrVprrr8uq9J5DwZ9UPCgP8vQIoMbuukhjkdwW2WehNL0s6d5sSe6qFUEBBJcUC3ziBw4oXqfTVH1mbJFPOtOIrF5-02y8NL0KWxVlFR0hLemibcSVvW5vx_IamqSAbGSDJH3e2bvGPOdDD3QBP2_i5vtSy_XIshYP-H4cQaxFC2vytPPbnJDkV-wYqZ56G9wIy8jk7uQwwZNQNlDCEBGOhUvRmstHZFpAf943E7O0LrjazWNXGusAk1cyDa7bmFNOzcGODAlf-g3U'
+        //
+        //   },
+
           validateStatus: (status){
             return true;
             //  return status!=null && status>=200 && status<300;
@@ -326,31 +328,41 @@ class APIProvider extends GetxService{
     // _dio.httpClientAdapter=adapter;
 
     print(5);
-    // if (cookies!=null|| token!=null ){
-    //   // _dio.options = dio.BaseOptions(
-    //   //     headers: {
-    //   //       // 'Cookie': cookies??cookies,
-    //   //       // 'Authorization' : token?? 'Bearer ${token}'
-    //   //       'Authorization' :  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjNlMGU3ZDA4NDY2MzcxNDE1NDc5OTVlZDVlZjJiYjMwMTRlMGI4OWFmNThhZTA3NTRkMmFiYzEzYzQwMjgzZDcxMDRkODVlN2YxYTM2ZjUiLCJpYXQiOjE3MjI0NDc3ODUuMjcyMTU4LCJuYmYiOjE3MjI0NDc3ODUuMjcyMTY1LCJleHAiOjE3NTM5ODM3ODQuODMyMjIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.JORNyQUX_C9RxZClziMVTTBpbliJDLKh_bIsPwLQqdAnz0NxmFay4eWdnQkhoO-Dm0oJHmGJ350K_uGrD8kb5FQq7Iwsf9XNs1oPiuhUzciicuTW6WoDU-h55mD6zIxn1u-kQKsUWckTH_PzOVyZy70LiZnkG4b8flQpeHInWrrB-E0QPK_8LRSlY_Q-r-O7tNfcPVBmmk-GgItlSzsFEi42vSfnfWmfgrI_2pCXllQmqJmGb6jWzV5jCbG4s9Wu4733IuGbrfLW3pT5TEQoUgjaPKa0NgY1XfTDSgimm5c-6VVNr06HuYDsKC0j-fUG_IU89uN4SjY-63WRwPXkEzzugXVph4-XLjLAlKMuNvg9gLDAgVqvMvJEVMeayYT7SLPk9sozQnbbWP4yE9ykoguIurvJZb9hXM-qgxHN1EapgU9MnGacSDzl3vIY5FZsEaC0bhL_adiuqS6T3WpvOOFZ2dABXIkJphxBDwBKVV9TLpK502I_NfUdluJhSSvgOXTpVrg3h9LfEXaHl5WGPaPXG4OpvkB6EvLTlnIm_W2_3svmeTXdB6Fsn0y9vI5gO3G7KUoiCDZelmXWo0du_BQU2brT5__MwOh1OjCUGtoyIkLyRr126Fzm4wSbvOXh0BW8R18j-4ZzTnznV1kWism-WImB-VF-NKfzBUTbwoo'
-    //   //     }
-    //   // );
-    // }
+    //SharedPreferences pref= await SharedPreferences.getInstance();
+    //print(token);
+
+   // if (cookies!=null|| token!=null ){
+   //    _dio.options = dio.BaseOptions(
+   //        headers: {
+   //          // 'Cookie': cookies??cookies,
+   //           'Authorization' : token?? 'Bearer ${token}'
+   //          //'Authorization' :  'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjNlMGU3ZDA4NDY2MzcxNDE1NDc5OTVlZDVlZjJiYjMwMTRlMGI4OWFmNThhZTA3NTRkMmFiYzEzYzQwMjgzZDcxMDRkODVlN2YxYTM2ZjUiLCJpYXQiOjE3MjI0NDc3ODUuMjcyMTU4LCJuYmYiOjE3MjI0NDc3ODUuMjcyMTY1LCJleHAiOjE3NTM5ODM3ODQuODMyMjIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.JORNyQUX_C9RxZClziMVTTBpbliJDLKh_bIsPwLQqdAnz0NxmFay4eWdnQkhoO-Dm0oJHmGJ350K_uGrD8kb5FQq7Iwsf9XNs1oPiuhUzciicuTW6WoDU-h55mD6zIxn1u-kQKsUWckTH_PzOVyZy70LiZnkG4b8flQpeHInWrrB-E0QPK_8LRSlY_Q-r-O7tNfcPVBmmk-GgItlSzsFEi42vSfnfWmfgrI_2pCXllQmqJmGb6jWzV5jCbG4s9Wu4733IuGbrfLW3pT5TEQoUgjaPKa0NgY1XfTDSgimm5c-6VVNr06HuYDsKC0j-fUG_IU89uN4SjY-63WRwPXkEzzugXVph4-XLjLAlKMuNvg9gLDAgVqvMvJEVMeayYT7SLPk9sozQnbbWP4yE9ykoguIurvJZb9hXM-qgxHN1EapgU9MnGacSDzl3vIY5FZsEaC0bhL_adiuqS6T3WpvOOFZ2dABXIkJphxBDwBKVV9TLpK502I_NfUdluJhSSvgOXTpVrg3h9LfEXaHl5WGPaPXG4OpvkB6EvLTlnIm_W2_3svmeTXdB6Fsn0y9vI5gO3G7KUoiCDZelmXWo0du_BQU2brT5__MwOh1OjCUGtoyIkLyRr126Fzm4wSbvOXh0BW8R18j-4ZzTnznV1kWism-WImB-VF-NKfzBUTbwoo'
+   //        }
+   //    );
+  //  }
     print(6);
+    //print(token);
+
     dio.Response response=await _dio.post(
       // 'http://192.168.1.110:8000/api/user/profile',
         method,
         // queryParameters: queryParams,
-        data: body
+        data: body,
       // {
       //   'first_name':'basheer123567'
       // }
+      options: dio.Options(
+          headers: {
+            'Authorization' : token==null?null:'Bearer $token',
+            'Cookie': cookies==null?null:cookies,
+
+          }),
     );
     print(7);
-    print(response);
-    SharedPreferences pref= await SharedPreferences.getInstance();
-    print(pref.get('token'));
+   // print(response);
+    //print(pref.get('token'));
     print(response.statusCode);
-    print(APIProvider.token);
+   // print(APIProvider.token);
     if(response.statusCode==200){
       // getc();
       return response;
