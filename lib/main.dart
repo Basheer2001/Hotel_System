@@ -48,6 +48,8 @@ class AppBinding extends Bindings{
     Get.put(ServicesRepo());
     Get.lazyPut(()=>ReportController());
     Get.lazyPut(()=>ServicesController());
+
+
     Get.lazyPut(()=>BookingRoomRepo());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
@@ -65,7 +67,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   AppBinding().dependencies();
   await initialServices();
-  // SharedPreferences pref = await SharedPreferences.getInstance();
+   //SharedPreferences pref = await SharedPreferences.getInstance();
   // pref.clear();
   runApp(const MyApp());
 }

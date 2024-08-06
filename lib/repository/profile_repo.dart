@@ -463,7 +463,6 @@ class ProfileRepo extends GetxService{
         if (response.data != null) {
           return AppResponse<String>(
             success: true,
-            data: response.data["data"],
           );
         } else {
           throw Exception("Token not found in response data");

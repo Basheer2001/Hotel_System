@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled1/controllers/services/services_controller.dart';
 import '../pages/homepage/homepage.dart';
 import '../repository/account_repo.dart';
 import '../models/app_response.dart';
@@ -9,7 +10,8 @@ import 'homepage/homepage_controller.dart';
 
 class loginController extends GetxController{
 
-
+    //  Get.put(ServicesController());
+  final ServicesController controller1 = Get.find<ServicesController>();
 
   //LoginRepo accountRepo= Get.find<LoginRepo>();
   AccountRepo accountRepo=Get.find<AccountRepo>();

@@ -110,18 +110,18 @@ class ServicesRepo extends GetxService {
         token: token,
       );
       print("\n2");
-      APIProvider.cookies = response.headers['set-cookie'];
+      //APIProvider.cookies = response.headers['set-cookie'];
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
 
-      print("Response cookies: ${ APIProvider.cookies}");
+      //print("Response cookies: ${ APIProvider.cookies}");
       print("Response header: ${response.headers}");
       print("Response header: ${response}");
       // cookie = response.headers['set-cookie'];
 
       if (response.statusCode == 200) {
-        List<dynamic> roomsJson = response.data['data'];
+        //List<dynamic> roomsJson = response.data['data'];
         return AppResponse<String>(
           success: true,
         );
