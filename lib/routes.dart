@@ -49,7 +49,8 @@ List<GetPage<dynamic>>? routes =[
 
   //TODO Homepage
   GetPage(name: AppRoute.hotelhome, page:()=>HotelHome(token: '',)),
-  GetPage(name: "/", page:()=>HotelHome(token: '',)),
+
+ GetPage(name: "/", page:()=>HotelHome(token: '',)),
   GetPage(name: AppRoute.favorite, page: () => Favorite(wishlistData: [])),
   //GetPage(name: "/", page: () => Report()),
 

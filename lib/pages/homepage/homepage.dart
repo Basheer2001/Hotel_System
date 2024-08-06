@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
+import 'package:untitled1/controllers/review_controller.dart';
 import 'package:untitled1/pages/homepage/roomhill.dart';
 import 'package:untitled1/pages/homepage/roompool.dart';
 import 'package:untitled1/pages/homepage/roomsea.dart';
@@ -21,6 +22,7 @@ import '../navigation/navigation-screen.dart';
 import '../profile/profile.dart';
 import '../report/createreport.dart';
 import '../report/reports.dart';
+import '../review/reviewscreen.dart';
 import '../rooms/roomscreen.dart';
 import '../rooms/roomserachscreen.dart';
 import '../services/servicerequestpage.dart';
@@ -30,17 +32,18 @@ import 'hoteln.dart';
 import 'hotelnp.dart';
 import 'hotels.dart';
 
-//
+
 class HotelHome extends StatelessWidget {
   final String token;
+
 
   HotelHome({required this.token,Key? key}) : super(key: key);
 
   final HotelHomeController controller = Get.put(HotelHomeController());
   final ServicesController servicesController = Get.find<ServicesController>();
-//  final ReviewController  reviewController=Get.put(ReviewController());
+  final ReviewController reviewController=Get.put(ReviewController());
 
-  // Define categories
+
   final List<Map<String, dynamic>> categories = [
     {'icon': Icons.beach_access, 'label': 'Sea'},
     {'icon': Icons.pool, 'label': 'Pool'},
@@ -51,7 +54,7 @@ class HotelHome extends StatelessWidget {
   //navigation bar
   final List<IconData> iconList = [
     Icons.home,
-    Icons.settings,
+    Icons.person,
     Icons.search,
     Icons.person,
   ];
@@ -123,7 +126,7 @@ class HotelHome extends StatelessWidget {
       ),
     );
   }
-//
+
   @override
   Widget build(BuildContext context) {
     Color customColor = Color.fromRGBO(255, 160, 42, 1.0);
@@ -196,14 +199,7 @@ class HotelHome extends StatelessWidget {
                 Get.to(DashboardScreen());
               },
             ),
-            // ListTile(
-            //   leading: Icon(Icons.person,color: Colors.black),
-            //   title: Text('Profile',),
-            //   onTap: () {
-            //     Get.to(() => Profile());
-            //
-            //   },
-            // ),
+
             ListTile(
               leading: Icon(Icons.logout,color: Colors.black),
               title: Text('Logout',),
@@ -211,14 +207,7 @@ class HotelHome extends StatelessWidget {
                 Get.find<HotelHomeController>().logout();
               },
             ),
-            // ListTile(
-            //   leading: Icon(Icons.search,color: Colors.black),
-            //   title: Text('Search',),
-            //   onTap: () {
-            //     Get.to(()=>RoomSearch());
-            //
-            //   },
-            // ),
+
             ListTile(
               leading: Icon(Icons.location_on_sharp,color: Colors.black),
               title: Text('Location',),
@@ -261,33 +250,16 @@ class HotelHome extends StatelessWidget {
                 Get.to(roomsView());
               },
             ),
-
-            /* ListTile(
-              leading: Icon(Icons.room_rounded,color: Colors.black),
-              title: Text('Rooms',),
-              onTap: () {
-
-                Get.to(() => RoomScreen());
-
+            ListTile(
+              leading: Icon(Icons.home_work_outlined,color: Colors.black),
+              title: Text('reveiew',),
+              onTap: () async{
+                Get.to(ReviewScreen());
               },
-            ),*/
-            /* ListTile(
-              leading: Icon(Icons.room_service,color: Colors.black),
-              title: Text('Services',),
-              onTap: () async {
-                await servicesController.fetchServices();
-                Get.to(() => ServicesPage(services: servicesController.services));
-              },
-            ),*/
-            /*ListTile(
-              leading: Icon(Icons.cleaning_services,color: Colors.black),
-              title: Text('MY Booking Servcies',),
-              onTap: () async {
-                await servicesController.fetchBookingServices(bookingId);
-                print(servicesController.services);
-                Get.to(() => MyBookingService(services: servicesController.services));
-              },
-            ),*/
+            ),
+
+
+
           ],
         ),
       ),
@@ -543,7 +515,6 @@ class HotelHome extends StatelessWidget {
                                           onRatingUpdate: (rating) {
                                             // Update the rating of the hotel
                                             hotel.rating = rating;
-
                                           },
                                         ),
                                       ],
@@ -702,7 +673,6 @@ class CustomSearch extends SearchDelegate {
 
 
 }
-
 
 
 
@@ -1428,6 +1398,40 @@ class CustomSearch extends SearchDelegate {
                     },*/// Text style
 
 
+/* ListTile(
+              leading: Icon(Icons.room_rounded,color: Colors.black),
+              title: Text('Rooms',),
+              onTap: () {
+
+                Get.to(() => RoomScreen());
+
+              },
+            ),*/
+/* ListTile(
+              leading: Icon(Icons.room_service,color: Colors.black),
+              title: Text('Services',),
+              onTap: () async {
+                await servicesController.fetchServices();
+                Get.to(() => ServicesPage(services: servicesController.services));
+              },
+            ),*/
+/*ListTile(
+              leading: Icon(Icons.cleaning_services,color: Colors.black),
+              title: Text('MY Booking Servcies',),
+              onTap: () async {
+                await servicesController.fetchBookingServices(bookingId);
+                print(servicesController.services);
+                Get.to(() => MyBookingService(services: servicesController.services));
+              },
+            ),*/
+/* ListTile(
+               leading: Icon(Icons.search,color: Colors.black),
+               title: Text('Search',),
+               onTap: () {
+                 Get.to(()=>RoomSearch());
+
+              },
+            ),*/
 
 
 

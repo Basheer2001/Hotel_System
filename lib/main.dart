@@ -25,6 +25,7 @@ import 'controllers/services/services_controller.dart';
 import 'controllers/verfiycode_controller.dart';
 import 'core/localaization/changeLocal.dart';
 import 'core/localaization/translation.dart';
+import 'repository/review_repo.dart';
 import 'repository/roomsearch_repo.dart';
 import 'repository/services_repo.dart';
 
@@ -48,8 +49,7 @@ class AppBinding extends Bindings{
     Get.put(ServicesRepo());
     Get.lazyPut(()=>ReportController());
     Get.lazyPut(()=>ServicesController());
-
-
+    Get.lazyPut(()=>ReviewRepo());
     Get.lazyPut(()=>BookingRoomRepo());
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
 
       ),
-      //initialRoute: '/dashboard', // Set your initial route
+      //initialRoute: '/hotelhome', // Set your initial route
       getPages: routes,
 
     );
