@@ -11,7 +11,7 @@ import '../../controllers/bookings/roomView_controller.dart';
 
 
 Color customColor = Color(0xFF2B74FE);
-
+//
 
 class roomsView extends GetView<RoomViewsController> {
 
