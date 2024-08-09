@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/pages/rooms/roomsResult.dart';
 import '../constant/room/room.dart';
 import '../models/app_response.dart';
 
@@ -39,6 +40,7 @@ class RoomSearchController extends GetxController {
 //
       if (response.success) {
         rooms.assignAll(response.data!);
+        //Get.to(()=>RoomsResult());
       } else {
         Get.defaultDialog(
           title: "Error",

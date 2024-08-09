@@ -50,7 +50,7 @@ class AppBinding extends Bindings{
     Get.lazyPut(()=>ReportController());
     Get.lazyPut(()=>ServicesController());
     Get.lazyPut(()=>ReviewRepo());
-    Get.lazyPut(()=>BookingRoomRepo());
+    Get.lazyPut(()=>BookingRoomRepo(),);
     Get.put(VerfiyCodeController());
     Get.put(Register1Controller());
     Get.put(ResetPasswordCodeController());

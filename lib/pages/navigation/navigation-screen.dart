@@ -17,7 +17,7 @@ class SideNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int bookingId = 2;
+    int bookingId = 1;
     return  Scaffold(
         backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(

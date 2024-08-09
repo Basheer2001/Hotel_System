@@ -359,7 +359,7 @@ class APIProvider extends GetxService{
           }),
     );
     print(7);
-   // print(response);
+    print(response);
     //print(pref.get('token'));
     print(response.statusCode);
    // print(APIProvider.token);

@@ -25,7 +25,7 @@ MyServices myServices=Get.find();
 
 List<GetPage<dynamic>>? routes =[
   //TODO AUTH
-// GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
+ GetPage(name: "/", page: ()=> myServices.sharedPreferences.getString("token") == null?const Language():  HotelHome(token: myServices.sharedPreferences.getString("token")!,)),
  GetPage(name:"/", page: ()=> Login()),
 
  GetPage(name:AppRoute.onBoarding, page: ()=>const OnBoarding()),

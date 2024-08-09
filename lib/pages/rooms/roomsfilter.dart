@@ -118,30 +118,36 @@ class RoomFilter extends StatefulWidget {
 
 class _RoomFilterState extends State<RoomFilter> {
   final RoomSearchController roomSearchController = Get.find<RoomSearchController>();
+  bool ratingisSelected0 = false;
   bool ratingisSelected1 = false;
   bool ratingisSelected2 = false;
   bool ratingisSelected3 = false;
   bool ratingisSelected4 = false;
   bool priceisSelected100= false;
+  bool priceisSelected150= false;
   bool priceisSelected1000= false;
   bool priceisSelected2000= false;
   bool seaviewisSelected= false;
   bool pooliewisSelected= false;
   bool hillviewisSelected= false;
+  bool gardenviewisSelected= false;
 
   final List<Map<String, dynamic>> viewcategories = [
     {'icon': Icons.beach_access, 'label': 'Sea'},
     {'icon': Icons.pool, 'label': 'Pool'},
     {'icon': Icons.terrain, 'label': 'Hill'},
+    {'icon': Icons.forest, 'label': 'Garden'},
   ];
 
   final List<Map<String, dynamic>> pricecategories = [
     {'icon': Icons.monetization_on_sharp, 'label': '100'},
+    {'icon': Icons.monetization_on_sharp, 'label': '150'},
     {'icon': Icons.monetization_on_sharp, 'label': '1000'},
     {'icon': Icons.monetization_on_sharp, 'label': '2000'},
   ];
 
   final List<Map<String, dynamic>> ratingcategories = [
+    {'icon': Icons.star_rate, 'label': '0'},
     {'icon': Icons.star_rate, 'label': '1'},
     {'icon': Icons.star_rate, 'label': '2'},
     {'icon': Icons.star_rate, 'label': '3'},
@@ -235,7 +241,7 @@ class _RoomFilterState extends State<RoomFilter> {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed:(){
-                      roomSearchController.searchRooms;
+                      roomSearchController.searchRooms();
                       Get.to(()=>RoomsResult());
                     } ,
                     style: ButtonStyle(
@@ -308,8 +314,13 @@ class _RoomFilterState extends State<RoomFilter> {
       }else if( label =="Hill"){
         return hillviewisSelected?Colors.blue:Colors.grey;
       }
+      else if( label =="Garden"){
+        return gardenviewisSelected?Colors.blue:Colors.grey;
+      }
       else if(  label =="100"){
         return priceisSelected100?Colors.blue:Colors.grey;
+      }else if(  label =="150"){
+        return priceisSelected150?Colors.blue:Colors.grey;
       }
       else if(  label =="1000"){
         return priceisSelected1000?Colors.blue:Colors.grey;
@@ -319,6 +330,9 @@ class _RoomFilterState extends State<RoomFilter> {
       }
       else if (label=="1") {
         return ratingisSelected1?Colors.blue:Colors.grey;
+
+      }    else if (label=="0") {
+        return ratingisSelected0?Colors.blue:Colors.grey;
 
       }      else if (label=="2") {
         return ratingisSelected2?Colors.blue:Colors.grey;
@@ -341,24 +355,41 @@ class _RoomFilterState extends State<RoomFilter> {
             seaviewisSelected=!seaviewisSelected;
             pooliewisSelected=false;
             hillviewisSelected=false;
+            gardenviewisSelected=false;
             roomSearchController.viewTextController.text=label;
           }
           else if( label =="Pool"){
             pooliewisSelected=!pooliewisSelected;
             seaviewisSelected=false;
             hillviewisSelected=false;
+            gardenviewisSelected=false;
             roomSearchController.viewTextController.text=label;
 
           }else if( label =="Hill"){
             hillviewisSelected=!hillviewisSelected;
             seaviewisSelected=false;
             pooliewisSelected=false;
+            gardenviewisSelected=false;
+            roomSearchController.viewTextController.text=label;
+          }else if( label =="Garden"){
+            gardenviewisSelected=!hillviewisSelected;
+            seaviewisSelected=false;
+            pooliewisSelected=false;
+            hillviewisSelected=false;
             roomSearchController.viewTextController.text=label;
           }
           else if(  label =="100"){
             priceisSelected100=!priceisSelected100;
             priceisSelected1000=false;
             priceisSelected2000=false;
+            priceisSelected150=false;
+            roomSearchController.basePriceTextController.text=label;
+
+          } else if(  label =="150"){
+            priceisSelected150=!priceisSelected100;
+            priceisSelected1000=false;
+            priceisSelected2000=false;
+            priceisSelected100=false;
             roomSearchController.basePriceTextController.text=label;
 
           }
@@ -366,24 +397,36 @@ class _RoomFilterState extends State<RoomFilter> {
             priceisSelected1000=!priceisSelected1000;
             priceisSelected100=false;
             priceisSelected2000=false;
+            priceisSelected150=false;
+
             roomSearchController.basePriceTextController.text=label;
           }
           else if(  label =="2000"){
             priceisSelected2000=!priceisSelected2000;
             priceisSelected1000=false;
             priceisSelected100=false;
+            priceisSelected150=false;
+
             roomSearchController.basePriceTextController.text=label;
           }
-          else if (label=="1") {
-            ratingisSelected1=!ratingisSelected1;
+          else if (label=="0") {
+            ratingisSelected0=!ratingisSelected1;
+            ratingisSelected1=false;
             ratingisSelected2=false;
             ratingisSelected3=false;
             ratingisSelected4=false;
-
-
+            roomSearchController.averageRatingTextController.text=label;
+          }else if (label=="1") {
+            ratingisSelected1=!ratingisSelected1;
+            ratingisSelected0=false;
+            ratingisSelected2=false;
+            ratingisSelected3=false;
+            ratingisSelected4=false;
             roomSearchController.averageRatingTextController.text=label;
           }      else if (label=="2") {
             ratingisSelected2=!ratingisSelected2;
+            ratingisSelected0=false;
+
             ratingisSelected1=false;
             ratingisSelected3=false;
             ratingisSelected4=false;
@@ -391,6 +434,8 @@ class _RoomFilterState extends State<RoomFilter> {
 
           }      else if (label=="3") {
             ratingisSelected3=!ratingisSelected3;
+            ratingisSelected0=false;
+
             ratingisSelected1=false;
             ratingisSelected2=false;
             ratingisSelected4=false;
@@ -398,6 +443,8 @@ class _RoomFilterState extends State<RoomFilter> {
 
           }      else {
             ratingisSelected4=!ratingisSelected4;
+            ratingisSelected0=false;
+
             ratingisSelected1=false;
             ratingisSelected2=false;
             ratingisSelected3=false;

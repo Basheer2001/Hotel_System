@@ -42,7 +42,7 @@ class CreateReport extends StatelessWidget {
                   return CircularProgressIndicator();
                 }
                 return ElevatedButton(
-                  onPressed: reportController.createReport,
+                  onPressed:() {reportController.createReport();},
                   child: Text('Create Report'),
                 );
               }),
