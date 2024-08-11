@@ -146,27 +146,27 @@ class HotelHome extends StatelessWidget {
               },
             );
           },),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child:
-            ElevatedButton (
-              onPressed: () async {
-                await controller.navigateToFavorites();
-              },
-              child: Text('Favorites', style: TextStyle(color: Colors.black)),
-              style: ElevatedButton.styleFrom(
-                backgroundColor:Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4), // Adjust border radius to make it more rectangular
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Adjust padding as needed
-
-              ),
-            ),
-
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 10),
+        //     child:
+        //     ElevatedButton (
+        //       onPressed: () async {
+        //         await controller.navigateToFavorites();
+        //       },
+        //       child: Text('Favorites', style: TextStyle(color: Colors.black)),
+        //       style: ElevatedButton.styleFrom(
+        //         backgroundColor:Colors.blue,
+        //         shape: RoundedRectangleBorder(
+        //           borderRadius: BorderRadius.circular(4), // Adjust border radius to make it more rectangular
+        //         ),
+        //         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Adjust padding as needed
+        //
+        //       ),
+        //     ),
+        //
+        //   ),
+        // ],
       ),
 
       drawer: Drawer(
@@ -476,7 +476,7 @@ class HotelHome extends StatelessWidget {
                                         },
                                         child: Icon(
                                           hotel.isLiked ? Icons.favorite : Icons.favorite_border,
-                                          color: hotel.isLiked ? Colors.red : Colors.grey, // Change color based on isLiked status
+                                          color: hotel.isLiked ? Colors.black : Colors.grey, // Change color based on isLiked status
                                         ),
                                       ),
                                     ),
@@ -541,7 +541,7 @@ class HotelHome extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(() => BottomNavigationBar(
         currentIndex: controller.currentIndex.value,
-        onTap: (index) {
+        onTap: (index) async {
           controller.currentIndex.value = index;
           switch (index) {
             case 0:
@@ -551,7 +551,9 @@ class HotelHome extends StatelessWidget {
               Get.to(() => Profile());
               break;
             case 2:
-              Get.to(() => RoomFilter());
+              //Get.to(() => RoomFilter());
+              await controller.navigateToFavorites();
+
               break;
             case 3:
               Get.to(() => RoomScreen());
@@ -561,7 +563,7 @@ class HotelHome extends StatelessWidget {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "favorite"),
           BottomNavigationBarItem(icon: Icon(Icons.meeting_room_sharp), label: "rooms"),
         ],
         selectedItemColor: Colors.blue,

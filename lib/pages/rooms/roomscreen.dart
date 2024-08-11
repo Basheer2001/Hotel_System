@@ -33,9 +33,9 @@ class RoomScreen extends StatelessWidget {
           Positioned(
             right: 20,
             bottom: 40,
-            child: FloatingActionButton(
-              backgroundColor: Colors.grey,
-                
+            child: ElevatedButton(
+              //backgroundColor: Colors.grey,
+               // style: ButtonStyle(backgroundColor: Colors.grey),
                 onPressed: (){
                   Get.to(()=>RoomFilter());
                 },

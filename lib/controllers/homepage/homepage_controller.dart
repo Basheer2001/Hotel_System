@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:untitled1/pages/homepage/homepage.dart';
+import 'package:untitled1/pages/rooms/roomdetailclass.dart';
 import 'package:untitled1/pages/rooms/roomserachscreen.dart';
 import '../../constant/sharedprefrence/shared.dart';
 import '../../pages/auth/login/login.dart';
@@ -11,6 +12,7 @@ import '../../pages/homepage/roomdetailspage.dart';
 import '../../pages/profile/profile.dart';
 import '../../pages/rooms/roomclass.dart';
 import '../../repository/homepage_repo.dart';
+import '../../repository/room_repo.dart';
 
 //
 class HotelHomeController extends GetxController {
@@ -19,7 +21,7 @@ class HotelHomeController extends GetxController {
   var currentIndex = 0.obs; // Reactive variable
 
   HomePageRepo homePageRepo = Get.find<HomePageRepo>();
-
+  //RoomRepo roomRepo = Get.find<RoomRepo>();
   List<int> wishlist = [];
 
   List<int> likedHotelIds = [];
@@ -31,10 +33,33 @@ class HotelHomeController extends GetxController {
   var filteredHotels = <Hotel>[].obs;
 
   @override
-  void onInit() {
+   onInit()  {
     super.onInit();
+   // List<RoomDetail> rooms = await roomRepo.getAllRooms();
     hotels.addAll([
       Hotel(
+        name: 'Doublex',
+        imageUrl: 'assets/images/hill1.jpg',
+        des: "Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.",
+        price: 100.0,
+        id: 1,
+        floor: '1F',
+        // Example floor
+        status: 'available',
+        // Example status
+        roomNumber: '1',
+        // Example room number
+        view: 'sea',
+        // Example view
+        roomClass: RoomClass.fromJson({
+          "id": 1,
+          "class_name": "Standard Room",
+          "base_price": 150.0,
+          "bed_type": "Single",
+          "number_of_beds": 1,
+          // Other properties as per your RoomClass structure
+        }),
+      ), Hotel(
         name: 'Doublex',
         imageUrl: 'assets/images/hill1.jpg',
         des: "Nestled amidst lush greenery, our hotel offers a serene escape from the hustle and bustle of city life.",
@@ -166,14 +191,14 @@ class HotelHomeController extends GetxController {
   void toggleFavorite(int id) async {
     int index = hotels.indexWhere((hotel) => hotel.id == id);
     if (index != -1) {
-      hotels[index].isLiked = !hotels[index].isLiked;
-      hotels.refresh(); // Refresh the observable list
+
 
       if (hotels[index].isLiked) {
         print('Hotel ${hotels[index].name} (ID: ${hotels[index]
             .id}) added to favorites.');
         if (!wishlist.contains(hotels[index].id)) {
           await addToWishlist(hotels[index].id);
+
         }
       } else {
         print('Hotel ${hotels[index].name} (ID: ${hotels[index]
