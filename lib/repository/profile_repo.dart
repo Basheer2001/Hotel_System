@@ -427,7 +427,6 @@ class ProfileRepo extends GetxService{
       ) async {
     print("\n1");
     try {
-      APIProvider.cookies=null;
 
 
       var formData = dio.FormData.fromMap({
@@ -499,7 +498,7 @@ class ProfileRepo extends GetxService{
       if (response.statusCode == 200 && response.data != null) {
         return AppResponse<Map<String, dynamic>>(
           success: true,
-          data: response.data["data"],
+          data: response.data,
         );
       } else {
         return AppResponse<Map<String, dynamic>>(
@@ -532,7 +531,7 @@ class ProfileRepo extends GetxService{
       if (response.statusCode == 200 && response.data != null) {
         return AppResponse<Map<String, dynamic>>(
           success: true,
-          data: response.data["data"],
+          data: response.data,
         );
       } else {
         return AppResponse<Map<String, dynamic>>(

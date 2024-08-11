@@ -16,7 +16,7 @@ class ReviewRepo extends GetxService {
       );
 
       if (response.statusCode == 200 && response.data["status"]) {
-        var invoiceData = response.data["data"]["invoice"];
+        var invoiceData = response.data["invoice"];
         var remainingAmount = double.parse(invoiceData["remaining_amount"]);
         return remainingAmount == 0.0;
       } else {

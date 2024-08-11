@@ -78,7 +78,6 @@ class ServicesRepo extends GetxService {
 
       );
 
-      APIProvider.cookies = response.headers['set-cookie'];
 
       if (response.statusCode == 200) {
         return AppResponse<String>(

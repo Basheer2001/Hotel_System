@@ -5,13 +5,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:image_card/image_card.dart';
 
-
-import '../../constant/color.dart';
 import '../../controllers/bookings/roomView_controller.dart';
 
 
+
 Color customColor = Color(0xFF2B74FE);
-//
+
 
 class roomsView extends GetView<RoomViewsController> {
 
@@ -100,23 +99,23 @@ class roomsView extends GetView<RoomViewsController> {
         return Scaffold(
           backgroundColor: Colors.blueGrey[50], // Set background color
           body: Padding(
-            padding: const EdgeInsets.all(8),
-            child:  Column(
+            padding: const EdgeInsets.all(10),
+            child:  ListView(
               children: [
-                Flexible(
-flex: 5,
-                  child:   Container(child: ListView(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              children: [
-                SizedBox(height: 30,),
-                Text(
+                SizedBox(
+                  height: Get.height/2,
+              child:  ListView(
+                                shrinkWrap: true,
+                                primary: false,
+                                children: [
+                                  SizedBox(height: 20,),
+                                  Text(
                   'Choose Room Type :',
                   style:
-                  TextStyle(color: Colors.black,fontSize: 18),
-                ),
-                SizedBox(height: 10,),
-                Row(
+                  TextStyle(color: Colors.black,fontSize: 16),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -147,26 +146,26 @@ flex: 5,
                                 controller.typeVal=
                                 newVal as bool;
                               type='room';
-    list = room.where((element) => element.type == type).toList();
+                      list = room.where((element) => element.type == type).toList();
 
 
-    if (controller.selectedFeatures.isNotEmpty) {
-    list = list.where((item) =>
-        controller.selectedFeatures.every((feature) => item.addFeatures?.contains(feature) ?? false)).toList();
-    }
+                      if (controller.selectedFeatures.isNotEmpty) {
+                      list = list.where((item) =>
+                          controller.selectedFeatures.every((feature) => item.addFeatures?.contains(feature) ?? false)).toList();
+                      }
 
 
                               if (controller.selectedCapacity.isNotEmpty) {
                                 list = list.where((item) =>
                                     controller.selectedCapacity.every((feature) => item.capacity?.contains(feature) ?? false)).toList();
                               }
-          });
+                            });
                             },
                           ),
                         ),
                       ),
                     ),
-                    Expanded(
+                    Flexible(
                       child: ListTile(
                         minVerticalPadding: 0,
                         minLeadingWidth: 0,
@@ -192,21 +191,21 @@ flex: 5,
                                 controller.typeVal=
                                 newVal as bool;
                                 type='suite';
-          list = room.where((element) => element.type == type).toList();
+                            list = room.where((element) => element.type == type).toList();
 
 
-          if (controller.selectedFeatures.isNotEmpty) {
-          list = list.where((item) =>
-          controller.selectedFeatures.every((feature) => item.addFeatures?.contains(feature) ?? false)).toList();
-          }
+                            if (controller.selectedFeatures.isNotEmpty) {
+                            list = list.where((item) =>
+                            controller.selectedFeatures.every((feature) => item.addFeatures?.contains(feature) ?? false)).toList();
+                            }
 
 
-          if (controller.selectedCapacity.isNotEmpty) {
-          list = list.where((item) =>
-          controller.selectedCapacity.every((feature) => item.capacity?.contains(feature) ?? false)).toList();
-          }
+                            if (controller.selectedCapacity.isNotEmpty) {
+                            list = list.where((item) =>
+                            controller.selectedCapacity.every((feature) => item.capacity?.contains(feature) ?? false)).toList();
+                            }
 
-          });
+                            });
 
                             },
                           ),
@@ -214,19 +213,19 @@ flex: 5,
                       ),
                     ),
                   ],
-                ),
-                SizedBox(
+                                  ),
+                                  SizedBox(
                   height: 10,
-                ),
-                Text(
+                                  ),
+                                  Text(
                   'additional features :',
                   style:
-                  TextStyle(color: Colors.black,fontSize: 18),
-                ),
-                SizedBox(height: 10,),
+                  TextStyle(color: Colors.black,fontSize: 16),
+                                  ),
+                                  SizedBox(height: 10,),
 
 
-            ListView(
+                              ListView(
                     shrinkWrap: true,
                     children: additionalFeatures.keys.map((String key) {
                       return  CheckboxListTile(
@@ -241,26 +240,26 @@ flex: 5,
                                 .where((entry) => entry.value)
                                 .map((entry) => entry.key)
                                 .toList();
-          list = room.where((element) => element.type == type).toList();
+                            list = room.where((element) => element.type == type).toList();
 
 
-          if (controller.selectedFeatures.isNotEmpty) {
-          list = list.where((item) =>
-              controller.selectedFeatures.every((feature) => item.addFeatures?.contains(feature) ?? false)).toList();
-          }
+                            if (controller.selectedFeatures.isNotEmpty) {
+                            list = list.where((item) =>
+                                controller.selectedFeatures.every((feature) => item.addFeatures?.contains(feature) ?? false)).toList();
+                            }
 
                           });
                         },
                       );
                     }).toList(),),
-          SizedBox(height: 10,),
-          Text(
-          ' room is for :',
-          style:
-          TextStyle(color: Colors.black,fontSize: 18),
-        ),
-          SizedBox(height: 10,),
-                GridView(
+                            SizedBox(height: 10,),
+                            Text(
+                            ' room is for :',
+                            style:
+                            TextStyle(color: Colors.black,fontSize: 16),
+                          ),
+                            SizedBox(height: 10,),
+                                  GridView(
                   shrinkWrap: true,
                   primary: false,
                   gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
@@ -297,11 +296,11 @@ flex: 5,
                   }).toList(),),
 
 
-              ],
-            ),),),
+                                ],
+                              ),),
                 SizedBox(height: 20,),
-                Flexible(
-                  flex: 4,
+                SizedBox(
+                  height: Get.height/2,
                   child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
@@ -612,7 +611,7 @@ class _RoomCardState extends State<RoomCard> {
             child: TransparentImageCard(
               width: 150,
               // height: 500,
-              contentMarginTop: 50,
+              contentMarginTop: 30,
               // contentPadding: EdgeInsets.all(100),
               startColor: Colors.white,
               endColor: Colors.transparent ,
@@ -654,25 +653,24 @@ class _RoomCardState extends State<RoomCard> {
               ),
               Align(
                 alignment: AlignmentDirectional.bottomEnd,
-                child: Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
+                child: Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
                       "${widget.room.des}",
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 6,
+                      maxLines: 3,
                       style: TextStyle(color:Colors.white.withOpacity(0.8),fontSize: 14),
                     ),
                   ),
-                ),
+
               ),
 
 
 
                     ],
               title:     Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
+                padding: const EdgeInsets.only(bottom: 15.0),
                 child: Text(
                   '\$${widget.room.price?.toStringAsFixed(2)}',
                   textAlign: TextAlign.end,
